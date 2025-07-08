@@ -1,0 +1,27 @@
+\SISTEMA DE ATENCION CIUDADANA
+	\Civiles
+		//no hay nada aun
+	\Funcionarios
+		\Municipio
+			\Colonias
+				ReportesEnColonias.html
+				ColoniaEstilos.css
+				ColoniaFunciones.js
+			\Facultades
+				\Estatal
+					Estatal.html
+					Estatal.css
+				\Federal
+					Federal.html
+					Federal.css
+			MunicipioInforme.html
+			script.js
+			styles.css
+		\Recursos
+			\Imagenes
+				*/Aqui estan todas las imagenes de los escudos de cada municipio/*
+		Portal.html
+		EstilosPortal.css
+		PortalScripts.js
+	\Otros Archivos
+		//Archivos que no son necesarios para el sistema

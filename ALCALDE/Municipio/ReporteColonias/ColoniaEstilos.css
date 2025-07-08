@@ -1,0 +1,183 @@
+/*Estilos de etiquetas html*/
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background-color: #f97613;
+    color: white;
+    padding: 30px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo {
+    width: 70px;
+    height: auto;
+    margin-right: 20px;
+}
+
+.Cuerpo {
+    display: flex;
+    justify-content: space-between; 
+    align-items: stretch;
+}
+
+.opcion {
+    display: flex;
+    flex-direction: row;
+    
+    align-items: center;
+    
+    text-decoration: none;
+    padding: 10px 20px;
+    border-bottom: 2px solid black;
+    list-style: none;
+    cursor: pointer;
+    width: 100%;
+    color: white;
+    background-color: #333;
+    text-transform: uppercase;
+}
+
+.Titulo_opcion{
+    justify-content: space-between;
+    align-items:center;
+    background-color: #f97613;
+}
+
+
+.Titulo_opcion:hover{
+    background-color: #e76d10 !important;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.opcion:hover{
+    background-color: #272727;   
+}
+
+.opcion img {
+    width: 40px;
+    margin-right: 10px;
+}
+
+h1 {
+    margin: 0;
+}
+
+.container {
+    padding: 20px;
+    width: 75%;
+    margin: 5px auto;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.content {
+    text-align: center;
+}
+
+.info-section {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+nav {
+    margin-top: 5px;
+    background-color: #f97613;
+    border-radius: 5px;
+    padding: 5px 20px;
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+    align-items: center;
+}
+
+
+
+.Contenido_Reportes {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    column-gap: 10px;
+    background-color: #f4f4f4;
+}
+
+.Reporte {
+    width: 85%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: aqua;
+    border: 1px dotted blueviolet;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.Reporte:hover {
+    transform: scale(1.15);
+    transition: transform 0.3s ease-in-out;
+}
+
+.Reporte img {
+    display: block;
+    margin: 0 auto;
+    width: 90%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+
+
+
+.Informe {
+    background-color: #f9f9f9;
+    width: 90%;
+    display: flex;
+    margin: 0 auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.Informe img {
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 70%;
+    border-radius: 8px;
+    
+}
+
+.Informe div{
+    width: 80%;
+    text-align: left;
+    font-weight: 900;
+    color: #333;
+    /*margin-bottom: 30px;*/
+}
+
+.Informe a {
+    color: #333;
+}
+
+
+.acostado {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}

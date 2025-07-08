@@ -1,0 +1,9 @@
+generacion de nomenclatura de reporte
+
+[id_estado] / [id_municipio] / [id_colonia] - [id_tipoReporte] - [num_pila]
+
+
+//////////////////////////////////////////////////////
+a nivel municipal de guadalupe sera:
+20/24/[id_colonia] - [id_tipoReporte] - [num_pila]
+//LA BASE DE ARRIBA ES OBSOLETA, HABRA QUE ACTUALIZAR

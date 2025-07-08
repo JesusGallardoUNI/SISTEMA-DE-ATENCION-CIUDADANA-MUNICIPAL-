@@ -1,0 +1,30 @@
+HACER PAGINA WEB
+
+
+//FEDERAL
+Facultades y obligaciones de los municipios según el Artículo 115 de la Constitución Política de los Estados Unidos Mexicanos:
+ **Servicios Públicos**:
+   - Los Municipios tendrán a su cargo las funciones y servicios públicos siguientes:
+	a) Agua potable, drenaje, alcantarillado, tratamiento y disposición de sus aguas residuales;
+	b) Alumbrado público.
+	c) Limpia, recolección, traslado, tratamiento y disposición final de residuos;
+	d) Mercados y centrales de abasto.
+	e) Panteones.
+	f) Rastro.
+	g) Calles, parques y jardines y su equipamiento;
+	h) Seguridad pública, en los términos del artículo 21 de esta Constitución, policía preventiva municipal y tránsito; 
+	i) Los demás que las Legislaturas locales determinen según las condiciones territoriales y
+	socio-económicas de los Municipios, así como su capacidad administrativa y financiera.
+
+
+//ESTATAL
+Facultades que son otorgadas a los municipios según el **Artículo 181** de la Constitución Política del Estado Libre y Soberano de Nuevo León:
+   - Los Municipios tendrán las siguientes atribuciones:
+	I. Prestar las funciones y servicios públicos siguientes:
+		a) Agua potable, drenaje, alcantarillado, tratamiento y disposición de sus aguas residuales.
+		b) Alumbrado público.
+		c) Limpia, recolección, traslado, tratamiento y disposición final de residuos.
+		d) Mercados y centrales de abastos.
+		e) Panteones.
+		f) Rastro.
+		g) Calles, parques y jardines y su equipamiento.

@@ -1,0 +1,71 @@
+.Acostado {
+    display: flex;
+    flex-direction: row !important;
+    gap: 20px;
+}
+
+table {
+    width: 100%;
+    border-radius: 10px;
+    border: 2px dotted #bd0d0d;
+}
+
+thead {
+    background-color: #f97613;
+    color: white;
+    height: 35px;
+}
+
+th {
+    border-radius: 5px;
+}
+
+tbody tr {
+    height: 45px;
+    text-align: center;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tbody tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+.Form {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.Form h2 {
+    text-align: center;
+    color: #f97613;
+}
+
+.Form div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+
+.Agregar {
+    margin-top: 10px;
+    width: 45%;
+}
+
+.Configurar {
+    margin-top: 20px;
+    width: 80%;
+
+    max-height: 400px; /* puedes ajustar este valor */
+    overflow-y: auto;
+    overflow-x: auto; /* por si tu tabla es muy ancha */
+    border: 1px solid #ccc;
+    margin-bottom: 40px;
+}
