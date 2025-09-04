@@ -18,7 +18,10 @@
                 $_SESSION['Municipio'] = $Usuario['cargo'];
                 $_SESSION['Nombre'] = $Usuario['nombre'];
                 $_SESSION['login'] = true;
+                $_SESSION['url'] = "/MUNICIPAL/ALCALDE/Portal.php";
                 header('Location: Municipio/MunicipioInforme.php');
+            } else {
+                echo '<div id="alerta" class="alerta alerta__malo">la contraseña no es correcta</div>';
             }
         }else{
             //Caso de que no exista
@@ -33,24 +36,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atención Ciudadana - Inicio de Sesión</title>
-    <link rel="stylesheet" href="EstilosPortal.css">
-    
+    <link rel="stylesheet" href="../Recursos/CSS/General.css">
+    <script src="../Recursos/JS/General.js"></script>
 </head>
 <body>
-    <div class="barra-superior">
-        <img src="../Recursos/Imagenes/Guadalupe.png" alt="Estado de Nuevo León" class="logo">
+    <header>
+        <img src="../Recursos/Imagenes/icono.png" alt="Estado de Nuevo León" class="logo">
         <h1>Municipio de Guadalupe</h1>
-    </div>
-    <div class="container">
+    </header>
         <h2>Sistema de Atención Ciudadana</h2>
         <form method="POST" action="Portal.php" id="loginForm">
-            <label for="Cargo">Cargo: </label>
-            <input name="Cargo" id="Cargo" type="text" value="Guadalupe" readonly required>
-            <label for="contrasena">Contraseña:</label>
-            <input type="password" id="contrasena" name="contrasena" required>
+            <div>
+                <label for="Cargo">Cargo: </label>
+                <input name="Cargo" id="Cargo" type="text" value="Guadalupe" readonly required>
+            </div>
+            <div>
+                <label for="contrasena">Contraseña:</label>
+                <input type="password" id="contrasena" name="contrasena" required>
+            </div>
 
             <input type="submit" value="Ingresar">
         </form>
-    </div>
 </body>
 </html>

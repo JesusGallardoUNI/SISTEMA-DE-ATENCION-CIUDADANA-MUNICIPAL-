@@ -1,23 +1,39 @@
+/*===========================================================*/
+/*          ELEMENTOS GENERALES PARA ETIQUETAS BASE          */
+/*===========================================================*/
+:root {
+      --color-primario: #f97613;  /* Define un color del partido actual */
+}
+
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    
-    min-height: 100vh;
     background-color: #f4f4f4;
     width: 100%;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
+
 
 header {
     width: 100%;
-    background-color: #f97613;
+    background-color: var(--color-primario);
     color: white;
-    padding: 30px 0;
+    padding: 6px 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 30px;
+}
+
+header div {
+    text-align: center;
 }
 
 .logo {
@@ -26,15 +42,50 @@ header {
     margin-right: 20px;
 }
 
-header div {
-    text-align: center;
+
+
+
+
+
+
+/*==========================================================================*/
+/*                          PARA CLASES GENERALES                           */                                                                                                                                                            
+/*==========================================================================*/
+.Ciego {
+    display: none;
 }
 
 
 
+/*==========================================================================*/
+/*                            PARA EL FORMULARIO                            */                                                                                                                                                            
+/*==========================================================================*/
+form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 60%;
+    
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
 
+form img {
+    width: 100%;
+}
 
-input[type="text"], select {
+form div {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input, select, textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -42,43 +93,182 @@ input[type="text"], select {
     box-sizing: border-box;
 }
 
+select {
+    white-space: normal; /* Permite que el texto largo se divida en varias líneas */
+}
+
+option {
+    padding: 5px;
+}
+
+textarea {
+    resize: none;
+}
+
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0; /* Opcional: para algunos navegadores */
+}
+/*==========================================================================*/
+
+
+
+
 
 /*==========================================================================*/
 /*                BOTONES GENERALES PARA TODAS LAS SECCIONES                */
 /*==========================================================================*/
+button, input[type="submit"] {
+    background-color: #e8792a; /*#f97613;*/
+    border: 3px solid #e8792a;
+    color: white;
+    min-height: 35px;
+    max-height: 70px;
+    border-radius: 5px;
+    width: 90%;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    text-transform: uppercase;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 15px;
+    /*
+    padding: 10px 15px;
+    */
+}
+
+input[type="submit"]:hover, button:hover {
+    background-color: #EA863F;
+    box-shadow: 0 0 0 0.2rem rgba(232, 121, 42, 0.25);
+}
 
 .BOTON {
-    display: flex;
-    width: 80%;
-    height: 25px;
-    max-height: 70px;
+
+    min-height: 50px !important;
+    max-height: 70px !important;
+    border-radius: 5px;
+    width: 90%;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    text-transform: uppercase;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 15px;
+
     text-decoration: none;
     border-style: none;
-    text-transform: uppercase;
+    display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    border-radius: 5px;
     color: white;
-    margin: 0 auto;
-    font-weight: 600;
-    cursor: pointer;
+    /*margin: 0 auto;*/
 }
 
 
 .BTN__Color_Verde{
-    background-color: greenyellow;
+    background-color: greenyellow !important;
 }
 
 .BTN__Color_Verde:hover{
-    background-color: green;
+    background-color: green !important;
 }
 
 
 .BTN__Color_Rojo{
-    background-color: red;
+    background-color: red !important;
 }
 
 .BTN__Color_Rojo:hover{
-    background-color: rgb(223, 9, 9);
+    background-color: rgb(223, 9, 9) !important;
+}
+
+
+
+.Salir {
+    /*position: fixed;*/
+    position: absolute;          
+    top: 16%;
+    left: 100%;
+    transform: translateX(-100%);
+
+    display: flex;
+    text-transform: uppercase;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    margin-left: auto;
+    
+    padding: 8px;
+    border-radius: 8px;
+    width: 12%;
+    height: 25px;
+    background-color: #4CAF50;
+}
+
+.Salir a {
+    color: white;
+    text-align: center;
+    text-decoration: none;
+}
+
+.Salir img {
+    width: 25px;
+}
+
+
+
+/*==========================================================================*/
+/*                ALERTAS GENERALES PARA TODAS LAS SECCIONES                */
+/*==========================================================================*/
+
+
+.alerta {
+    position: fixed;          
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 45%;
+    height: 45px;
+    background-color: white;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-align: center;
+}
+
+
+.alerta__bueno {
+    background-color: greenyellow;
+}
+
+.alerta__malo {
+    background-color: red;
+    color: white;
+    border: 3px solid black;
+}
+
+
+
+@media(max-width: 880px){
+
+    header {
+        flex-direction: column;
+    }
+
+    header .logo {
+        margin-right: 0;
+    }
+
+    form {
+        width: 80%;
+    }
+
 }

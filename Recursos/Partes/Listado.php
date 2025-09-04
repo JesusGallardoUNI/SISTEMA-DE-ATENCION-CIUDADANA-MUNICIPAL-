@@ -6,10 +6,11 @@
     //$Ejecucion = mysqli_query($db, $Muestra);
 
 
-    // Revisión del parámetro GET
+    // Revisión del parámetro GET solo muestra
     if (isset($_GET['tipo'])) {
         $tipo = intval($_GET['tipo']);
         $Muestra = "SELECT * FROM reportes_colonias WHERE tipo_reporte = {$tipo} AND resuelto != 'si'";
+        //$Muestra = "SELECT * FROM reportes_colonias WHERE tipo_reporte = {$tipo} AND resuelto = 'no'";  //alternativa igual de funcional
 
     } else {
         $Muestra = "SELECT * FROM reportes_colonias WHERE resuelto != 'si'";
@@ -29,10 +30,12 @@
             <img src="../../../Recursos/SVG/inicio.svg" alt="">
             <a href="../MunicipioInforme.php">Volver a la página principal</a>
         </div>
+        <!--
         <div class="opcion" id="Opcion1">
             <img src="../../../Recursos/SVG/opcion1.svg" alt="">
             <a href="?tipo=1">a) Agua potable, drenaje, alcantarillado, tratamiento y disposición de sus aguas residuales</a>
         </div>
+        -->
         <div class="opcion" id="Opcion2">
             <img src="../../../Recursos/SVG/opcion2.svg" alt="">
             <a href="?tipo=2">b) Alumbrado público</a>
@@ -45,14 +48,18 @@
             <img src="../../../Recursos/SVG/opcion4.svg" alt="">
             <a href="?tipo=4">d) Mercados y centrales de abasto</a>
         </div>
+        <!--
         <div class="opcion" id="Opcion5">
             <img src="../../../Recursos/SVG/opcion5.svg" alt="">
             <a href="?tipo=5">e) Panteones</a>
         </div>
+        -->
+        <!--
         <div class="opcion" id="Opcion6">
             <img src="../../../Recursos/SVG/opcion6.svg" alt="">
             <a href="?tipo=6">f) Rastro</a>
         </div>
+        -->
         <div class="opcion" id="Opcion7">
             <img src="../../../Recursos/SVG/opcion7.svg" alt="">
             <a href="?tipo=7">g) Calles, parques y jardines y su equipamiento</a>
@@ -62,12 +69,12 @@
             <a href="?tipo=8">h) Seguridad pública, policía preventiva municipal y tránsito</a>
         </div>
     </nav>
-    <main class="container">
-        <div class="content">
-            <h2 id="report-title">Reporte de colonias</h2>
+    <main class="Contenido">
+        <div class="Contenido__Encabezado">
+            <h2>Reporte de colonias</h2>
             <p>Información sobre los reportes realizados por los ciudadanos.</p>
         </div>
-        <div class="info-section" id="infoSection">
+        <div class="Muestra" id="infoSection">
             <h2>Información Detallada</h2>
             <p id="Problematica">Seleccione una opción del menú para ver la información.</p>
         </div>

@@ -1,7 +1,19 @@
-\SISTEMA DE ATENCION CIUDADANA
-	\Civiles
-		//no hay nada aun
-	\Funcionarios
+\MUNICIPAL
+	\CIVILES
+		CiudadanoEstilo.css
+		CiudadanoScript.js
+		ReporteCivil.php
+	\ALCALDE
+		\Municipio
+			\ColoniasAjustes
+			\Facultades
+			\ReporteColonias
+			MunicipioInforme.php
+			script.js
+			styles.css
+		EstilosPortal.css
+		Portal.php
+	\FUNCIONARIOS
 		\Municipio
 			\Colonias
 				ReportesEnColonias.html

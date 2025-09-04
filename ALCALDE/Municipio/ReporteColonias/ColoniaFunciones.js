@@ -4,16 +4,17 @@
 
 document.addEventListener("DOMContentLoaded", function () {
     // Aquí se declaran los botones
-    const opcion1 = document.getElementById("Opcion1");
+    
+    //const opcion1 = document.getElementById("Opcion1");
     const opcion2 = document.getElementById("Opcion2");
     const opcion3 = document.getElementById("Opcion3");
     const opcion4 = document.getElementById("Opcion4");
-    const opcion5 = document.getElementById("Opcion5");
-    const opcion6 = document.getElementById("Opcion6");
+    //const opcion5 = document.getElementById("Opcion5");
+    //const opcion6 = document.getElementById("Opcion6");
     const opcion7 = document.getElementById("Opcion7");
     const opcion8 = document.getElementById("Opcion8");
 
-    // Aquí se declara la problemática particular
+    // Aquí se declara la problemática particular 
     const problematica = document.getElementById("Problematica");
 
     // Cargar texto guardado, si existe
@@ -28,9 +29,11 @@ document.addEventListener("DOMContentLoaded", function () {
         localStorage.setItem("problematicaTexto", nuevoTexto);
     }
 
+    /*
     opcion1.addEventListener("click", function () {
         cambiarTexto("Agua potable, drenaje, alcantarillado, tratamiento y disposición de sus aguas residuales");
     });
+    */
 
     opcion2.addEventListener("click", function () {
         cambiarTexto("Alumbrado público");
@@ -40,10 +43,11 @@ document.addEventListener("DOMContentLoaded", function () {
         cambiarTexto("Limpia, recolección, traslado, tratamiento y disposición final de residuos");
     });
 
+    
     opcion4.addEventListener("click", function () {
         cambiarTexto("Mercados y centrales de abasto");
     });
-
+    /*
     opcion5.addEventListener("click", function () {
         cambiarTexto("Panteones");
     });
@@ -51,6 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
     opcion6.addEventListener("click", function () {
         cambiarTexto("Rastro");
     });
+    */
 
     opcion7.addEventListener("click", function () {
         cambiarTexto("Calles, parques y jardines y su equipamiento");

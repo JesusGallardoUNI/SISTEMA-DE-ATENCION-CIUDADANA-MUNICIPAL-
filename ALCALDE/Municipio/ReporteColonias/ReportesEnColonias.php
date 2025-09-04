@@ -15,8 +15,8 @@
     <meta charset="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <title>Reportes</title>
-    <link rel="stylesheet" href="ColoniaEstilos.css">
     <link rel="stylesheet" href="../../../Recursos/CSS/General.css">
+    <link rel="stylesheet" href="ColoniaEstilos.css">
     <script src="ColoniaFunciones.js" defer></script>
 </head>
 

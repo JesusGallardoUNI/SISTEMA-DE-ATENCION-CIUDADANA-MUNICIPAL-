@@ -1,57 +1,47 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+nav {
+    background-color: darkslategray;
+    position: absolute;
+    left: 0px;
+    height: auto;
+    max-width: 18%;
+    top: 27.7%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    
-    background-color: #f4f4f4;
+    border-end-end-radius: 8px;
+    text-transform: uppercase;
 }
 
-header {
-    width: 100%;
-    padding: 20px 0;
-    background-color: #f97613;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-header .logo {
-    width: 70px;
-    height: auto;
-    margin-right: 20px;
-}
-
-header div {
+nav .Titulo {
+    background-color: #bd0d0d;
     text-align: center;
 }
 
-input, select, button {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+nav div {
+    display: flex;
+    flex-direction: row;
+    gap: 15%;
+    text-align: left;
 }
 
-input[type="submit"] {
-    background-color: #28a745;
+nav a {
     color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
+    text-decoration: none;
+    text-align: center;
+    margin: auto 0;
+    font-size: x-large;
+    font-weight: 500;
+}
+
+nav div img {
+    width: 20%;
+    margin-left: 10px;
+}
+
+nav div:hover{
+    background-color: rgb(22, 32, 32);
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 16px;
 }
-
-button:hover {
-    background-color: #218838;
-}
-
 
 table {
     width: 100%;
@@ -91,11 +81,35 @@ table tbody tr:nth-child(odd) {
     display: block;
     margin: 0 auto;
     margin-top: 20px;
-    width: 100%;
+    width: 98%;
 
-    max-height: 400px; /* puedes ajustar este valor */
+    /*max-height: 400px;*/ /* puedes ajustar este valor */
     overflow-y: auto;
     overflow-x: auto; /* por si tu tabla es muy ancha */
-    border: 1px solid #ccc;
+    /*border: 1px solid #ccc;*/
     margin-bottom: 40px;
+}
+
+.Configurar form {
+    border: 0px solid #ccc;
+    display: block;
+    margin: 0 auto;
+    width: 70% !important;
+}
+
+.ancho {
+    width: 90%;
+}
+
+.alto {
+    display: block;
+    height: 70% !important;
+}
+
+.ancholistado {
+    max-width: 82%;
+    top: 24%;
+    position: absolute;
+    right: 0px;
+    height: 72% !important;
 }

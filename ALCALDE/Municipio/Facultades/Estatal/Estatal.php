@@ -12,6 +12,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Facultades que otorga la constitución estatal</title>
+    <link rel="stylesheet" href="../../../../Recursos/CSS/General.css">
     <link rel="stylesheet" href="../Facultades.css">
 </head>
 <body>

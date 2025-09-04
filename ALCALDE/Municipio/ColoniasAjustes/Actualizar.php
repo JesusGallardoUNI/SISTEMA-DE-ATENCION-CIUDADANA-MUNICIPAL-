@@ -59,19 +59,17 @@
         </div>
     </header>
     <main>
-        <div class="Form Configurar">
-            <form method="POST" enctype="multipart/form-data">
-                <h2>Cambiar nombre de la colonia</h2>
-                <div>
-                    <label for="Nombre">Nuevo nombre de la colonia: </label>
-                    <input type="text" name="Nombre" id="Nombre" value="<?php echo $Valor1; ?>" required>
-                </div>
-                <div class="Acostado">
-                    <input type="submit" value="Actualizar" class="BOTON BTN__Color_Verde">
-                    <a href="Mostrar.php" class="BOTON BTN__Color_Rojo">Cancelar</a>
-                </div>
-            </form>
-        </div>
+    
+        <form method="POST" enctype="multipart/form-data" class="Form Configurar">
+            <h2>Cambiar nombre de la colonia</h2>
+            <div>
+                <label for="Nombre">Nuevo nombre de la colonia: </label>
+                <input type="text" name="Nombre" id="Nombre" value="<?php echo $Valor1; ?>" required>
+            </div>
+            <input type="submit" value="Actualizar" class="BOTON BTN__Color_Verde">
+            <a href="Mostrar.php" class="BOTON BTN__Color_Rojo">Cancelar</a>
+        </form>
+        
     </main>
     <?php mysqli_close($db); ?>
 </body>

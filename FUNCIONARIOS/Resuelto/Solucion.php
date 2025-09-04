@@ -4,6 +4,12 @@
     require "../../Recursos/Informacion.php";
     $db = ConectarDB();
 
+    require "../../Recursos/Partes/Bloqueo.php";
+    $Bloqueo = Seguridad();
+    if(!$Bloqueo){
+        header('Location: ../Acceso.php');
+    }
+
     //=====================================================================//
     //  Consulta a la tabla buscando la informacion que contiene la clave  //
     //=====================================================================//
@@ -59,9 +65,10 @@
 
 
         $Val4 = mysqli_real_escape_string($db,$_POST["CostoResuelto"]);
-        $Val5 = mysqli_real_escape_string($db,$_POST["FechaHoraResuelto"]);
+        $Val5 = mysqli_real_escape_string($db,$_POST["DescripcionSolucion"]);
+        $Val6 = mysqli_real_escape_string($db,$_POST["FechaHoraResuelto"]);
 
-        $SubirSolucion = "INSERT INTO reportes_resueltos (clave, resuelto, foto, costo, fecha_resuelto) VALUES ('$Val1','$Val2','$NombreImagen','$Val4','$Val5')";        
+        $SubirSolucion = "INSERT INTO reportes_resueltos (clave, resuelto, foto, costo,descripcion , fecha_resuelto) VALUES ('$Val1','$Val2','$NombreImagen','$Val4','$Val5','$Val6')";        
         $Informar = mysqli_query($db,$SubirSolucion);
         if($Informar){
             //===============//
@@ -81,8 +88,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Datos del Reporte</title>
-    <link rel="stylesheet" href="Solucion.css">
     <link rel="stylesheet" href="../../Recursos/CSS/General.css">
+    <link rel="stylesheet" href="Solucion.css">
 </head>
 <body>
     <header>
@@ -144,6 +151,10 @@
                 <input type="number" name="CostoResuelto" id="CostoResuelto" step="any" required>
             </div>
             <div>
+                <label for="DescripcionSolucion">Descripción de atención al reporte: </label>
+                <textarea name="DescripcionSolucion" id="DescripcionSolucion" rows="8" maxlength="200" required></textarea>
+            </div>
+            <div>
                 <label for="FechaHoraResuelto">Fecha y hora de acceso:</label>
                 <input type="datetime-local" name="FechaHoraResuelto" id="FechaHoraResuelto" required readonly>
             </div>
@@ -151,7 +162,7 @@
         <br>
         <input type="submit" value="Subir reporte">
         <br><br>
-        <a href="../Muestra.php" class="BOTON BTN__Color_Rojo">Cancelar</a>
+        <a href="Muestra.php" class="BOTON BTN__Color_Rojo">Cancelar</a>
         <!-- <button type="button" onclick="validarYGenerarPDF()">Subir reporte</button> -->
         
     </form>

@@ -1,23 +1,3 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
-}
-
-header {
-    background-color: #007BFF;
-    color: white;
-    padding: 20px 0;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-    margin: 0;
-}
-
 .container {
     padding: 20px;
     max-width: 1000px;
@@ -33,9 +13,17 @@ h1 {
     max-width: 800px;
 }
 
-h2 {
+h1, h2 {
+    margin: 0;
     text-align: center;
-    color: #007BFF;
+}
+
+h1 {
+    color: white;
+}
+
+h2 {
+    color: #f97613;
 }
 
 ul {
@@ -49,24 +37,8 @@ ul li {
 
 ul li::before {
     content: "•";
-    color: #007BFF;
+    color: #f97613;
     display: inline-block;
     width: 1em;
     margin-left: -1em;
-}
-
-button {
-    display: block;
-    margin: 20px auto;
-    padding: 10px 20px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #0056b3;
 }

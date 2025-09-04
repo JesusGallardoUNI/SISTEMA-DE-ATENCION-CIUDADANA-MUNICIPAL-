@@ -39,6 +39,9 @@ function actualizarFechaHora() {
 // Llamada a actualizarFechaHora al cargar la página
 document.addEventListener("DOMContentLoaded", actualizarFechaHora);
 
+
+
+//Esta funcion no funciona actualmente, debo checar el porque
 function generarPDF() {
     // Actualizar la fecha y hora al hacer clic en enviar
     actualizarFechaHora();
@@ -112,3 +115,36 @@ function generarPDF() {
         actualizarFechaHora(); // Actualizar para el próximo reporte
     };
 }
+
+
+var map = L.map('mi_mapa').setView([25.67688, -100.25943], 15);
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { 
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Definir un icono personalizado (flecha o ubicación tipo pin)
+    var iconoUbicacion = L.icon({
+        iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png', // puedes cambiar la URL por otra imagen
+        iconSize: [30, 30],  // tamaño del icono
+        iconAnchor: [15, 30], // punto del icono que se coloca en la coordenada
+        popupAnchor: [0, -30] // posición del popup respecto al icono
+    });
+
+    // Crear marcador vacío (sin posición inicial)
+    var marker = L.marker([25.67688, -100.25943], { icon: iconoUbicacion })
+                 .addTo(map)
+                 .bindPopup("Ubicación inicial");
+
+    // Evento clic en el mapa
+    map.on('click', function(e) {
+        var lat = e.latlng.lat.toFixed(6);  
+        var lng = e.latlng.lng.toFixed(6);  
+
+        // Mostrar coordenadas en el input
+        document.getElementById("coordenadas").value = lat + ", " + lng;
+
+        // Mover el marcador a la nueva posición con el ícono de ubicación
+        marker.setLatLng(e.latlng)
+              .bindPopup("Nueva ubicación: " + lat + ", " + lng);
+    });

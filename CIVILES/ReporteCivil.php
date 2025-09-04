@@ -21,14 +21,14 @@
         $Campo5 = mysqli_real_escape_string($db, $_POST["reporte"] ?? 0);
         $Campo6 = mysqli_real_escape_string($db, $_POST["Descripcion"] ?? 0);
         $Campo7 = mysqli_real_escape_string($db, $_POST["calle"] ?? 0);
-        $Campo8 = mysqli_real_escape_string($db, $_POST["googleMapsLink"] ?? 0);
+        $Campo8 = mysqli_real_escape_string($db, $_POST["mi_mapa"] ?? 0);
         $Campo9 = $_FILES["imagen"];
         $Campo10 = mysqli_real_escape_string($db, $_POST["fechaHora"] ?? 0);
 
 
         //============================================================//
         //  Crea el num_pila a través de la cantidad de reportes      //
-        //  de la colonia seleccionada                                 //
+        //  de la colonia seleccionada                                //
         //============================================================//
         $consultaConteo = "SELECT COUNT(*) AS total FROM reportes_colonias WHERE nombre_colonia = ?";
         $stmt = mysqli_prepare($db, $consultaConteo);
@@ -62,8 +62,8 @@
             //echo "Insertado correctamente";
             //header("Location: https://guadalupe.gob.mx/");
             //echo '<script>location.reload();</script>';
-            header("Location: ReporteCivil.php");
-
+            echo '<div id="alerta" class="alerta alerta__bueno">Reporte subido correctamente</div>';
+            //header("Location: ReporteCivil.php");
         }
     }
 ?>
@@ -73,12 +73,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../Recursos/Imagenes/icono.png" type="image/png" sizes="174x256">
     <title>Atención Ciudadana</title>  
+    <link rel="stylesheet" href="../Recursos/CSS/General.css">
     <link rel="stylesheet" href="CiudadanoEstilo.css">
+
+    <!--Importante no borrar, sirve para la api del mapa-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="../Recursos/JS/General.js"></script>
+    <script src="CiudadanoScript.js"></script>
 </head>
 <body>
     <header>
-        <img src="../Recursos/Imagenes/Guadalupe.png" alt="Logo" class="logo">
+        <img src="../Recursos/Imagenes/icono.png" alt="Logo" class="logo">
         <div>
             <h1>Atención Ciudadana</h1>
             <h2>Ingrese su reporte</h2>
@@ -88,19 +95,19 @@
         <!-- Nombre del Estado -->
         <div>
             <label for="estado">Nombre del Estado:</label>
-            <input type="text" id="estado" name="estado" value="Nuevo León" readonly>
+            <input type="text" id="estado" name="estado" value="Nuevo León" readonly required>
         </div>
     
         <!-- Nombre del Municipio -->
         <div>
             <label for="municipio">Nombre del Municipio:</label>
-            <input type="text" id="municipio" name="municipio" value="Guadalupe" readonly>
+            <input type="text" id="municipio" name="municipio" value="Guadalupe" readonly required>
         </div>
 
         <!-- Código Postal -->
         <div>
             <label for="codigoPostal">Código Postal:</label>
-            <input type="number" id="codigoPostal" name="codigoPostal" min="0" required>
+            <input type="number" id="codigoPostal" name="codigoPostal" min="0" maxlength="5" required>
         </div>
 
         <!-- Nombre de la Colonia -->
@@ -115,23 +122,23 @@
         </div>
 
         <!-- Tipo de reporte -->  
-        <!-- Eliminar: 1 4 5 6; SOLO PONERLOS COMENTADOS -->
+        <!-- Eliminar: 1 5 6; SOLO PONERLOS COMENTADOS -->
         <div>
             <label for="reporte">Reporte que se quiere hacer:</label>
             <select id="reporte" name="reporte" required>
-                <option selected disabled>Seleccione un tipo de reporte</option>
+                <option value="" selected disabled>Seleccione un tipo de reporte</option>
                 <!-- <option value="1">Agua potable, drenaje, alcantarillado, tratamiento y disposición de sus aguas residuales</option> -->
                 <option value="2">Alumbrado público</option>
                 <option value="3">Limpia, recolección, traslado, tratamiento y disposición final de residuos</option>
-                <!-- <option value="4">Mercados y centrales de abasto</option> -->
+                <option value="4">Mercados y centrales de abasto</option>
                 <!-- <option value="5">Panteones</option> -->
                 <!-- <option value="6">Rastro</option> -->
                 <option value="7">Calles, parques y jardines y su equipamiento</option>
-                <option value="8">Seguridad pública, en los términos del artículo 21 de esta Constitución, policía preventiva municipal y tránsito</option>
+                <option value="8">Seguridad pública, policía preventiva municipal y tránsito</option>
             </select>
         </div>
 
-        <!-- Tipo de reporte -->
+        <!-- Descripcion de reporte -->
         <div>
             <label for="Descripcion">Descripción del reporte:</label>
             <textarea name="Descripcion" id="Descripcion" maxlength="400" rows="8" required></textarea>
@@ -143,10 +150,11 @@
             <input type="text" id="calle" name="calle" required>
         </div>
 
-        <!-- Link de Google Maps -->
+        <!-- Mapa -->
         <div>
-            <label for="googleMapsLink">Link de Google Maps:</label>
-            <input type="url" id="googleMapsLink" name="googleMapsLink" required>
+            <label for="mi_mapa">Ubica el lugar:</label>
+            <div id="mi_mapa"></div>
+            <input type="hidden" id="coordenadas" name="mi_mapa" readonly required>
         </div>
 
         <!-- Imagen de referencia -->
@@ -170,7 +178,34 @@
         <input type="submit" value="Enviar reporte" onclick="generarPDF()">
     </form>
 
+    <footer>
+        <div class="footer_imagenes">
+            <img src="../Recursos/Imagenes/UANL.png" alt="UANL" title="UANL">
+            <img src="../Recursos/Imagenes/FIME.png" alt="FIME" title="FIME">
+            <img src="../Recursos/Imagenes/FACDYC.png" alt="FACDYC" title="FACDYC">
+        </div>
+
+        <div class="footer_texto">
+            <h3>Proyecto desarrollado por: Jesús Gallardo</h3>
+            <h4>Esto no es un sitio oficial por parte del <span>Gobierno municipal de Guadalupe</span></h4>
+            <hr>
+            <h4><a href="https://guadalupe.gob.mx/noticia/atiende-lupita-de-forma-rapida-reportes-de-guadalupenses">Enlace directo al sitio oficial <span>Da clic aqui</span></a></h4>
+        </div>
+
+        <div>
+            <h3 class="footer_texto">Sigueme en mis redes sociales:</h3>
+            <div class="footer_imagenes">
+                <a href="https://www.instagram.com/jesusgallardo4t/" title="Instagram"><img src="../Recursos/SVG/Instagram.svg" class="footer_redes"></a>
+                <a href="https://x.com/JrGallardo4T" title="X"><img src="../Recursos/SVG/x.svg" class="footer_redes"></a>
+                <a href="https://www.facebook.com/jesus.gallardo.856060" title="Facebook"><img src="../Recursos/SVG/facebook.svg" class="footer_redes"></a>
+            </div>
+        </div>
+    </footer>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="CiudadanoScript.js"></script>
+
+
 </body>
 </html>

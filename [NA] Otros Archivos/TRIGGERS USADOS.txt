@@ -1,0 +1,26 @@
+//Este actualiza el nombre de una colonia de la tabla municipio con el de reportes
+DELIMITER //
+
+CREATE TRIGGER ActualizarNombres
+AFTER UPDATE ON colonias_guadalupe
+FOR EACH ROW
+BEGIN
+    UPDATE reportes_colonias
+    SET nombre_colonia = NEW.nombre_colonia
+    WHERE nombre_colonia = OLD.nombre_colonia;
+END //
+
+DELIMITER ;
+
+//Este elimina el nombre de la columna de la tabla municipio y se elimina de los reportes y resueltos
+DELIMITER //
+
+CREATE TRIGGER BorrarNombres
+AFTER DELETE ON colonias_guadalupe
+FOR EACH ROW
+BEGIN
+    DELETE FROM reportes_colonias
+    WHERE nombre_colonia = OLD.nombre_colonia;
+END //
+
+DELIMITER ;

@@ -86,57 +86,50 @@
             <h2>Configuración de colonias</h2>
         </div>
     </header>
-    <main>
+    
+    <a href="../MunicipioInforme.php" class="BOTON BTN__Color_Verde">Volver a la pagina principal</a>
 
+    <form method="POST" action="Mostrar.php" enctype="multipart/form-data">
+        <h2>Agregar nueva colonia</h2>
         <div>
-            <a href="../MunicipioInforme.php" class="BOTON BTN__Color_Verde">Volver a la pagina principal</a>
+            <label for="Nombre">Nombre de la colonia:</label>
+            <input type="text" name="Nombre" id="Nombre" required>
         </div>
-
-        <div class="Form Agregar">
-            <form method="POST" action="Mostrar.php" enctype="multipart/form-data">
-                <h2>Agregar nueva colonia</h2>
-                <div>
-                    <label for="Nombre">Nombre de la colonia:</label>
-                    <input type="text" name="Nombre" id="Nombre" required>
-                </div>
-                <input type="submit" value="Agregar colonia" class="BOTON BTN__Color_Verde">
-            </form>
-        </div>
-
-        <div class="Form Configurar">
-            <table>
-                <h2>Configurar colonias del municipio de Guadalupe</h2>
-                <thead>
-                    <tr>
-                        <th>Nombre de la colonia</th>
-                        <th>Renombrar</th>
-                        <th>Eliminar</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php while ($Registro = mysqli_fetch_assoc($Tabla)): ?>
-                        <?php if (!empty($Registro['nombre_colonia'])): ?>
-                            <tr>
-                                <td><?php echo $Registro['nombre_colonia']; ?></td>
-                                <td>
-                                    <a href="Actualizar.php?nombre_colonia=<?php echo urlencode($Registro['nombre_colonia']); ?>" class="BOTON BTN__Color_Verde">Cambiar nombre</a>
-                                </td>
-                                <td>
+        <input type="submit" value="Agregar colonia" class="BOTON BTN__Color_Verde">
+    </form>
+    
+    <h2>Configurar colonias del municipio de Guadalupe</h2>
+    <div class="tabla-contenedor">
+        <table class="Configurar">
+            <thead>
+                <tr>
+                    <th>Nombre de la colonia</th>
+                    <th>Renombrar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while ($Registro = mysqli_fetch_assoc($Tabla)): ?>
+                    <?php if (!empty($Registro['nombre_colonia'])): ?>
+                        <tr>
+                            <td><?php echo $Registro['nombre_colonia']; ?></td>
+                            <td><a href="Actualizar.php?nombre_colonia=<?php echo urlencode($Registro['nombre_colonia']); ?>" class="BOTON BTN__Color_Verde">Cambiar nombre</a></td>
+                            <td>
+                                <center>
                                     <form method="POST">
                                         <input type="hidden" name="NombreEliminar" value="<?php echo $Registro['nombre_colonia']; ?>">
                                         <input type="submit" value="Eliminar colonia" class="BOTON BTN__Color_Rojo">
                                     </form>
-                                </td>
-                            </tr>
-                        <?php endif; ?>
-                    <?php endwhile; ?>
-                </tbody>
+                                </center>
+                            </td>
+                        </tr>
+                    <?php endif; ?>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
+    </div>
 
-                
-            </table>
-        </div>
-
-    </main>
+    
     <?php mysqli_close($db); ?>
 </body>
 
