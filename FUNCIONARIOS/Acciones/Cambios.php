@@ -1,12 +1,9 @@
 <?php
-
-    require "../../Recursos/Partes/Bloqueo.php";
+    include "../../Recursos/Partes/Partes.php";
     $Bloqueo = Seguridad();
     if(!$Bloqueo){
         header('Location: ../AccesoAdministracion.php');
     }
-
-    require "../../Recursos/Informacion.php";
     $db = ConectarDB();
     //============================================================//
     //  Aqui empiezo a buscar todos los funcionarios registrados  //
@@ -46,34 +43,31 @@
     <link rel="stylesheet" href="../BuscarEstilo.css">
 </head>
 <body>
+    <?php Banner(true,"../../Recursos/Imagenes/icono.png","Gobierno de Guadalupe","Actualizacion de datos de personal"); ?>
     <br><br>
-    <a href="../Administracion.php" class="BOTON BTN__Color_Verde">Regresar</a>
+    <a href="Administracion.php" class="BOTON">Regresar</a>
     <br><br>
-    <div class="Configurar alto">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Curp</th>
-                        <th>Nombre completo</th>
-                        <th>Telefono</th>
-                        <th>Departamento</th>
-                        <th>Acción</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php while ($Registro = mysqli_fetch_assoc($Ejecutar)): ?>
-                        <tr>
-                            <td><?php echo $Registro['Curp']; ?></td>
-                            <td><?php echo $Registro['Nombres'] . " " . $Registro['Apellidos']; ?></td>
-                            <td><?php echo $Registro['Telefono']; ?></td>
-                            <td><?php echo $Registro['Departamento']; ?></td>
-                            <td>
-                                <a href="Actualizar.php?Curp=<?php echo $Registro['Curp']; ?>" class="BOTON BTN__Color_Verde">Cambiar registro</a>
-                            </td>
-                        </tr>
-                    <?php endwhile; ?>
-                </tbody>
-            </table>
-        </div>
+    <table class="Configurar Configurar__Mediano">
+        <thead>
+            <tr>
+                <th>Curp</th>
+                <th>Nombre completo</th>
+                <th>Telefono</th>
+                <th>Departamento</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php while ($Registro = mysqli_fetch_assoc($Ejecutar)): ?>
+                <tr>
+                    <td><?php echo $Registro['Curp']; ?></td>
+                    <td><?php echo $Registro['Nombres'] . " " . $Registro['Apellidos']; ?></td>
+                    <td><?php echo $Registro['Telefono']; ?></td>
+                    <td><?php echo Traductor($Registro['Departamento']); ?></td>
+                    <td><a href="Actualizar.php?Curp=<?php echo $Registro['Curp']; ?>" class="BOTON BOTON_CERO BTN__Color_Verde">Cambiar registro</a></td>
+                </tr>
+            <?php endwhile; ?>
+        </tbody>
+    </table>
 </body>
 </html>

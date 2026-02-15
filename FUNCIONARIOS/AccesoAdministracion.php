@@ -1,7 +1,8 @@
 <?php
-    require "../Recursos/Informacion.php";
-    
+    include "../Recursos/Partes/Partes.php";
     $db = ConectarDB();
+
+    
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $Cuenta = mysqli_real_escape_string($db, $_POST['Cargo']);
         $Clave = mysqli_real_escape_string($db, $_POST['contrasena']);
@@ -22,11 +23,13 @@
             
             if($auth){
                 //echo "Si esta valido";
+                
                 session_start();
-                //$_SESSION['NombreCompleto'] = $Usuario['Nombres'] . " " . $Usuario['Apellidos'];
-                $_SESSION['url'] = "/MUNICIPAL/FUNCIONARIOS/AccesoAdministracion.php";
                 $_SESSION['login'] = true;
-                header('Location: Administracion.php');
+                $_SESSION['usuario_tipo'] = 'administracion';
+                //$_SESSION['url'] = "/MUNICIPAL/FUNCIONARIOS/AccesoAdministracion.php";   //Este puede ser descartado en un futuro
+                
+                header('Location: Acciones/Administracion.php');
             } else {
                 echo '<div id="alerta" class="alerta alerta__malo">la contraseña no es correcta</div>';
             }
@@ -44,18 +47,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atención Ciudadana - Inicio de Sesión</title>
     <link rel="stylesheet" href="../Recursos/CSS/General.css">
-    <link rel="stylesheet" href="BuscarEstilo.css">
     <script src="../Recursos/JS/General.js"></script>
-    
 </head>
 <body>
-    <header>
-        <img src="../Recursos/Imagenes/Guadalupe.png" alt="Logo" class="logo">
-        <div>
-            <h1>Municipio de Guadalupe</h1>
-            <h2>Secretaria de obras publicas</h2>
-        </div>
-    </header>
+    <?php Banner(true,"../Recursos/Imagenes/icono.png","Municipio de Guadalupe","Secretaria de obras publicas"); ?>
     <h2>Acceso al panel de control</h2>
     <form method="POST" action="AccesoAdministracion.php" id="loginForm">
         <div>

@@ -1,17 +1,26 @@
 <?php
     session_start();
-    $url = $_SESSION['url'];
-    $_SESSION = [];
+    
+    $tipo = $_SESSION['usuario_tipo'];
 
-    switch ($url) {
-        case "/MUNICIPAL/ALCALDE/Portal.php":
-            header("Location: ../../ALCALDE/Portal.php");
-            exit;
-        case "/MUNICIPAL/FUNCIONARIOS/Acceso.php":
-            header("Location: ../../FUNCIONARIOS/Acceso.php");
-            exit;
-        case "/MUNICIPAL/FUNCIONARIOS/AccesoAdministracion.php":
-            header("Location: ../../FUNCIONARIOS/AccesoAdministracion.php");
-            exit;
-    }
+
+    echo $url;
+
+    switch ($tipo) {
+        case "alcalde":
+            header("Location: /MUNICIPAL/ALCALDE/ALCALDE.php");
+            session_unset();
+            session_destroy();
+            break;
+        case "administracion":
+            header("Location: /MUNICIPAL/FUNCIONARIOS/AccesoAdministracion.php");
+            session_unset();
+            session_destroy();
+            break;
+        case "servidor":
+            header("Location: /MUNICIPAL/FUNCIONARIOS/Acceso.php");
+            session_unset();
+            session_destroy();
+            break;
+    }  
 ?>

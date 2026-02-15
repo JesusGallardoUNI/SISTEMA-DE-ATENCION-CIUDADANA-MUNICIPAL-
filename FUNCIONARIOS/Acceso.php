@@ -1,7 +1,8 @@
 <?php
-    require "../Recursos/Informacion.php";
-    
+    include "../Recursos/Partes/Partes.php";
     $db = ConectarDB();
+
+    
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $Cuenta = mysqli_real_escape_string($db, $_POST['Cargo']);
         $Clave = mysqli_real_escape_string($db, $_POST['contrasena']);
@@ -21,16 +22,20 @@
             
             if($auth){
                 //echo "Si esta valido";
+                
                 session_start();
-                $_SESSION['NombreCompleto'] = $Usuario['Nombres'] . " " . $Usuario['Apellidos'];
                 $_SESSION['login'] = true;
-                $_SESSION['url'] = "/MUNICIPAL/FUNCIONARIOS/Acceso.php";
+                $_SESSION['usuario_tipo'] = 'servidor';
+                //$_SESSION['url'] = "/MUNICIPAL/FUNCIONARIOS/Acceso.php";   //Este puede ser descartado en un futuro
+                
+                $_SESSION['Reporte'] = $Usuario['Departamento'];
+                $_SESSION['NombreCompleto'] = $Usuario['Nombres'] . " " . $Usuario['Apellidos'];
                 header('Location: Resuelto/Muestra.php');
             } else {
                 echo '<div id="alerta" class="alerta alerta__malo">la contraseña no es correcta</div>';
             }
         }else{
-            echo  '<div id="alerta" class="alerta alerta__malo">el correo no existe</div>';
+            echo  '<div id="alerta" class="alerta alerta__malo">el correo no esta registrado</div>';
         }
     }
 
@@ -43,18 +48,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atención Ciudadana - Inicio de Sesión</title>
     <link rel="stylesheet" href="../Recursos/CSS/General.css">
-    <link rel="stylesheet" href="BuscarEstilo.css">
     <script src="../Recursos/JS/General.js"></script>
-    
 </head>
 <body>
-    <header>
-        <img src="../Recursos/Imagenes/Guadalupe.png" alt="Logo" class="logo">
-        <div>
-            <h1>Municipio de Guadalupe</h1>
-            <h2>Acceso Funcionarios</h2>
-        </div>
-    </header>
+    <?php Banner(true,"../Recursos/Imagenes/icono.png","Municipio de Guadalupe","Acceso Funcionarios"); ?>
     <h2>Ingrese correo y contraseña para entrar</h2>
     <form method="POST" action="Acceso.php" id="loginForm">
         <div>

@@ -1,4 +1,9 @@
-// Función para establecer la fecha y hora de acceso actuales
+
+
+
+//============================================================//
+//            ESTA PARTE SE VA PARA Solucion.PHP              //
+//============================================================//
 function actualizarFechaHora() {
     const now = new Date();
     const year = now.getFullYear();
@@ -15,8 +20,8 @@ document.addEventListener("DOMContentLoaded", function() {
     actualizarFechaHora();
     
     const params = new URLSearchParams(window.location.search);
-    document.getElementById('estado').value = params.get('estado') || "NULL";
-    document.getElementById('municipio').value = params.get('municipio') || "NULL";
+    //document.getElementById('estado').value = params.get('estado') || "NULL";
+    //document.getElementById('municipio').value = params.get('municipio') || "NULL";
     document.getElementById('colonia').value = params.get('colonia') || "NULL";
     document.getElementById('reporte').value = params.get('reporte') || "NULL";
 });

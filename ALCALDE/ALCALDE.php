@@ -1,6 +1,8 @@
 <?php
     require "../Recursos/Informacion.php";
     $db = ConectarDB();
+
+    include "../Recursos/Partes/Partes.php";
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $Cuenta = mysqli_real_escape_string($db, $_POST['Cargo']);
         $Clave = mysqli_real_escape_string($db, $_POST['contrasena']);
@@ -14,11 +16,14 @@
             $auth = password_verify($Clave,$Usuario['acceso']);
             if($auth){
                 //echo "Si esta valido";
+                
                 session_start();
+                $_SESSION['login'] = true;
+                $_SESSION['usuario_tipo'] = 'alcalde';
+                //$_SESSION['url'] = "/MUNICIPAL/ALCALDE/ALCALDE.php";   //Este puede ser descartado en un futuro
+                
                 $_SESSION['Municipio'] = $Usuario['cargo'];
                 $_SESSION['Nombre'] = $Usuario['nombre'];
-                $_SESSION['login'] = true;
-                $_SESSION['url'] = "/MUNICIPAL/ALCALDE/Portal.php";
                 header('Location: Municipio/MunicipioInforme.php');
             } else {
                 echo '<div id="alerta" class="alerta alerta__malo">la contraseña no es correcta</div>';
@@ -40,12 +45,9 @@
     <script src="../Recursos/JS/General.js"></script>
 </head>
 <body>
-    <header>
-        <img src="../Recursos/Imagenes/icono.png" alt="Estado de Nuevo León" class="logo">
-        <h1>Municipio de Guadalupe</h1>
-    </header>
+    <?php Banner(true,"../Recursos/Imagenes/icono.png","Municipio de Guadalupe"); ?>
         <h2>Sistema de Atención Ciudadana</h2>
-        <form method="POST" action="Portal.php" id="loginForm">
+        <form method="POST" action="ALCALDE.php" id="loginForm">
             <div>
                 <label for="Cargo">Cargo: </label>
                 <input name="Cargo" id="Cargo" type="text" value="Guadalupe" readonly required>

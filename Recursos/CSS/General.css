@@ -2,7 +2,17 @@
 /*          ELEMENTOS GENERALES PARA ETIQUETAS BASE          */
 /*===========================================================*/
 :root {
-      --color-primario: #f97613;  /* Define un color del partido actual */
+    --PRI: #FF0000;
+    --PAN: #046BD2;
+    --PartidoVerde: #53AF31;
+    --PT: #DA0514;
+    --Morena: #8E2C2D;
+    --MovimientoCiudadano: #F97613;
+
+    --Fondo: #f4f4f4;
+
+
+    --Gobierno: var(--PartidoVerde);  /* Define un color del partido actual */
 }
 
 
@@ -10,9 +20,10 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: var(--Fondo);
     width: 100%;
     
+     
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -22,7 +33,7 @@ body {
 
 header {
     width: 100%;
-    background-color: var(--color-primario);
+    background-color: var(--Gobierno);
     color: white;
     padding: 6px 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -42,9 +53,9 @@ header div {
     margin-right: 20px;
 }
 
-
-
-
+main {
+    width: 90%;
+}
 
 
 
@@ -52,7 +63,12 @@ header div {
 /*                          PARA CLASES GENERALES                           */                                                                                                                                                            
 /*==========================================================================*/
 .Ciego {
-    display: none;
+    display: none !important;
+}
+
+#mi_mapa {
+    width: 100%;
+    height: 400px;
 }
 
 
@@ -60,6 +76,16 @@ header div {
 /*==========================================================================*/
 /*                            PARA EL FORMULARIO                            */                                                                                                                                                            
 /*==========================================================================*/
+.elemento {
+    padding: 0;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.elemento input[type="submit"] {
+    width: 100%;
+}
+
 form {
     background-color: white;
     padding: 20px;
@@ -109,6 +135,10 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
     -webkit-appearance: none;
     margin: 0; /* Opcional: para algunos navegadores */
 }
+
+.No_Contestar {
+    cursor: no-drop;
+}
 /*==========================================================================*/
 
 
@@ -118,9 +148,9 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 /*==========================================================================*/
 /*                BOTONES GENERALES PARA TODAS LAS SECCIONES                */
 /*==========================================================================*/
-button, input[type="submit"] {
-    background-color: #e8792a; /*#f97613;*/
-    border: 3px solid #e8792a;
+button, input[type="submit"], .BOTON {
+    background-color: var(--Gobierno); /*#f97613;*/
+    border: 4px solid color-mix(in srgb, var(--Gobierno) 80%, black);
     color: white;
     min-height: 35px;
     max-height: 70px;
@@ -130,6 +160,8 @@ button, input[type="submit"] {
     font-size: 16px;
     cursor: pointer;
     text-transform: uppercase;
+    text-align: center;
+    text-decoration: none;
     display: block;
     margin: 0 auto;
     margin-bottom: 15px;
@@ -138,51 +170,43 @@ button, input[type="submit"] {
     */
 }
 
-input[type="submit"]:hover, button:hover {
-    background-color: #EA863F;
-    box-shadow: 0 0 0 0.2rem rgba(232, 121, 42, 0.25);
-}
-
 .BOTON {
-
-    min-height: 50px !important;
-    max-height: 70px !important;
-    border-radius: 5px;
-    width: 90%;
-    font-weight: bold;
-    font-size: 16px;
-    cursor: pointer;
-    text-transform: uppercase;
-    display: block;
-    margin: 0 auto;
-    margin-bottom: 15px;
-
-    text-decoration: none;
-    border-style: none;
     display: flex;
     align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: white;
+    justify-content: center;    
     /*margin: 0 auto;*/
 }
+
+input[type="submit"]:hover, button:hover, .BOTON:hover {
+    background-color: color-mix(in srgb, var(--Gobierno) 95%, white);
+    box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--Gobierno) 25%, transparent);
+}
+
+
 
 
 .BTN__Color_Verde{
     background-color: greenyellow !important;
+    border: 3px solid color-mix(in srgb, greenyellow 45%, black) !important;
+
 }
 
 .BTN__Color_Verde:hover{
     background-color: green !important;
+    border: 3px solid color-mix(in srgb, green 45%, black) !important;
 }
 
 
 .BTN__Color_Rojo{
     background-color: red !important;
+    border: 3px solid color-mix(in srgb, rgb(197, 15, 15) 45%, black) !important;
+
 }
 
 .BTN__Color_Rojo:hover{
-    background-color: rgb(223, 9, 9) !important;
+    background-color: rgb(255, 29, 29) !important;
+    border: 3px solid color-mix(in srgb,red 45%, white) !important;
+
 }
 
 
@@ -190,7 +214,7 @@ input[type="submit"]:hover, button:hover {
 .Salir {
     /*position: fixed;*/
     position: absolute;          
-    top: 16%;
+    top: 2%;
     left: 100%;
     transform: translateX(-100%);
 
@@ -218,6 +242,11 @@ input[type="submit"]:hover, button:hover {
     width: 25px;
 }
 
+.BOTON_CERO {
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+}
+
 
 
 /*==========================================================================*/
@@ -226,7 +255,10 @@ input[type="submit"]:hover, button:hover {
 
 
 .alerta {
-    position: fixed;          
+
+    position: absolute;          
+
+           
     top: 15%;
     left: 50%;
     transform: translateX(-50%);
@@ -235,18 +267,30 @@ input[type="submit"]:hover, button:hover {
     justify-content: center;
     align-items: center;
 
-    width: 45%;
-    height: 45px;
+    width: 65%;
+    height: 65px;
     background-color: white;
-    border-radius: 5px;
+    border: 2px solid #ddd;
+    border-radius: 2px;
     text-transform: uppercase;
     font-weight: 700;
     text-align: center;
 }
 
+.close-btn {
+  position: absolute;
+  top: 2%;
+  right: 16px;
+  font-size: 35px;
+  cursor: pointer;
+}
+
 
 .alerta__bueno {
-    background-color: greenyellow;
+    background-color: #d4edda;
+    border: 3px solid #c3e6cb;
+    color: #155724;
+    font-weight: 800;
 }
 
 .alerta__malo {
@@ -271,4 +315,167 @@ input[type="submit"]:hover, button:hover {
         width: 80%;
     }
 
+}
+
+
+
+/*==========================================================================*/
+/*             PARA PANEL DE CONTROL BARRA LATERAL Y CONTENIDO              */
+/*==========================================================================*/
+
+.Cuerpo {
+    display: flex;
+    justify-content: stretch; 
+    align-items: stretch;
+    width: 100%;
+}
+
+.Cuerpo nav {
+    margin-top: 5px;
+    background-color: var(--Gobierno);
+    border-radius: 5px;
+    padding: 5px 20px;
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+    align-items: center;
+    height: 100% !important;
+}
+
+.Cuerpo .opcion {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-bottom: 2px solid black;
+    list-style: none;
+    cursor: pointer;
+    width: 100%;
+    color: white;
+    background-color: #333;
+    text-transform: uppercase;
+}
+
+.Cuerpo .Titulo_opcion{
+    justify-content: space-between;
+    align-items:center;
+    background-color: var(--Gobierno);
+}
+
+.Cuerpo .Titulo_opcion:hover{
+    cursor: auto;
+    background-color: var(--Gobierno) !important;
+}
+
+.Cuerpo a {
+    text-decoration: none;
+    color: white;
+}
+
+.Cuerpo .opcion:hover{
+    background-color: #272727;   
+}
+
+.Cuerpo .opcion img {
+    width: 40px;
+    margin-right: 10px;
+    border-radius: 0;
+    box-shadow:none;
+}
+
+.Cuerpo .opcion img:hover{
+    transform: none !important;
+}
+
+
+
+/*==========================================================================*/
+/*                        PRESENTACION PARA LA TABLA                        */
+/*==========================================================================*/
+
+
+.Configurar {
+    width: 100% !important;
+    border: 1px solid #ccc;
+    margin-bottom: 40px;
+    border-collapse: collapse; /* para que se vean los bordes */
+}
+
+.Configurar__Local {
+    width: auto !important;
+}
+
+.Configurar__Mediano {
+    width: 90% !important;
+}
+
+.Configurar__Mediano__Centro{
+    display: block;
+    margin: 0 auto;
+}
+
+
+.Configurar__General tbody tr:nth-child(even) {
+    background-color: white !important;
+}
+
+.Configurar__General tbody tr:nth-child(odd) {
+    background-color: white !important;
+}
+
+
+.Configurar thead {
+    background-color: var(--Gobierno);
+    color: white;  
+}
+
+.Configurar td p{
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    background-color: color-mix(in srgb, var(--Gobierno) 85%, black);
+    border-radius: 5px;
+    padding: 2px;
+    color: white;
+}
+
+.Configurar thead th, tbody td {
+    text-align: center;
+    vertical-align: middle;
+    padding: 5px;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.Configurar input {
+    text-align: center;
+}
+
+.Configurar tbody td {
+    height: 25px;
+    margin: 0;
+    padding: 10px;
+    margin: 6px 0 !important;
+    padding: 6px 0 !important;
+}
+
+.Configurar tr {
+    max-height: 30px;
+}
+
+.Configurar .trMaximo {
+    max-height: 10px !important;
+}
+
+.Configurar tbody tr:last-child td {
+    border-bottom: none; /* quitar línea final si no la quieres */
+}
+
+.Configurar tbody tr:nth-child(even) {
+    background-color: #e1e1e1;
+}
+
+.Configurar tbody tr:nth-child(odd) {
+    background-color: #fff;
 }

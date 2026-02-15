@@ -1,48 +1,22 @@
 <?php
-    $Clave = $_GET["clave"];
-    
-    require "../../Recursos/Informacion.php";
-    $db = ConectarDB();
-
-    require "../../Recursos/Partes/Bloqueo.php";
+    include "../../Recursos/Partes/Partes.php";
     $Bloqueo = Seguridad();
     if(!$Bloqueo){
         header('Location: ../Acceso.php');
     }
+    $db = ConectarDB();
+    $Clave = $_GET["clave"];
 
     //=====================================================================//
     //  Consulta a la tabla buscando la informacion que contiene la clave  //
     //=====================================================================//
-    $Busqueda = "SELECT * FROM reportes_colonias WHERE clave = '{$Clave}'";
+    $Busqueda = "SELECT * FROM reportes_colonias WHERE clave = '{$Clave}';";
     $Ejecuta = mysqli_query($db, $Busqueda);
     $Resultado = mysqli_fetch_assoc($Ejecuta);
-    switch($Resultado["tipo_reporte"]){
-        case 1:
-            $Reporte="Agua potable, drenaje, alcantarillado, tratamiento y disposición de sus aguas residuales";
-        break;
-        case 2:
-            $Reporte="Alumbrado público";
-        break;
-        case 3:
-            $Reporte="Limpia, recolección, traslado, tratamiento y disposición final de residuos";
-        break;
-        case 4:
-            $Reporte="Mercados y centrales de abasto";
-        break;
-        case 5:
-            $Reporte="Panteones";
-        break;
-        case 6:
-            $Reporte="Rastro";
-        break;
-        case 7:
-            $Reporte="Calles, parques y jardines y su equipamiento";
-        break;
-        case 8:
-            $Reporte="Seguridad pública, policía preventiva municipal y tránsito";
-        break;
-    }
-
+    $Reporte = Traductor($Resultado["tipo_reporte"]);
+    //json_encode($Resultado["ubicacion"]);
+    //json_encode(["ubicacion" => $Resultado['ubicacion']]);
+    
     //====================================================//
     //  Aqui subo la informacion del reporte ya resuelto  //
     //====================================================//
@@ -68,15 +42,21 @@
         $Val5 = mysqli_real_escape_string($db,$_POST["DescripcionSolucion"]);
         $Val6 = mysqli_real_escape_string($db,$_POST["FechaHoraResuelto"]);
 
-        $SubirSolucion = "INSERT INTO reportes_resueltos (clave, resuelto, foto, costo,descripcion , fecha_resuelto) VALUES ('$Val1','$Val2','$NombreImagen','$Val4','$Val5','$Val6')";        
+        $Identificacion1 = mysqli_real_escape_string($db,$_POST["nombre_colonia"]);
+        $Identificacion2 = mysqli_real_escape_string($db,$_POST["tipo_reporte"]);
+
+        
+        $SubirSolucion = "INSERT INTO reportes_resueltos (clave, nombre_colonia, tipo_reporte, resuelto, foto, costo, descripcion , fecha_resuelto) VALUES ('$Val1','$Identificacion1','$Identificacion2','$Val2','$NombreImagen','$Val4','$Val5','$Val6');";        
         $Informar = mysqli_query($db,$SubirSolucion);
+
+        
         if($Informar){
             //===============//
             //  Primer paso  //
             //===============//
             $Primer = "UPDATE reportes_colonias SET resuelto = 'si' WHERE clave = '{$Val1}'";
             $Actualizado = mysqli_query($db, $Primer);
-            header("Location: ../Muestra.php");
+            echo "<div id='alerta__resuelto'></div>";
         }
     }
 
@@ -89,17 +69,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Datos del Reporte</title>
     <link rel="stylesheet" href="../../Recursos/CSS/General.css">
-    <link rel="stylesheet" href="Solucion.css">
+    <link rel="stylesheet" href="../FUNCIONARIOS.css">
+
+    <!--Importante no borrar, sirve para la api del mapa-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 </head>
 <body>
-    <header>
-        <img src="../../Recursos/Imagenes/Guadalupe.png" alt="Logo" class="logo">
-        <div>
-            <h1>Atención Ciudadana</h1>
-            <h2>Detalles del reporte</h2>
-        </div>
-    </header>
-    <form id="detallesReporteForm" method="POST" action="Solucion.php" enctype="multipart/form-data">
+    <?php Banner(true,"../../Recursos/Imagenes/icono.png","Atención Ciudadana","Detalles del reporte"); ?>
+    <form id="detallesReporteForm" method="POST"  enctype="multipart/form-data">
         <fieldset>
             <legend>Datos del reporte:</legend>
             <div>
@@ -112,11 +89,12 @@
             </div>
             <div>
                 <label>Nombre de la Colonia:</label>
-                <input type="text" id="colonia" value="<?php echo $Resultado['nombre_colonia']; ?>" readonly>
+                <input type="text" id="nombre_colonia" name="nombre_colonia" value="<?php echo $Resultado['nombre_colonia']; ?>" readonly>
             </div>
             <div>
                 <label> Tipo de reporte realizado:</label>
                 <input type="text" id="reporte" value="<?php echo $Reporte ?>" readonly>
+                <input type="hidden" id="reporte_subir" name="tipo_reporte" value="<?php echo $Resultado["tipo_reporte"] ?>" readonly>
             </div>
             <div>
                 <label for="Descripcion">Descripción del reporte:</label>
@@ -127,11 +105,12 @@
                 <input type="text" id="colonia" value="<?php echo $Resultado['nombre_calle']; ?>" readonly>
             </div>
             <div>
-                <label>Link de google maps:</label>
-                <a target="_blank" href="<?php echo $Resultado['ubicacion']; ?>">Da clic para ver</a>
+                <label>Lugar del reporte:</label>
+                <div id="mi_mapa"></div>
+                <input type="hidden" id="coordenadas" name="mi_mapa" value="<?php echo $Resultado['ubicacion']; ?>" readonly required>
             </div>
             <div>
-                <label for="imagen">Imagen del reporte:</label>
+                <label>Imagen del reporte:</label>
                 <img loading="lazy" src="../../ImagenesReportes/<?php echo $Resultado['imagen']; ?>" alt="Foto">
             </div>
         </fieldset>
@@ -167,6 +146,9 @@
         
     </form>
 
-    <script src="Solucion.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><!--Este sirve para mostrar alertas-->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="../FUNCIONARIOS.js"></script>
+    <script src="../../Recursos/JS/General.js"></script>
 </body>
 </html>

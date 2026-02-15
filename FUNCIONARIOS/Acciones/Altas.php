@@ -1,15 +1,10 @@
 <?php
-
-    require "../../Recursos/Partes/Bloqueo.php";
+    include "../../Recursos/Partes/Partes.php";
     $Bloqueo = Seguridad();
     if(!$Bloqueo){
         header('Location: ../AccesoAdministracion.php');
     }
-
-    require "../../Recursos/Informacion.php";
-    include "../../Recursos/Partes/Partes.php";
     $db = ConectarDB();
-
     //=======================================================================//
     //  Consulta a la tabla buscando la informacion antes de insertar nuevo  //
     //=======================================================================//
@@ -33,11 +28,14 @@
         $Val10 = mysqli_real_escape_string($db,$_POST["Curp"]);
         //$Val11 = mysqli_real_escape_string($db,$_POST[""]);
 
-        $SubirSolucion = "INSERT INTO servidores_publicos (Nombres, Apellidos, Edad, Sexo, FDN, Telefono, Departamento, Correo, Acceso, Curp) VALUES ('$Val1','$Val2',$Val3,'$Val4','$Val5',$Val6,'$Val7','$Val8','$Val9','$Val10')";        
-        
+        $SubirSolucion = "INSERT INTO servidores_publicos (Nombres, Apellidos, Edad, Sexo, FDN, Telefono, Departamento, Correo, Acceso, Curp) VALUES ('$Val1','$Val2',$Val3,'$Val4','$Val5',$Val6,'$Val7','$Val8','$Val9','$Val10');";        
         $Informar = mysqli_query($db,$SubirSolucion);
-    }
+        
 
+        if($Informar){
+            echo '<div id="alerta" class="alerta alerta__bueno"><p>Reporte subido correctamente</p><span class="close-btn">&times;</span></div>';
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -47,10 +45,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
         <link rel="stylesheet" href="../../Recursos/CSS/General.css">
-        
     </head>
     <body>
-        <form method="POST" action="Altas.php" enctype="multipart/form-data">
+        <?php Banner(true,"../../Recursos/Imagenes/icono.png","Gobierno de Guadalupe","Alta de personal"); ?>
+        <form method="POST" action="Altas.php" >
             <fieldset>
                 <!--Nombres-->
                 <div>
@@ -99,11 +97,11 @@
                     <label for="Departamento">Selecciona el departamento a asignar</label>
                     <select name="Departamento" id="Departamento" required>
                         <option disabled selected>Ingresa departamento</option>
-                        <option value="Alumbrado Publico">Alumbrado Publico</option>
-                        <option value="Limpia de residuos">Limpia de residuos</option>
-                        <option value="Recoleccion y traslado de residuos">Recoleccion y traslado de residuos</option>
-                        <option value="Calles">Calles</option>
-                        <option value="Parques y jardines">Parques y jardines</option>
+                        <option value="2">Alumbrado público</option>
+                        <option value="3">Limpia, recolección, traslado, tratamiento y disposición final de residuos</option>
+                        <option value="4">Mercados y centrales de abasto</option>
+                        <option value="7">Calles, parques y jardines y su equipamiento</option>
+                        <option value="8">Seguridad pública, policía preventiva municipal y tránsito</option>
                     </select>
                 </div>
                 <!--Correo-->
@@ -119,7 +117,7 @@
             </fieldset>
             <br>
             <input type="submit" value="Registar">
-            <a href="../Administracion.php" class="BOTON BTN__Color_Verde">Regresar</a>
+            <a href="Administracion.php" class="BOTON BTN__Color_Verde">Regresar</a>
         </form>
     </body>
 </html>

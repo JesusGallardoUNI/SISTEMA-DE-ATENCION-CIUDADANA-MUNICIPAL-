@@ -1,20 +1,15 @@
 <?php
-
-    require "../../../Recursos/Partes/Bloqueo.php";
+    include "../../../Recursos/Partes/Partes.php";
     $Bloqueo = Seguridad();
     if(!$Bloqueo){
-        header('Location: ../../Portal.php');
+        header('Location: ../../ALCALDE.php');
     }
-
-    require "../../../Recursos/Informacion.php";
     $db = ConectarDB();
-
     //=================================================================//
     //  Este es para ingresar nueva colonia al municipio de Guadalupe  //
     //=================================================================//
     if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['Nombre'])) {
         $Nombre = mysqli_real_escape_string($db, $_POST['Nombre']);
-
         if (!empty($Nombre)) {
             // Verificar si ya existe esa colonia
             $ConsultaExistente = "SELECT * FROM colonias_guadalupe WHERE nombre_colonia = '$Nombre'";
@@ -74,20 +69,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../../Recursos/CSS/General.css">
-    <link rel="stylesheet" href="Ajustes.css">
+    <link rel="stylesheet" href="../../ALCALDE.css">
     <title>Configuración municipal</title>
 </head>
 
 <body>
-    <header>
-        <img src="../../../Recursos/Imagenes/Guadalupe.png" alt="Logo" class="logo">
-        <div>
-            <h1>Gobierno municipal de Guadalupe</h1>
-            <h2>Configuración de colonias</h2>
-        </div>
-    </header>
+    <?php Banner(true,"../../../Recursos/Imagenes/icono.png","Gobierno municipal de Guadalupe","Configuración de colonias"); ?>
     
-    <a href="../MunicipioInforme.php" class="BOTON BTN__Color_Verde">Volver a la pagina principal</a>
+    <a href="../MunicipioInforme.php" class="BOTON">Volver a la pagina principal</a>
 
     <form method="POST" action="Mostrar.php" enctype="multipart/form-data">
         <h2>Agregar nueva colonia</h2>
@@ -113,12 +102,12 @@
                     <?php if (!empty($Registro['nombre_colonia'])): ?>
                         <tr>
                             <td><?php echo $Registro['nombre_colonia']; ?></td>
-                            <td><a href="Actualizar.php?nombre_colonia=<?php echo urlencode($Registro['nombre_colonia']); ?>" class="BOTON BTN__Color_Verde">Cambiar nombre</a></td>
+                            <td><a href="Actualizar.php?nombre_colonia=<?php echo urlencode($Registro['nombre_colonia']); ?>" class="BOTON BOTON_CERO BTN__Color_Verde">Cambiar nombre</a></td>
                             <td>
                                 <center>
-                                    <form method="POST">
+                                    <form method="POST" class="elemento">
                                         <input type="hidden" name="NombreEliminar" value="<?php echo $Registro['nombre_colonia']; ?>">
-                                        <input type="submit" value="Eliminar colonia" class="BOTON BTN__Color_Rojo">
+                                        <input type="submit" value="Eliminar colonia" class="BOTON BOTON_CERO BTN__Color_Rojo">
                                     </form>
                                 </center>
                             </td>

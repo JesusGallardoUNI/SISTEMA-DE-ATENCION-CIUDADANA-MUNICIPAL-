@@ -1,16 +1,12 @@
 <?php
-
-    require "../../../Recursos/Partes/Bloqueo.php";
+    include "../../../Recursos/Partes/Partes.php";
     $Bloqueo = Seguridad();
     if(!$Bloqueo){
-        header('Location: ../../Portal.php');
+        header('Location: ../../ALCALDE.php');
     }
-
     $nombre_colonia = $_GET['nombre_colonia'];
-    
-    require "../../../Recursos/Informacion.php";
     $db = ConectarDB();
-
+    
     //Obtener los datos de la colonia
     $Consulta = "SELECT * FROM colonias_guadalupe WHERE nombre_colonia = '{$nombre_colonia}'";
     $Resultado = mysqli_query($db, $Consulta);   
@@ -47,20 +43,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../../Recursos/CSS/General.css">
-    <link rel="stylesheet" href="Ajustes.css">
+    <link rel="stylesheet" href="../../ALCALDE.css">
     <title>Actualizacion</title>
 </head>
 <body>
-    <header>
-        <img src="../../../Recursos/Imagenes/Guadalupe.png" alt="Logo" class="logo">
-        <div>
-            <h1>Gobierno municipal de Guadalupe</h1>
-            <h2>Configuración de colonias</h2>
-        </div>
-    </header>
+    <?php Banner(true,"../../../Recursos/Imagenes/icono.png","Gobierno municipal de Guadalupe","Configuración de colonias"); ?>
+
     <main>
     
-        <form method="POST" enctype="multipart/form-data" class="Form Configurar">
+        <form method="POST" enctype="multipart/form-data" class="Configurar Configurar__Local">
             <h2>Cambiar nombre de la colonia</h2>
             <div>
                 <label for="Nombre">Nuevo nombre de la colonia: </label>

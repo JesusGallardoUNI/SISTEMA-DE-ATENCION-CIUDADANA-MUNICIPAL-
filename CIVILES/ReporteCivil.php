@@ -1,12 +1,11 @@
 <?php
-    require "../Recursos/Informacion.php";
+    include "../Recursos/Partes/Partes.php";
     $db = ConectarDB();
-    
+
     //====================================================//
     //  Agarra los nombres de las colonias y las muestra  //
     //====================================================//
-    $Colonias = "SELECT * FROM colonias_guadalupe";
-    $ListaColonias = mysqli_query($db,$Colonias);
+    $ListaColonias = Tabla("colonias_guadalupe");
     //====================================================//
 
 
@@ -14,6 +13,9 @@
         //==========================================================//
         //  Guarda los valores para guardarlos en la base de datos  //
         //==========================================================//
+        $Identificacion1 = mysqli_real_escape_string($db, $_POST["nombre_persona"] ?? "");
+        $Identificacion2 = mysqli_real_escape_string($db, $_POST["telefono_persona"] ?? 0);
+        $Identificacion3 = mysqli_real_escape_string($db, $_POST["correo_persona"] ?? "");
         $Campo1 = mysqli_real_escape_string($db, $_POST["estado"] ?? 0);
         $Campo2 = mysqli_real_escape_string($db, $_POST["municipio"] ?? 0);
         $Campo3 = mysqli_real_escape_string($db, $_POST["codigoPostal"] ?? 0);
@@ -56,17 +58,14 @@
         $Campo12 = "no";
 
 
-        $SubirReporte = "INSERT INTO reportes_colonias (estado, municipio, codigo_postal, nombre_colonia, tipo_reporte, descripcion, nombre_calle, ubicacion, imagen, fecha, clave, resuelto) VALUES ('$Campo1','$Campo2','$Campo3','$Campo4','$Campo5','$Campo6','$Campo7','$Campo8','$NombreImagen','$Campo10','$Campo11','$Campo12')";
+        $SubirReporte = "INSERT INTO reportes_colonias (nombre_persona, telefono_persona, correo_persona, estado, municipio, codigo_postal, nombre_colonia, tipo_reporte, descripcion, nombre_calle, ubicacion, imagen, fecha, clave, resuelto) VALUES ('$Identificacion1', '$Identificacion2', '$Identificacion3','$Campo1','$Campo2','$Campo3','$Campo4','$Campo5','$Campo6','$Campo7','$Campo8','$NombreImagen','$Campo10','$Campo11','$Campo12')";
         $Agregar = mysqli_query($db, $SubirReporte);
-        if($Agregar){
-            //echo "Insertado correctamente";
-            //header("Location: https://guadalupe.gob.mx/");
-            //echo '<script>location.reload();</script>';
-            echo '<div id="alerta" class="alerta alerta__bueno">Reporte subido correctamente</div>';
-            //header("Location: ReporteCivil.php");
+        if ($Agregar) {
+            echo "<div id='alerta'></div>";
         }
     }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -76,38 +75,56 @@
     <link rel="icon" href="../Recursos/Imagenes/icono.png" type="image/png" sizes="174x256">
     <title>Atención Ciudadana</title>  
     <link rel="stylesheet" href="../Recursos/CSS/General.css">
-    <link rel="stylesheet" href="CiudadanoEstilo.css">
+    <link rel="stylesheet" href="ReporteCivil.css">
 
     <!--Importante no borrar, sirve para la api del mapa-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="../Recursos/JS/General.js"></script>
-    <script src="CiudadanoScript.js"></script>
+    <script src="ReporteCivil.js"></script>
 </head>
 <body>
-    <header>
-        <img src="../Recursos/Imagenes/icono.png" alt="Logo" class="logo">
-        <div>
-            <h1>Atención Ciudadana</h1>
-            <h2>Ingrese su reporte</h2>
-        </div>
-    </header>
+    <?php Banner(true,"../Recursos/Imagenes/icono.png","Atención Ciudadana","Ingrese su reporte"); ?>
+    
     <form method="POST" action="ReporteCivil.php" enctype="multipart/form-data">
+
+        <fieldset>
+            <legend>Datos de identificacion</legend>
+
+            <!-- Nombre del ciudadano que lo reporta -->
+            <div>
+                <label for="nombre_persona">Ingresa tu nombre:</label>
+                <input type="text" id="nombre_persona" name="nombre_persona" required>
+            </div>
+
+            <!-- Telefono del ciudadano que lo reporta -->
+            <div>
+                <label for="telefono_persona">Ingresa tu numero telefono:</label>
+                <input type="number" id="telefono_persona" name="telefono_persona">
+            </div>
+
+            <!-- Correo del ciudadano que lo reporta -->
+            <div>
+                <label for="correo_persona">Ingresa tu correo:</label>
+                <input type="email" id="correo_persona" name="correo_persona">
+            </div>
+        </fieldset> <br>
+
         <!-- Nombre del Estado -->
         <div>
             <label for="estado">Nombre del Estado:</label>
-            <input type="text" id="estado" name="estado" value="Nuevo León" readonly required>
+            <input type="text" id="estado" name="estado" value="Nuevo León" class="No_Contestar" readonly required>
         </div>
     
         <!-- Nombre del Municipio -->
         <div>
             <label for="municipio">Nombre del Municipio:</label>
-            <input type="text" id="municipio" name="municipio" value="Guadalupe" readonly required>
+            <input type="text" id="municipio" name="municipio" value="Guadalupe" class="No_Contestar" readonly required>
         </div>
 
         <!-- Código Postal -->
         <div>
             <label for="codigoPostal">Código Postal:</label>
-            <input type="number" id="codigoPostal" name="codigoPostal" min="0" maxlength="5" required>
+            <input type="text" maxlength="5" pattern="\d{5}" id="codigoPostal" name="codigoPostal" title="Ingrese los cinco digitos numericos" required>
         </div>
 
         <!-- Nombre de la Colonia -->
@@ -147,14 +164,14 @@
         <!-- Nombre de la Calle -->
         <div>
             <label for="calle">Nombre de la Calle:</label>
-            <input type="text" id="calle" name="calle" required>
+            <input type="text" id="calle" name="calle" maxlength="50" required>
         </div>
 
         <!-- Mapa -->
         <div>
             <label for="mi_mapa">Ubica el lugar:</label>
             <div id="mi_mapa"></div>
-            <input type="hidden" id="coordenadas" name="mi_mapa" readonly required>
+            <input type="text" id="coordenadas" name="mi_mapa" class="Ciego" required>
         </div>
 
         <!-- Imagen de referencia -->
@@ -179,7 +196,7 @@
     </form>
 
     <footer>
-        <div class="footer_imagenes">
+        <div class="footer_imagenes footer_facultades">
             <img src="../Recursos/Imagenes/UANL.png" alt="UANL" title="UANL">
             <img src="../Recursos/Imagenes/FIME.png" alt="FIME" title="FIME">
             <img src="../Recursos/Imagenes/FACDYC.png" alt="FACDYC" title="FACDYC">
@@ -202,9 +219,11 @@
         </div>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="CiudadanoScript.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><!--Este sirve para mostrar alertas-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script><!--Este sirve para crear PDF-->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script><!--Este sirve para mostrar un mapa-->
+    <script src="ReporteCivil.js"></script>
 
 
 </body>

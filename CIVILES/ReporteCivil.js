@@ -46,6 +46,12 @@ function generarPDF() {
     // Actualizar la fecha y hora al hacer clic en enviar
     actualizarFechaHora();
 
+    //Persona
+    const nombre = document.getElementById('nombre_persona').value;
+    const telefono = document.getElementById('telefono_persona').value;
+    const correo = document.getElementById('correo_persona').value;
+
+    //Reporte
     const estado = document.getElementById('estado').value;
     const municipio = document.getElementById('municipio').value;
     const codigoPostal = document.getElementById('codigoPostal').value;
@@ -53,23 +59,34 @@ function generarPDF() {
     const reporte = document.getElementById('reporte');
     const descripcion = document.getElementById('Descripcion').value;
     const calle = document.getElementById('calle').value;
-    const googleMapsLink = document.getElementById('googleMapsLink').value;
+    const coordenadas = document.getElementById('coordenadas').value;
+    const imagenInput = document.getElementById('imagen'); 
     const fechaHora = document.getElementById('fechaHora').value;
-    const imagenInput = document.getElementById('imagen');
+    //const clave = document.getElementById('Clave').value;
 
     // Validación de campos
-    const missingFields = [];
+    const Mensaje = [];
     
-    if (!codigoPostal) missingFields.push("Código Postal");
-    if (!colonia.value) missingFields.push("Nombre de la Colonia");
-    if (!reporte.value) missingFields.push("Tipo de Reporte");
-    if (!descripcion) missingFields.push("Descripcion del reporte");
-    if (!calle) missingFields.push("Nombre de la Calle");
-    if (!googleMapsLink) missingFields.push("Link de Google Maps");
-    if (!imagenInput.value) missingFields.push("Imagen de Referencia");
+    //Para los datos de la persona
+    if(!nombre) Mensaje.push("Ingresa tu nombre");
+    if(!telefono || !correo) Mensaje.push("Necesitamos tu numero de telefono o correo para comunicarnos");
 
-    if (missingFields.length > 0) {
-        alert("Por favor, completa los siguientes campos: " + missingFields.join(", "));
+    //Para los datos del reporte
+    if (!codigoPostal) Mensaje.push("Código Postal");
+    if (!colonia.value) Mensaje.push("Nombre de la Colonia");
+    if (!reporte.value) Mensaje.push("Tipo de Reporte");
+    if (!descripcion) Mensaje.push("Descripcion del reporte");
+    if (!calle) Mensaje.push("Nombre de la Calle");
+    if (!coordenadas) Mensaje.push("Seleccione en el mapa la hubicacion");
+    if (!imagenInput.value) Mensaje.push("Imagen de Referencia");
+
+    if (Mensaje.length > 0) {
+        Swal.fire({
+            title: "Reporte incompleto",
+            text: "Asegúrate de completar los siguientes campos: " + Mensaje.join(", "),
+            icon: "warning"
+        })
+        //alert("Por favor, completa los siguientes campos: " + Mensaje.join(", "));
         return;
     }
 

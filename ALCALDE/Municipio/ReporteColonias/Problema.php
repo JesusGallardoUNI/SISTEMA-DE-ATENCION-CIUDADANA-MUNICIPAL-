@@ -1,19 +1,14 @@
 <?php
-    require "../../../Recursos/Partes/Bloqueo.php";
+    include "../../../Recursos/Partes/Partes.php";
     $Bloqueo = Seguridad();
     if(!$Bloqueo){
-        header('Location: ../../Portal.php');
+        header('Location: ../../ALCALDE.php');
     }
+    $id = $_GET['id'];
+    $db = ConectarDB();
     //echo "<pre>";
     //var_dump($_GET);
     //echo "</pre>";
-
-    $id = $_GET['id'];
-
-
-    require "../../../Recursos/Informacion.php";
-    $db = ConectarDB();
-
     $Query = "SELECT * FROM reportes_colonias WHERE id = {$id}";
     $Resultado = mysqli_query($db, $Query);
     $Muestra = mysqli_fetch_assoc($Resultado);
@@ -27,42 +22,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reporte de caso</title>
     <link rel="stylesheet" href="../../../Recursos/CSS/General.css">
-    <link rel="stylesheet" href="ColoniaEstilos.css">
+    <link rel="stylesheet" href="../../ALCALDE.css">
+    
+
+    <!--Importante no borrar, sirve para la api del mapa-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    
 </head>
 
 <body>
-    <header>
-        <img src="../../../Recursos/Imagenes/Guadalupe.png" alt="" class="logo">
-        <h1 id="page-title">Reporte</h1>
-    </header>
+    <?php Banner(true,"../../../Recursos/Imagenes/icono.png","Reporte"); ?>
     <main class="Informe">
         <img loading="lazy" src="../../../ImagenesReportes/<?php echo $Muestra['imagen']; ?>" alt="Foto">
         <p>Colonia: <?php echo $Muestra['nombre_colonia']; ?></p>
         <p>Calle: <?php echo $Muestra['nombre_calle']; ?></p>
         <p>Codigo postal: <?php echo $Muestra['codigo_postal']; ?></p>
-        <p>Reporte: 
-            <?php 
-                //echo $Muestra['tipo_reporte'];
-                switch($Muestra['tipo_reporte']){
-                    case 1: echo "Agua potable, drenaje, alcantarillado, tratamiento y disposición de sus aguas residuales"; break;
-                    case 2: echo "Alumbrado público"; break;
-                    case 3: echo "Limpia, recolección, traslado, tratamiento y disposición final de residuos"; break;
-                    case 4: echo "Mercados y centrales de abasto"; break;
-                    case 5: echo "Panteones"; break;
-                    case 6: echo "Rastro"; break;
-                    case 7: echo "Calles, parques y jardines y su equipamiento"; break;
-                    case 8: echo "Seguridad pública, policía preventiva municipal y tránsito"; break;
-                    default:
-                        echo "Reporte desconocido"; break;
-                }
-            ?>
-        </p>
+        <p>Reporte: <?php echo Traductor($Muestra['tipo_reporte']); ?> </p>
         <textarea name="" id="" class="Descripcion" rows="8" readonly><?php echo $Muestra['descripcion']; ?></textarea>
-        <a target="_blank" href="<?php echo $Muestra['ubicacion']; ?>">Clic para ver la ubicacion desde google maps</a>
+        <label for="mi_mapa">Lugar del reporte:</label>
+        <div>
+            <div id="mi_mapa"></div>
+        </div>
+        <input type="hidden" id="coordenadas" name="mi_mapa" value="<?php echo $Muestra['ubicacion']; ?>" readonly required>
         <p>Fecha: <?php echo $Muestra['fecha']; ?></p>
         <a href="ReportesEnColonias.php" class="BOTON BTN__Color_Verde">Regresar</a>
     </main>
 
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="../../../Recursos/JS/General.js"></script>
     
 </body>
 

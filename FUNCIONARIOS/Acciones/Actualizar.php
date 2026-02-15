@@ -1,14 +1,11 @@
 <?php
-    require "../../Recursos/Partes/Bloqueo.php";
+    include "../../Recursos/Partes/Partes.php";
     $Bloqueo = Seguridad();
     if(!$Bloqueo){
         header('Location: ../AccesoAdministracion.php');
     }
-
-    require "../../Recursos/Informacion.php";
-    $db = ConectarDB();
-
     $quiero = $_GET['Curp'];
+    $db = ConectarDB();
 
     //Obtener los datos de la colonia
     $Consulta = "SELECT * FROM servidores_publicos WHERE Curp = '{$quiero}'";
@@ -57,59 +54,51 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../../Recursos/CSS/General.css">
-        <link rel="stylesheet" href="../BuscarEstilo.css">
         <title>Actualizacion</title>
     </head>
 <body>
-    <header>
-        <img src="../../Recursos/Imagenes/Guadalupe.png" alt="Logo" class="logo">
-        <div>
-            <h1>Gobierno municipal de Guadalupe</h1>
-            <h2>Configuración de colonias</h2>
-        </div>
-    </header>
+    <?php Banner(true,"../../Recursos/Imagenes/icono.png","Gobierno de Guadalupe"); ?>
     
-    <div class="Configurar">
-        <form method="POST" action="Actualizar.php" enctype="multipart/form-data">
+    <form method="POST" action="Actualizar.php" enctype="multipart/form-data">
+        <fieldset>
+            <!--Nombres-->
+            <div>
+                <label for="Nombres">Ingresa sus nombres: </label>
+                <input type="text" id="Nombres" name="Nombres" value="<?php echo $Empleado['Nombres']; ?>" required>
+            </div>
+            <!--Apellidos-->
+            <div>
+                <label for="Apellidos">Ingresa sus apellidos: </label>
+                <input type="text" id="Apellidos" name="Apellidos" value="<?php echo $Empleado['Apellidos']; ?>" required>
+            </div>
+            <!--Edad-->
+            <div>
+                <label for="Edad">Edad: </label>
+                <input type="number" id="Edad" name="Edad" value="<?php echo $Empleado['Edad']; ?>" required>
+            </div>
+            <!--Sexo-->
+            <div>
+                <label for="Sexo">Sexo: </label>
+                <select name="Sexo" id="Sexo" required>
+                    <option value="" selected disabled>Ingrese el sexo</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Femenino">Femenino</option>
+                </select>
+            </div>
+            <!--Fecha de nacimiento-->
+            <div>
+                <label for="FDN">Fecha de nacimiento: </label>
+                <input type="date" name="FDN" id="FDN" value="<?php echo $Empleado['FDN']; ?>" required>
+            </div>
+            <!--Curp de empleado-->
+            <div>
+                <label for="Curp">Curp de empleado: </label>
+                <input type="hidden" name="CurpOriginal" value="<?php echo $Empleado['Curp']; ?>">
+                <input type="text" name="Curp" id="Curp" maxlength="18" value="<?php echo $Empleado['Curp']; ?>" required>
+            </div>
+            </fieldset>
+            <hr>
             <fieldset>
-                <!--Nombres-->
-                <div>
-                    <label for="Nombres">Ingresa sus nombres: </label>
-                    <input type="text" id="Nombres" name="Nombres" value="<?php echo $Empleado['Nombres']; ?>" required>
-                </div>
-                <!--Apellidos-->
-                <div>
-                    <label for="Apellidos">Ingresa sus apellidos: </label>
-                    <input type="text" id="Apellidos" name="Apellidos" value="<?php echo $Empleado['Apellidos']; ?>" required>
-                </div>
-                <!--Edad-->
-                <div>
-                    <label for="Edad">Edad: </label>
-                    <input type="number" id="Edad" name="Edad" value="<?php echo $Empleado['Edad']; ?>" required>
-                </div>
-                <!--Sexo-->
-                <div>
-                    <label for="Sexo">Sexo: </label>
-                    <select name="Sexo" id="Sexo" required>
-                        <option value="" selected disabled>Ingrese el sexo</option>
-                        <option value="Masculino">Masculino</option>
-                        <option value="Femenino">Femenino</option>
-                    </select>
-                </div>
-                <!--Fecha de nacimiento-->
-                <div>
-                    <label for="FDN">Fecha de nacimiento: </label>
-                    <input type="date" name="FDN" id="FDN" value="<?php echo $Empleado['FDN']; ?>" required>
-                </div>
-                <!--Curp de empleado-->
-                <div>
-                    <label for="Curp">Curp de empleado: </label>
-                    <input type="hidden" name="CurpOriginal" value="<?php echo $Empleado['Curp']; ?>">
-                    <input type="text" name="Curp" id="Curp" maxlength="18" value="<?php echo $Empleado['Curp']; ?>" required>
-                </div>
-                </fieldset>
-                <hr>
-                <fieldset>
                 <div>
                     <label for="Telefono">Telefono de identificacion: </label>
                     <input type="number" id="Telefono" name="Telefono" value="<?php echo $Empleado['Telefono']; ?>" required>
@@ -118,11 +107,11 @@
                     <label for="Departamento">Selecciona el departamento a asignar</label>
                     <select name="Departamento" id="Departamento" required>
                         <option disabled selected>Ingresa departamento</option>
-                        <option value="Alumbrado Publico">Alumbrado Publico</option>
-                        <option value="Limpia de residuos">Limpia de residuos</option>
-                        <option value="Recoleccion y traslado de residuos">Recoleccion y traslado de residuos</option>
-                        <option value="Calles">Calles</option>
-                        <option value="Parques y jardines">Parques y jardines</option>
+                        <option value="2">Alumbrado público</option>
+                        <option value="3">Limpia, recolección, traslado, tratamiento y disposición final de residuos</option>
+                        <option value="4">Mercados y centrales de abasto</option>
+                        <option value="7">Calles, parques y jardines y su equipamiento</option>
+                        <option value="8">Seguridad pública, policía preventiva municipal y tránsito</option>
                     </select>
                 </div>
                 <div>
@@ -133,12 +122,11 @@
                     <label for="Contra">Contraseña a ingresar: </label>
                     <input type="password" id="Contra" name="Contra" value="<?php echo $Empleado['Nombres']; ?>" required>
                 </div>
-                </fieldset>
-                <br>
-                <input type="submit" value="Actualizar">
-                <a href="Cambios.php" class="BOTON BTN__Color_Verde">Regresar</a>
-            </form>
-        </div>
+            </fieldset>
+            <br>
+            <input type="submit" value="Actualizar">
+            <a href="Cambios.php" class="BOTON BTN__Color_Verde">Regresar</a>
+        </form>
     
     
 </body>

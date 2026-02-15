@@ -1,11 +1,8 @@
 <?php
-    
-    include '../../Recursos/Informacion.php';
-    $db = ConectarDB();
-    require "../../Recursos/Partes/Bloqueo.php";
+    include '../../Recursos/Partes/Partes.php';
     $Bloqueo = Seguridad();
     if(!$Bloqueo){
-        header('Location: ../Portal.php');
+        header('Location: ../ALCALDE.php');
     }
 ?>
 
@@ -16,36 +13,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Municipio</title>
     <link rel="stylesheet" href="../../Recursos/CSS/General.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../ALCALDE.css">
 </head>
 <body>
-    <header>
-        <div>
-            <h1 id="page-title">Municipio de Guadalupe</h1>
-            <h2>Estado de Nuevo León</h2>
-        </div>
-        <div class="Salir">
-            <img src="../../Recursos/SVG/Cerrar.svg" alt="">
-            <a href="../../Recursos/Partes/Salir.php" class="">Cerrar sesión</a>
-        </div>
-    </header>
+    <?php Banner(false,"","Municipio de Guadalupe","Estado de Nuevo León", true,"../../Recursos/SVG/Cerrar.svg","../../Recursos/Partes/Salir.php"); ?>
     <main class="principal">
         <h2>Menu de operaciones</h2>
         <div class="contenido">
             <div class="opcion">
-                <a href="Facultades/Federal/Federal.php">
+                <a href="Facultades/Federal.php">
                     <img src="../../Recursos/Imagenes/Mexico.png" alt="Escudo Nacional de México">
                 </a>
                 <p>Legislación federal</p>
             </div>
             <div class="opcion">
-                <a href="Facultades/Estatal/Estatal.php">
+                <a href="Facultades/Estatal.php">
                     <img src="../../Recursos/Imagenes/NuevoLeón.png" alt="Escudo Estatal de Nuevo León">
                 </a>
                 <p>Legislacion estatal</p>
             </div>
             <div class="opcion">
-                <a href="Facultades/Municipal/Reglamento.php">
+                <a href="Facultades/Reglamento.php">
                     <img src="../../Recursos/Imagenes/Guadalupe.png" alt="Escudo Estatal de Nuevo León">
                 </a>
                 <p>Reglamento interno</p>
@@ -55,22 +43,7 @@
                     <img id="municipio-image" src="../../Recursos/SVG/reportes.svg" alt="Escudo Municipipal de Guadalupe">
                 </a>
                 <div>
-                    <?php 
-                        $no = "SELECT COUNT(*) AS 'total' FROM reportes_colonias WHERE resuelto = 'no'";
-                        $Ejecucion = mysqli_query($db, $no);
-                        if ($Ejecucion) {
-                            $fila = mysqli_fetch_assoc($Ejecucion);
-                            if ( $fila['total'] <= 99 ) {
-                                echo $fila['total'];
-                            } else {
-                                echo "+99";
-                            }
-                        } else {
-                            echo "Error en la consulta: " . mysqli_error($db);
-                            //Poner 0 en caso de resolucion corta y temporal
-                        }
-
-                    ?>
+                    <?php Contador("no"); ?>
                 </div>
                 <p>Reportes al Municipio</p>
             </div>
@@ -79,18 +52,7 @@
                     <img id="municipio-image" src="../../Recursos/SVG/resuelto.svg" alt="Escudo Municipipal de Guadalupe">
                 </a>
                 <div>
-                    <?php 
-                        $si = "SELECT COUNT(*) AS 'total' FROM reportes_colonias WHERE resuelto = 'si'";
-                        $Ejecucion = mysqli_query($db, $si);
-                        if ($Ejecucion) {
-                            $fila = mysqli_fetch_assoc($Ejecucion); 
-                            echo $fila['total'];
-                        } else {
-                            echo "Error en la consulta: " . mysqli_error($db);
-                            //Poner 0 en caso de resolucion corta y temporal
-                        }
-
-                    ?>
+                    <?php Contador("si"); ?>
                 </div>
                 <p>Reportes atendidos</p>
             </div>
@@ -99,6 +61,24 @@
                     <img src="../../Recursos/SVG/ModificarColonia.svg" alt="Modifica las propiedades de las colonias">
                 </a>
                 <p>Mostrar colonias</p>
+            </div>
+            <div class="opcion">
+                 <a href="Estadistica/Datos.php">
+                    <img src="../../Recursos/SVG/estadistica.svg" alt="Escudo Nacional de México">
+                </a>
+                <p>Estadistica municipal</p>
+            </div>
+            <div class="opcion">
+                 <a href="Estadistica/Gastos.php">
+                    <img src="../../Recursos/SVG/gasto.svg" alt="Escudo Nacional de México">
+                </a>
+                <p>Gasto municipal</p>
+            </div>
+            <div class="opcion">
+                 <a href="Inteligencia/AutoReparacion.php">
+                    <img src="../../Recursos/SVG/IA.svg" alt="Escudo Nacional de México">
+                </a>
+                <p>Asistencia de IA</p>
             </div>
         </div>
         <!--
@@ -132,6 +112,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
-    <script src="script.js"></script>
+    <script src="../ALCALDE.js"></script>
 </body>
 </html>

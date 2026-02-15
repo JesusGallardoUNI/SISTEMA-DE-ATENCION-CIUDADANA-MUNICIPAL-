@@ -1,12 +1,9 @@
 <?php
-
-    require "../../Recursos/Partes/Bloqueo.php";
+    include "../../Recursos/Partes/Partes.php";
     $Bloqueo = Seguridad();
     if(!$Bloqueo){
         header('Location: ../AccesoAdministracion.php');
     }
-    
-    require "../../Recursos/Informacion.php";
     $db = ConectarDB();
     //============================================================//
     //  Aqui empiezo a buscar todos los funcionarios registrados  //
@@ -42,41 +39,41 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
-        <link rel="stylesheet" href="../BuscarEstilo.css">
         <link rel="stylesheet" href="../../Recursos/CSS/General.css">
     </head>
     <body>
+        <?php Banner(true,"../../Recursos/Imagenes/icono.png","Gobierno de Guadalupe","Baja de personal"); ?>
         <br><br>
-        <a href="../Administracion.php" class="BOTON BTN__Color_Verde">Regresar</a>
+        <a href="Administracion.php" class="BOTON">Regresar</a>
         <br><br>
-        <div class="Configurar alto">
-            <table>
-                <thead>
+        <table class="Configurar Configurar__Mediano">
+            <thead>
+                <tr>
+                    <th>Curp</th>
+                    <th>Nombre completo</th>
+                    <th>Telefono</th>
+                    <th>Departamento</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while ($Registro = mysqli_fetch_assoc($Ejecutar)): ?>
                     <tr>
-                        <th>Curp</th>
-                        <th>Nombre completo</th>
-                        <th>Telefono</th>
-                        <th>Departamento</th>
-                        <th>Acción</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php while ($Registro = mysqli_fetch_assoc($Ejecutar)): ?>
-                        <tr>
-                            <td><?php echo $Registro['Curp']; ?></td>
-                            <td><?php echo $Registro['Nombres'] . " " . $Registro['Apellidos']; ?></td>
-                            <td><?php echo $Registro['Telefono']; ?></td>
-                            <td><?php echo $Registro['Departamento']; ?></td>
-                            <td>
-                                <form method="POST">
+                        <td><?php echo $Registro['Curp']; ?></td>
+                        <td><?php echo $Registro['Nombres'] . " " . $Registro['Apellidos']; ?></td>
+                        <td><?php echo $Registro['Telefono']; ?></td>
+                        <td><?php echo $Registro['Departamento']; ?></td>
+                        <td>
+                            <center>
+                                <form method="POST" class="elemento">
                                     <input type="hidden" name="ServidorEliminar" value="<?php echo $Registro['Curp']; ?>">
-                                    <input type="submit" value="Eliminar" class="BOTON BTN__Color_Rojo">
+                                    <input type="submit" value="Eliminar" class="BOTON BOTON_CERO BTN__Color_Rojo">
                                 </form>
-                            </td>
-                        </tr>
-                    <?php endwhile; ?>
-                </tbody>
-            </table>
-        </div>
+                            </center>
+                        </td>
+                    </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
     </body>
 </html>
