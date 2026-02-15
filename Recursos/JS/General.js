@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ================== ALERTA (solo si existe) ==================
   const alerta = document.getElementById("alerta");
   const ReporteAlerta = document.getElementById("alerta__resuelto");
+  const Funcionario = document.getElementById("Funcionario");
 
   if (alerta) {
     // Ocultar al hacer clic
@@ -35,6 +36,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }).then(() => {
       window.location.href = 'Muestra.php';
     });
+  }
+
+  if(Funcionario){
+    Swal.fire({
+      title: "Funcionario registrado correctamente",
+      text: "Ahora puedes acceder al sistema",
+      icon: "success"
+    })
   }
 
 

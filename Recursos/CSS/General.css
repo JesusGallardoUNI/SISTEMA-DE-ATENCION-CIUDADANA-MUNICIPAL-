@@ -8,11 +8,32 @@
     --PT: #DA0514;
     --Morena: #8E2C2D;
     --MovimientoCiudadano: #F97613;
+    --Gobierno: var(--MovimientoCiudadano);  /* Define un color del partido actual */
 
     --Fondo: #f4f4f4;
 
+    /* Este apartado indica el color de los reportes */
+    --Verde: #28A745;
+    --Amarillo: #FFC107;
+    --Naranja: #FF851B;
+    --Rojo: #DC3545;
+    
+}
 
-    --Gobierno: var(--PartidoVerde);  /* Define un color del partido actual */
+.FondoVerde {
+    background-color: var(--Verde);
+}
+
+.FondoAmarillo {
+    background-color: var(--Amarillo);
+}
+
+.FondoNaranja {
+    background-color: var(--Naranja);
+}
+
+.FondoRojo {
+    background-color: var(--Rojo);
 }
 
 

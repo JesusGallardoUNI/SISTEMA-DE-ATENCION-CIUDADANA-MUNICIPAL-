@@ -40,6 +40,37 @@
         }    
     }
 
+    function TiempoTotal($Fecha) {
+        $Original = new DateTime($Fecha);
+        $Actual = new DateTime(); // La actual
+        $Tiempo = date_diff($Actual, $Original);
+
+        $Retraso = $Tiempo->days;
+        switch($Retraso){
+            case($Retraso <= 3 ):
+                SemaforoResuelto($Retraso, "FondoVerde");
+            break;
+
+            case($Retraso >= 4 && $Retraso <= 7 ):
+                SemaforoResuelto($Retraso, "FondoAmarillo");
+            break;
+
+            case($Retraso >= 8 && $Retraso <= 12 ):
+                SemaforoResuelto($Retraso, "FondoNaranja");
+            break;
+
+            case($Retraso > 12):
+                SemaforoResuelto($Retraso, "FondoRojo");
+            break;
+
+            default: 
+                SemaforoResuelto($Retraso, "FondoNegro");
+                break;
+
+        }
+
+    }
+
     //Retorna el total de cierto tipo de reporte con base en si estan resueltos o no;
     function Estadistica(int $tipo , string $resuelto) {
         $db = ConectarDB();
@@ -141,10 +172,12 @@
         }
         return $Resultado;
     }
-
-    
-
 ?>
+
+
+
+
+
 
 <?php
     function Banner (/*Esta parte indica la imagen (opcional)*/
@@ -200,4 +233,43 @@
             </footer>
         <?php
     }
+?>
+
+<?php
+    function SemaforoResuelto ($DIAS, string $COLOR) {
+        ?>
+            <div class="Tiempo <?php echo $COLOR ;?>">
+                <?php echo $DIAS; ?>
+            </div>
+        <?php
+    }
+?>
+
+
+<?php 
+    function Opcion6() {
+        if($_SESSION['usuario_tipo'] == "Alcalde"){
+            ?>
+                <div class="opcion">
+                    <a href="ColoniasAjustes/Mostrar.php">
+                        <img src="../../Recursos/SVG/ModificarColonia.svg" alt="Modifica las propiedades de las colonias">
+                    </a>
+                    <p>Mostrar colonias</p>
+                </div>
+        <?php } ;?>
+    <?php }
+?>
+
+<?php 
+    function Opcion9() {
+        if($_SESSION['usuario_tipo'] == "Alcalde"){
+            ?>
+                <div class="opcion">
+                    <a href="Inteligencia/AutoReparacion.php">
+                        <img src="../../Recursos/SVG/IA.svg" alt="Escudo Nacional de México">
+                    </a>
+                    <p>Asistencia de IA</p>
+                </div>
+        <?php } ;?>
+    <?php }
 ?>

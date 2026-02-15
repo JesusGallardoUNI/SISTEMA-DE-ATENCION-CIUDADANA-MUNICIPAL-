@@ -173,6 +173,7 @@ ul li::before {
 }
 
 .Contenido .Contenido_Reportes .Reporte {
+    position: relative;
     width: 85%;
     padding: 10px;
     margin: 10px 0;
@@ -182,6 +183,18 @@ ul li::before {
     font-weight: 600;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.Contenido .Contenido_Reportes .Reporte .Tiempo {
+    position: absolute;
+    left: 85%;
+    top: -12px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .Contenido .Contenido_Reportes .Reporte:hover {

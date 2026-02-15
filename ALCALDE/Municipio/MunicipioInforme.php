@@ -20,24 +20,28 @@
     <main class="principal">
         <h2>Menu de operaciones</h2>
         <div class="contenido">
+
             <div class="opcion">
                 <a href="Facultades/Federal.php">
                     <img src="../../Recursos/Imagenes/Mexico.png" alt="Escudo Nacional de México">
                 </a>
                 <p>Legislación federal</p>
             </div>
+
             <div class="opcion">
                 <a href="Facultades/Estatal.php">
                     <img src="../../Recursos/Imagenes/NuevoLeón.png" alt="Escudo Estatal de Nuevo León">
                 </a>
                 <p>Legislacion estatal</p>
             </div>
+
             <div class="opcion">
                 <a href="Facultades/Reglamento.php">
                     <img src="../../Recursos/Imagenes/Guadalupe.png" alt="Escudo Estatal de Nuevo León">
                 </a>
                 <p>Reglamento interno</p>
             </div>
+
             <div class="opcion opcion_reporte">
                 <a href="ReporteColonias/ReportesEnColonias.php">
                     <img id="municipio-image" src="../../Recursos/SVG/reportes.svg" alt="Escudo Municipipal de Guadalupe">
@@ -47,6 +51,7 @@
                 </div>
                 <p>Reportes al Municipio</p>
             </div>
+
             <div class="opcion opcion_resuelto">
                 <a href="ReporteColonias/ReportesEnColoniasResueltos.php">
                     <img id="municipio-image" src="../../Recursos/SVG/resuelto.svg" alt="Escudo Municipipal de Guadalupe">
@@ -56,30 +61,24 @@
                 </div>
                 <p>Reportes atendidos</p>
             </div>
-            <div class="opcion">
-                <a href="ColoniasAjustes/Mostrar.php">
-                    <img src="../../Recursos/SVG/ModificarColonia.svg" alt="Modifica las propiedades de las colonias">
-                </a>
-                <p>Mostrar colonias</p>
-            </div>
+
+            <?php Opcion6(); ?>
+
             <div class="opcion">
                  <a href="Estadistica/Datos.php">
                     <img src="../../Recursos/SVG/estadistica.svg" alt="Escudo Nacional de México">
                 </a>
                 <p>Estadistica municipal</p>
             </div>
+            
             <div class="opcion">
                  <a href="Estadistica/Gastos.php">
                     <img src="../../Recursos/SVG/gasto.svg" alt="Escudo Nacional de México">
                 </a>
                 <p>Gasto municipal</p>
             </div>
-            <div class="opcion">
-                 <a href="Inteligencia/AutoReparacion.php">
-                    <img src="../../Recursos/SVG/IA.svg" alt="Escudo Nacional de México">
-                </a>
-                <p>Asistencia de IA</p>
-            </div>
+            
+            <?php Opcion9(); ?>
         </div>
         <!--
         <form id="infoForm">

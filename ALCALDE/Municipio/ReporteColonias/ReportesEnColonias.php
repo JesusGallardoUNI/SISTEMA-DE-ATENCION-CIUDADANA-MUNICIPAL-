@@ -93,6 +93,7 @@
                 <div class="Contenido_Reportes">
                     <?php while ($Registro = mysqli_fetch_assoc($Ejecucion)): ?>
                         <div class="Reporte">
+                            <?php TiempoTotal($Registro['fecha']); ?>
                             <a href="Problema.php?id=<?php echo $Registro['id']; ?>">
                                 <img loading="lazy" src="../../../ImagenesReportes/<?php echo $Registro['imagen']; ?>" alt="Foto">
                                 <p>Colonia: <?php echo $Registro['nombre_colonia']; ?></p>
