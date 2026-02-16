@@ -12,7 +12,7 @@
 			script.js
 			styles.css
 		EstilosPortal.css
-		ALCALDE.php
+		Ayuntamiento.php
 	\FUNCIONARIOS
 		\Municipio
 			\Colonias

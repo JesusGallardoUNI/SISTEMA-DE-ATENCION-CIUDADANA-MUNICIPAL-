@@ -19,7 +19,7 @@
                 session_start();
                 $_SESSION['login'] = true;
                 $_SESSION['usuario_tipo'] = $Usuario['cargo'];
-                //$_SESSION['url'] = "/MUNICIPAL/ALCALDE/ALCALDE.php";   //Este puede ser descartado en un futuro
+                //$_SESSION['url'] = "/MUNICIPAL/ALCALDE/Ayuntamiento.php";   //Este puede ser descartado en un futuro
                 
                 $_SESSION['Municipio'] = $Usuario['municipio'];
                 $_SESSION['Nombre'] = $Usuario['nombre'];

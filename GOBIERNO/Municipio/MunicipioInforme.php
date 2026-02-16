@@ -2,7 +2,7 @@
     include '../../Recursos/Partes/Partes.php';
     $Bloqueo = Seguridad();
     if(!$Bloqueo){
-        header('Location: ../ALCALDE.php');
+        header('Location: ../Ayuntamiento.php');
     }
 ?>
 
@@ -13,12 +13,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Municipio</title>
     <link rel="stylesheet" href="../../Recursos/CSS/General.css">
-    <link rel="stylesheet" href="../ALCALDE.css">
+    <link rel="stylesheet" href="../Ayuntamiento.css">
 </head>
 <body>
     <?php Banner(false,"","Municipio de Guadalupe","Estado de Nuevo León", true,"../../Recursos/SVG/Cerrar.svg","../../Recursos/Partes/Salir.php"); ?>
     <main class="principal">
-        <h2>Menu de operaciones</h2>
+        <strong><?php echo $_SESSION['Nombre'] . " " . $_SESSION['usuario_tipo'] . " del municipio de " . $_SESSION['Municipio'];?>
+        <h2>Menu de operaciones</strong></h2>
         <div class="contenido">
 
             <div class="opcion">
@@ -111,6 +112,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
-    <script src="../ALCALDE.js"></script>
+    <script src="../Ayuntamiento.js"></script>
 </body>
 </html>

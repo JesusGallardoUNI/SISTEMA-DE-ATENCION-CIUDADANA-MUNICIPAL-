@@ -2,7 +2,7 @@
     include "../../../Recursos/Partes/Partes.php";
     $Bloqueo = Seguridad();
     if(!$Bloqueo){
-        header('Location: ../../ALCALDE.php');
+        header('Location: ../../Ayuntamiento.php');
     }
 ?>
 
@@ -13,7 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Gastos en obra publica</title>
         <link rel="stylesheet" href="../../../Recursos/CSS/General.css">
-        <link rel="stylesheet" href="../../ALCALDE.css">
+        <link rel="stylesheet" href="../../Ayuntamiento.css">
         
 
         <link rel="stylesheet" href="https://cdn.datatables.net/2.3.6/css/dataTables.dataTables.min.css" />
@@ -87,7 +87,7 @@
     
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.datatables.net/2.3.6/js/dataTables.min.js"></script>
-    <script src="../../ALCALDE.js"></script>
+    <script src="../../Ayuntamiento.js"></script>
                  
     </body>
 </html>

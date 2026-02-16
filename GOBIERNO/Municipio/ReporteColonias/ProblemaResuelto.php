@@ -2,7 +2,7 @@
     include "../../../Recursos/Partes/Partes.php";
     $Bloqueo = Seguridad();
     if(!$Bloqueo){
-        header('Location: ../../ALCALDE.php');
+        header('Location: ../../Ayuntamiento.php');
     }
     $id = $_GET['id'];
     $db = ConectarDB();
@@ -28,7 +28,7 @@
     <title>Reporte de caso</title>
     
     <link rel="stylesheet" href="../../../Recursos/CSS/General.css">
-    <link rel="stylesheet" href="../../ALCALDE.css">
+    <link rel="stylesheet" href="../../Ayuntamiento.css">
 
     <!--Importante no borrar, sirve para la api del mapa-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />

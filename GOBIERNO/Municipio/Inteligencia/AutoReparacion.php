@@ -2,7 +2,7 @@
     include "../../../Recursos/Partes/Partes.php";
     $Bloqueo = Seguridad();
     if(!$Bloqueo){
-        header('Location: ../../ALCALDE.php');
+        header('Location: ../../Ayuntamiento.php');
     }
 ?>
 

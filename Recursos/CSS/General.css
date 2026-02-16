@@ -11,6 +11,7 @@
     --Gobierno: var(--MovimientoCiudadano);  /* Define un color del partido actual */
 
     --Fondo: #f4f4f4;
+    --Salir: #46484B;
 
     /* Este apartado indica el color de los reportes */
     --Verde: #28A745;
@@ -250,7 +251,7 @@ input[type="submit"]:hover, button:hover, .BOTON:hover {
     border-radius: 8px;
     width: 12%;
     height: 25px;
-    background-color: #4CAF50;
+    background-color: var(--Salir);
 }
 
 .Salir a {

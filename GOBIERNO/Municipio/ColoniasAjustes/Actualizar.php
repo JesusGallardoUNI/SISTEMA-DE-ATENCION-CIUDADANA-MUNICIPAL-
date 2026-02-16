@@ -2,7 +2,7 @@
     include "../../../Recursos/Partes/Partes.php";
     $Bloqueo = Seguridad();
     if(!$Bloqueo){
-        header('Location: ../../ALCALDE.php');
+        header('Location: ../../Ayuntamiento.php');
     }
     $nombre_colonia = $_GET['nombre_colonia'];
     $db = ConectarDB();
@@ -43,7 +43,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../../Recursos/CSS/General.css">
-    <link rel="stylesheet" href="../../ALCALDE.css">
+    <link rel="stylesheet" href="../../Ayuntamiento.css">
     <title>Actualizacion</title>
 </head>
 <body>

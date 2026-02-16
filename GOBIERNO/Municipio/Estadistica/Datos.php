@@ -2,7 +2,7 @@
     include "../../../Recursos/Partes/Partes.php";
     $Bloqueo = Seguridad();
     if(!$Bloqueo){
-        header('Location: ../../ALCALDE.php');
+        header('Location: ../../Ayuntamiento.php');
     }
 ?>
 
@@ -13,7 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Estadisticas en municipio</title>
         <link rel="stylesheet" href="../../../Recursos/CSS/General.css">
-        <link rel="stylesheet" href="../../ALCALDE.css">
+        <link rel="stylesheet" href="../../Ayuntamiento.css">
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     </head>
     <body id="Datos">
@@ -63,7 +63,7 @@
         <div>
             <button onclick="location.href='../MunicipioInforme.php'">Volver a la página principal</button>
         </div>
-        <script src="../../ALCALDE.js"></script> 
+        <script src="../../Ayuntamiento.js"></script> 
         
     </body>
 </html>

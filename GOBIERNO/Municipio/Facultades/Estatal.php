@@ -2,7 +2,7 @@
     include "../../../Recursos/Partes/Partes.php";
     $Bloqueo = Seguridad();
     if(!$Bloqueo){
-        header('Location: ../../ALCALDE.php');
+        header('Location: ../../Ayuntamiento.php');
     }
 ?>
 
@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Facultades que otorga la constitución estatal</title>
     <link rel="stylesheet" href="../../../Recursos/CSS/General.css">
-    <link rel="stylesheet" href="../../ALCALDE.css">
+    <link rel="stylesheet" href="../../Ayuntamiento.css">
 </head>
 <body>
     <?php Banner(false,"","Facultades que otorga la Constitución Estatal"); ?>

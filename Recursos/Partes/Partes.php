@@ -33,7 +33,7 @@
 
     function Tabla(string $nombre){
         $db = ConectarDB(); 
-        $Consulta = "SELECT * FROM $'$nombre';";
+        $Consulta = "SELECT * FROM $nombre;";
         $Ejecucion = mysqli_query($db,$Consulta);
         if($Ejecucion) {
             return $Ejecucion;

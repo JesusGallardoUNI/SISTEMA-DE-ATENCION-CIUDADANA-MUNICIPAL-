@@ -2,7 +2,7 @@
     include "../../../Recursos/Partes/Partes.php";
     $Bloqueo = Seguridad();
     if(!$Bloqueo){
-        header('Location: ../../ALCALDE.php');
+        header('Location: ../../Ayuntamiento.php');
     }
     $db = ConectarDB();
 
@@ -27,7 +27,7 @@
         <meta charset="UTF-8">
         <title>Reportes</title>
         <link rel="stylesheet" href="../../../Recursos/CSS/General.css">
-        <link rel="stylesheet" href="../../ALCALDE.css">
+        <link rel="stylesheet" href="../../Ayuntamiento.css">
     </head>
 
     <body>
