@@ -33,7 +33,7 @@
 </head>
 
 <body>
-    <?php Banner(true,"../../../Recursos/Imagenes/icono.png","Colonias de Guadalupe",""); ?>
+    <?php Banner(true,"../../../Recursos/Imagenes/icono.png","Colonias de Guadalupe","Reportes resueltos de colonias"); ?>
     <div class="Cuerpo">
         <nav>
             <div class="opcion Titulo_opcion">
@@ -85,7 +85,22 @@
         </nav>
         <main class="Contenido">
             <div class="Contenido__Encabezado">
-                <h2>Reporte resueltos de colonias</h2>
+                <table id="ReportesDashboard" class="Configurar Configurar__Local">
+                    <thead>
+                        <th class="FondoVerde">Sin retraso</th>
+                        <th class="FondoAmarillo">Retraso leve</th>
+                        <th class="FondoNaranja">Retraso considerable</th>
+                        <th class="FondoRojo">Retraso crítico</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="Reportes_Verde">3</td>
+                            <td id="Reportes_Amarillo">4</td>
+                            <td id="Reportes_Naranja">1</td>
+                            <td id="Reportes_Rojo">1</td>
+                        </tr>
+                    </tbody>
+                </table>
                 <p><?php echo $muestra = isset($Dato) ? $Dato : Traductor($_GET['tipo']);?></p>
             </div>
             <div class="Muestra" id="infoSection">
@@ -105,7 +120,7 @@
         </main>
     </div>
 
-
+<script src="../../Ayuntamiento.js"></script>
 </body>
 
 </html>

@@ -177,3 +177,30 @@ if(Gastos) {
     });
 
 }
+
+
+
+//====================================================================================//
+//   ESTA PARTE SE VA PARA ReportesEnColonias.PHP y ReportesEnColoniasResueltos.PHP   //
+//====================================================================================//
+
+const TablaDashboard = document.getElementById("ReportesDashboard");
+if(TablaDashboard) {
+    let Verde = document.querySelectorAll(".FondoVerde").length-1 || 0;
+    let Amarillo = document.querySelectorAll(".FondoAmarillo").length-1 || 0;
+    let Naranja = document.querySelectorAll(".FondoNaranja").length-1 || 0;
+    let Rojo = document.querySelectorAll(".FondoRojo").length-1 || 0;
+    
+    const Reportes_Verde = document.getElementById("Reportes_Verde");
+    const Reportes_Amarillo = document.getElementById("Reportes_Amarillo");
+    const Reportes_Naranja = document.getElementById("Reportes_Naranja");
+    const Reportes_Rojo = document.getElementById("Reportes_Rojo");
+
+
+    Reportes_Verde.innerText = Verde;
+    Reportes_Amarillo.innerText = Amarillo;
+    Reportes_Naranja.innerText = Naranja;
+    Reportes_Rojo.innerText = Rojo;
+    
+    
+}

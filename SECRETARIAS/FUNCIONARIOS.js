@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
     //document.getElementById('estado').value = params.get('estado') || "NULL";
     //document.getElementById('municipio').value = params.get('municipio') || "NULL";
     document.getElementById('colonia').value = params.get('colonia') || "NULL";
-    document.getElementById('reporte').value = params.get('reporte') || "NULL";
+    document.getElementById('reporte_subir').value = params.get('reporte') || "NULL";
 });
 
 function validarYGenerarPDF() {

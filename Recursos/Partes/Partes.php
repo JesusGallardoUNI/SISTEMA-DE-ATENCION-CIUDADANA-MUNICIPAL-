@@ -207,8 +207,8 @@
                         <img src="<?php echo $url ;?>" alt="Logo" class="logo">
                 <?php } ?>
                 <div>
-                    <h1><?php echo $titulo ?></h1>
-                    <h2><?php echo $Contexto ?></h2>
+                    <h1 id="HeaderTitulo"><?php echo $titulo ?></h1>
+                    <h2 id="HeaderSubtitulo"><?php echo $Contexto ?></h2>
                 </div>
                 <?php if($Boton){ ?>
                     <div class="Salir">

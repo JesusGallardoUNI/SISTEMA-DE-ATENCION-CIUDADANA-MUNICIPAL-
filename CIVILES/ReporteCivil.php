@@ -138,6 +138,12 @@
             </select>
         </div>
 
+        <!-- Nombre de la Calle -->
+        <div>
+            <label for="calle">Nombre de la Calle:</label>
+            <input type="text" id="calle" name="calle" maxlength="50" required>
+        </div>
+
         <!-- Tipo de reporte -->  
         <!-- Eliminar: 1 5 6; SOLO PONERLOS COMENTADOS -->
         <div>
@@ -159,12 +165,6 @@
         <div>
             <label for="Descripcion">Descripción del reporte:</label>
             <textarea name="Descripcion" id="Descripcion" maxlength="400" rows="8" required></textarea>
-        </div>
-
-        <!-- Nombre de la Calle -->
-        <div>
-            <label for="calle">Nombre de la Calle:</label>
-            <input type="text" id="calle" name="calle" maxlength="50" required>
         </div>
 
         <!-- Mapa -->
