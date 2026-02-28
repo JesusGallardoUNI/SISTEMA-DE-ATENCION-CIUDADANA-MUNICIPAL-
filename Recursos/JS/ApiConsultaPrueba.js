@@ -1,6 +1,6 @@
 // 1️⃣ fetch hace una petición HTTP al endpoint (API en PHP)
 //    NO devuelve datos inmediatamente, devuelve una PROMESA
-fetch("/MUNICIPAL/Recursos/API/ApiPrueba.php")
+fetch("/GUADALUPE/Recursos/API/ApiPrueba.php")
 
     // 2️⃣ PRIMER then:
     //    response representa la RESPUESTA CRUDA del servidor

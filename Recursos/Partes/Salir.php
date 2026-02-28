@@ -2,5 +2,5 @@
     session_start();
     $_SESSION = [];
 
-    header("Location: /MUNICIPAL/GOBIERNO/Ayuntamiento.php");
+    header("Location: /GUADALUPE/GOBIERNO/Ayuntamiento.php");
 ?>

@@ -9,9 +9,6 @@
     // Revisión del parámetro GET solo muestra
     if (isset($_GET['tipo'])) {
         $tipo = intval($_GET['tipo']);
-        //==========================================================//
-        // aqui muestra el informe del reporte generado por civiles //
-        //==========================================================//
         $Muestra = "SELECT * FROM reportes_colonias WHERE tipo_reporte = {$tipo} AND resuelto = 'si'";
     } else {
         $Muestra = "SELECT * FROM reportes_colonias WHERE resuelto = 'si'";
@@ -36,7 +33,7 @@
     <?php Banner(true,"../../../Recursos/Imagenes/icono.png","Colonias de Guadalupe","Reportes resueltos de colonias"); ?>
     <div class="Cuerpo">
         <nav>
-            <div class="opcion Titulo_opcion">
+            <div class="opcion Titulo_opcion" id="ScrollNavBar">
                 <h2>Menú</h2>
                 <img src="../../../Recursos/SVG/menu.svg" loading="lazy">
             </div>
@@ -53,14 +50,17 @@
             <div class="opcion" id="Opcion2">
                 <img src="../../../Recursos/SVG/opcion2.svg" alt="">
                 <a href="?tipo=2">b) Alumbrado público</a>
+                <div class="Total"><?php echo Estadistica(2, "si")?></div>
             </div>
             <div class="opcion" id="Opcion3">
                 <img src="../../../Recursos/SVG/opcion3.svg" alt="">
                 <a href="?tipo=3">c) Limpia, recolección, traslado, tratamiento y disposición final de residuos</a>
+                <div class="Total"><?php echo Estadistica(3, "si")?></div>
             </div>
             <div class="opcion" id="Opcion4">
                 <img src="../../../Recursos/SVG/opcion4.svg" alt="">
                 <a href="?tipo=4">d) Mercados y centrales de abasto</a>
+                <div class="Total"><?php echo Estadistica(4, "si")?></div>
             </div>
             <!--
             <div class="opcion" id="Opcion5">
@@ -77,10 +77,12 @@
             <div class="opcion" id="Opcion7">
                 <img src="../../../Recursos/SVG/opcion7.svg" alt="">
                 <a href="?tipo=7">g) Calles, parques y jardines y su equipamiento</a>
+                <div class="Total"><?php echo Estadistica(7, "si")?></div>
             </div>
             <div class="opcion" id="Opcion8">
                 <img src="../../../Recursos/SVG/opcion8.svg" alt="">
                 <a href="?tipo=8">h) Seguridad pública, policía preventiva municipal y tránsito</a>
+                <div class="Total"><?php echo Estadistica(8, "si")?></div>
             </div>
         </nav>
         <main class="Contenido">
@@ -109,6 +111,7 @@
             <div class="Contenido_Reportes">
                 <?php while ($Registro = mysqli_fetch_assoc($Ejecucion)): ?>
                     <div class="Reporte">
+                        <?php TiempoTotal($Registro['fecha']); ?>
                         <a href="ProblemaResuelto.php?id=<?php echo $Registro['id']; ?>">
                             <img loading="lazy" src="../../../ImagenesReportes/<?php echo $Registro['imagen']; ?>" alt="Foto">
                             <p>Colonia: <?php echo $Registro['nombre_colonia']; ?></p>
@@ -121,6 +124,7 @@
     </div>
 
 <script src="../../Ayuntamiento.js"></script>
+<script src="../../../Recursos/JS/General.js"></script>
 </body>
 
 </html>

@@ -39,12 +39,13 @@
         $Val4 = mysqli_real_escape_string($db,$_POST["CostoResuelto"]);
         $Val5 = mysqli_real_escape_string($db,$_POST["DescripcionSolucion"]);
         $Val6 = mysqli_real_escape_string($db,$_POST["FechaHoraResuelto"]);
+        $Val7 = mysqli_real_escape_string($db, $_POST["NombreCompleto"]);
 
         $Identificacion1 = mysqli_real_escape_string($db,$_POST["nombre_colonia"]);
         $Identificacion2 = mysqli_real_escape_string($db,$_POST["tipo_reporte"]);
 
         
-        $SubirSolucion = "INSERT INTO reportes_resueltos (clave, nombre_colonia, tipo_reporte, resuelto, foto, costo, descripcion , fecha_resuelto) VALUES ('$Val1','$Identificacion1','$Identificacion2','$Val2','$NombreImagen','$Val4','$Val5','$Val6');";        
+        $SubirSolucion = "INSERT INTO reportes_resueltos (clave, nombre_colonia, tipo_reporte, resuelto, foto, costo, descripcion , fecha_resuelto, nombre) VALUES ('$Val1','$Identificacion1','$Identificacion2','$Val2','$NombreImagen','$Val4','$Val5','$Val6','$Val7');";        
         $Informar = mysqli_query($db,$SubirSolucion);
 
         
@@ -74,7 +75,7 @@
 </head>
 <body>
     <?php Banner(true,"../../Recursos/Imagenes/icono.png","Atención Ciudadana","Detalles del reporte"); ?>
-    <form id="detallesReporteForm" method="POST"  enctype="multipart/form-data">
+    <form method="POST"  enctype="multipart/form-data">
         <fieldset>
             <legend>Datos del reporte:</legend>
             <div>
@@ -111,6 +112,11 @@
                 <label>Imagen del reporte:</label>
                 <img loading="lazy" src="../../ImagenesReportes/<?php echo $Resultado['imagen']; ?>" alt="Foto">
             </div>
+
+            <div>
+                <label for="">Fecha del reporte:</label>
+                <input type="text" value="<?php echo $Resultado['fecha']; ?>" readonly required>
+            </div>
         </fieldset>
 
         <fieldset>
@@ -134,6 +140,15 @@
             <div>
                 <label for="FechaHoraResuelto">Fecha y hora de acceso:</label>
                 <input type="datetime-local" name="FechaHoraResuelto" id="FechaHoraResuelto" required readonly>
+            </div>
+
+            <div>
+                <label for="">Dias de retraso:</label>
+                <input type="number" class="No_Contestar" value="<?php echo TiempoTotal($Resultado['fecha'],true); ?>" required readonly>
+            </div>
+
+            <div>
+                <input type="hidden" value="<?php echo $_SESSION['NombreCompleto']; ?>" name="NombreCompleto" required readonly>
             </div>
         </fieldset>
         <br>

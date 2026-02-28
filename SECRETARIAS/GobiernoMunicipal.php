@@ -21,11 +21,33 @@
                 $_SESSION['usuario_tipo'] = $Usuario['Departamento'];
                 
                 $_SESSION['Municipio'] = $Usuario['municipio'];
+                $_SESSION['NombreCompleto'] = $Usuario['Nombres'] . " " . $Usuario['Apellidos'];
 
                 $Ruta = "";
                 switch($_SESSION['usuario_tipo']){
-                    case ("2"): 
+                    case ("1"): 
+                        $Ruta = "";
+                    break;
+                    case ("2"): //TERMINADO
                         $Ruta = "ServiciosPublicos/SecretariaServiciosPublicos.php";
+                    break;
+                    case ("3"): //TERMINADO
+                        $Ruta = "ServiciosPublicos/SecretariaServiciosPublicos.php";
+                    break;
+                    case ("4"): 
+                        $Ruta = "";
+                    break;
+                    case ("5"): 
+                        $Ruta = "";
+                    break;
+                    case ("6"): 
+                        $Ruta = "";
+                    break;
+                    case ("7"): //TERMINADO
+                        $Ruta = "ServiciosPublicos/SecretariaServiciosPublicos.php";
+                    break;
+                    case ("8"): 
+                        $Ruta = "";
                     break;
                 }
                 $_SESSION['Nombre'] = $Usuario['Guadalupe'];
@@ -51,8 +73,7 @@
         <script src="../Recursos/JS/General.js"></script>
     </head>
     <body>
-        <?php Banner(true,"../Recursos/Imagenes/icono.png","Municipio de Guadalupe","Secretaria de obras publicas"); ?>
-        <h2>Acceso al panel de control</h2>
+        <?php Banner(true,"../Recursos/Imagenes/icono.png","Municipio de Guadalupe","Inicia sessión"); ?>
         <div>
             <form method="POST" class="VW50">
                 <div>

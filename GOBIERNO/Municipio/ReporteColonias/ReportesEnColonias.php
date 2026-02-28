@@ -14,7 +14,6 @@
     } else {
         $Muestra = "SELECT * FROM reportes_colonias WHERE resuelto = 'no'";
         $Dato = "Estas viendo el total de reportes, seleccione una opción del menú para ver casos especificos.";
-        
     }
     $Ejecucion = mysqli_query($db, $Muestra);
 ?>
@@ -35,7 +34,7 @@
 
         <div class="Cuerpo">
             <nav>
-                <div class="opcion Titulo_opcion">
+                <div class="opcion Titulo_opcion" id="ScrollNavBar">
                     <h2>Menú</h2>
                     <img src="../../../Recursos/SVG/menu.svg" loading="lazy">
                 </div>
@@ -52,14 +51,17 @@
                 <div class="opcion" id="Opcion2">
                     <img src="../../../Recursos/SVG/opcion2.svg" alt="">
                     <a href="?tipo=2">b) Alumbrado público</a>
+                    <div class="Total"><?php echo Estadistica(2, "no")?></div>
                 </div>
                 <div class="opcion" id="Opcion3">
                     <img src="../../../Recursos/SVG/opcion3.svg" alt="">
                     <a href="?tipo=3">c) Limpia, recolección, traslado, tratamiento y disposición final de residuos</a>
+                    <div class="Total"><?php echo Estadistica(3, "no")?></div>
                 </div>
                 <div class="opcion" id="Opcion4">
                     <img src="../../../Recursos/SVG/opcion4.svg" alt="">
                     <a href="?tipo=4">d) Mercados y centrales de abasto</a>
+                    <div class="Total"><?php echo Estadistica(4, "no")?></div>
                 </div>
                 <!--
                 <div class="opcion" id="Opcion5">
@@ -76,10 +78,12 @@
                 <div class="opcion" id="Opcion7">
                     <img src="../../../Recursos/SVG/opcion7.svg" alt="">
                     <a href="?tipo=7">g) Calles, parques y jardines y su equipamiento</a>
+                    <div class="Total"><?php echo Estadistica(7, "no")?></div>
                 </div>
                 <div class="opcion" id="Opcion8">
                     <img src="../../../Recursos/SVG/opcion8.svg" alt="">
                     <a href="?tipo=8">h) Seguridad pública, policía preventiva municipal y tránsito</a>
+                    <div class="Total"><?php echo Estadistica(8, "no")?></div>
                 </div>
             </nav>
             <main class="Contenido">
@@ -103,9 +107,6 @@
                     </table>
                     <p><?php echo $muestra = isset($Dato) ? $Dato : Traductor($_GET['tipo']);?></p>
                 </div>
-                <div class="Muestra" id="infoSection">
-                    <h2>Información Detallada</h2>
-                </div>
                 <div class="Contenido_Reportes">
                     <?php while ($Registro = mysqli_fetch_assoc($Ejecucion)): ?>
                         <div class="Reporte">
@@ -122,7 +123,6 @@
         </div>
         
         <script src="../../Ayuntamiento.js"></script>
-
+        <script src="../../../Recursos/JS/General.js"></script>
     </body>
-
 </html>

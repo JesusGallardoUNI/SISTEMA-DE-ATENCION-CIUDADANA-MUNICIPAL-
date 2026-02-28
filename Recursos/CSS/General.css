@@ -8,7 +8,7 @@
     --PT: #DA0514;
     --Morena: #8E2C2D;
     --MovimientoCiudadano: #F97613;
-    --Gobierno: var(--MovimientoCiudadano);  /* Define un color del partido actual */
+    --Gobierno: var(--PRI);  /* Define un color del partido actual */
 
     --Fondo: #f4f4f4;
     --Salir: #46484B;
@@ -20,6 +20,19 @@
     --Rojo: #DC3545;
     
 }
+
+.PRI {
+    background-color: var(--PRI);
+}
+
+.PAN {
+    background-color: var(--PAN);
+}
+
+.PartidoVerde {
+    background-color: var(--PartidoVerde);
+}
+
 
 .FondoVerde {
     background-color: var(--Verde);
@@ -35,6 +48,11 @@
 
 .FondoRojo {
     background-color: var(--Rojo);
+}
+
+.ColorFondo {
+    color: var(--Gobierno);
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.8)
 }
 
 
@@ -89,6 +107,22 @@ main {
     display: none !important;
 }
 
+.TextoCentrado {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.ContenidoCentrado {
+    display: block;
+    margin: 0 auto;
+}
+
+.Horizontal {
+    display: flex;
+    flex-direction: row;
+}
+
 #mi_mapa {
     width: 100%;
     height: 400px;
@@ -98,6 +132,27 @@ main {
     width: 50vw;
 }
 
+.W100 {
+    width: 100% !important;
+}
+
+.W80 {
+    width: 80% !important;
+}
+
+.LimiteTabla {
+    height: 98vh !important;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.Espacio {
+    margin: 5px;
+}
+
+.AnchoAuto {
+    width: auto !important;
+}
 
 /*==========================================================================*/
 /*                            PARA EL FORMULARIO                            */                                                                                                                                                            
@@ -381,6 +436,23 @@ input[type="submit"]:hover, button:hover, .BOTON:hover {
     color: white;
     background-color: #333;
     text-transform: uppercase;
+    position: relative;
+}
+
+.Cuerpo .opcion .Total {
+    position: absolute;
+    left: 88%;
+    top: -8px;
+    padding: 5px;
+    background-color: var(--Gobierno);
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+    border: 2px #272727 solid;
 }
 
 .Cuerpo .Titulo_opcion{
@@ -392,6 +464,10 @@ input[type="submit"]:hover, button:hover, .BOTON:hover {
 .Cuerpo .Titulo_opcion:hover{
     cursor: auto;
     background-color: var(--Gobierno) !important;
+}
+
+.Cuerpo .Titulo_opcion img {
+    cursor: pointer;
 }
 
 .Cuerpo a {
@@ -424,7 +500,7 @@ input[type="submit"]:hover, button:hover, .BOTON:hover {
 .Configurar {
     width: 100% !important;
     border: 1px solid #ccc;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     border-collapse: collapse; /* para que se vean los bordes */
 }
 
@@ -504,4 +580,8 @@ input[type="submit"]:hover, button:hover, .BOTON:hover {
 
 .Configurar tbody tr:nth-child(odd) {
     background-color: #fff;
+}
+
+.Configurar a {
+    color: blue;
 }

@@ -9,7 +9,7 @@
     max-width: 1000px !important;
     margin: 20px auto;
     background-color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px var(--Gobierno);
     border-radius: 8px;
 }
 
@@ -48,18 +48,19 @@
     height: auto;
     max-height: 150px;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px var(--Gobierno);
     transition: transform 0.3s ease;
 }
 
 .principal .contenido .opcion div {
     position: absolute;
-    top: -5px;
+    top: -7px;
     right: 23%;
     background-color: red;
     width: 35px;
     height: 35px;
     border-radius: 50%;
+    border: 2px #272727 solid;
 
     display: flex;
     justify-content: center;
@@ -140,7 +141,7 @@ ul li::before {
 
 
 .Contenido {
-    padding: 20px;
+    padding: 10px;
     width: 75%;
     margin: 5px auto;
     background-color: white;
@@ -157,24 +158,20 @@ ul li::before {
     text-align:start;
 }
 
-.Contenido .Muestra {
-    margin-top: 20px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
 .Contenido .Contenido_Reportes {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    column-gap: 10px;
+    column-gap: 8px;
     background-color: #f4f4f4;
+    width: auto;
+    max-height: 85vh;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .Contenido .Contenido_Reportes .Reporte {
     position: relative;
-    width: 85%;
+    width: 80%;
     padding: 10px;
     margin: 10px 0;
     background-color: color-mix(in srgb, var(--Gobierno) 75%, white);
@@ -255,28 +252,29 @@ ul li::before {
 
 
 .acostado {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    justify-items: center; /* Horizontal */
-    align-items: center;   /* Vertical */
-    height: auto;
-}
-
-.acostado img {
-    margin: 10 50%;
-    height: 50% !important;
-}
-
-.acostado div {
-    
     margin: 20px;
-    justify-items: center; /* Horizontal */
-    align-items: center;   /* Vertical */
+    padding: 10px;
+    width: 90%;
+    border: 4px solid var(--Gobierno);
+}
+
+.acostado tr td{
+    border: 4px solid #333;
+}
+
+.acostado tr td > img {
+    width: 250px !important;
+}
+
+.acostado tr td p {
+    background-color: transparent !important;
+    color: #272727;
 }
 
 .acostado textarea {
     display: block;
     margin: 10px auto;
+    width: 100%;
 }
 
 

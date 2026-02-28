@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
       text: "Asegúrate de comunicárselo a quien hizo el reporte",
       icon: "success"
     }).then(() => {
-      window.location.href = 'Muestra.php';
+      window.location.href = 'SecretariaServiciosPublicos.php';
     });
   }
 
@@ -92,3 +92,32 @@ document.addEventListener("DOMContentLoaded", () => {
           .openPopup();
   });
 });
+
+
+
+const Barra = document.getElementById("ScrollNavBar");
+if(Barra) {
+  let Truco = 0;
+  function AcortarNavegador() {
+    Truco++;
+    const Barra = document.querySelector("nav");
+    let OpcionTitulo = document.querySelector(".Titulo_opcion h2");
+    let Opciones = document.querySelectorAll(".opcion a");
+    if(Truco%2 == 0){
+      Opciones.forEach(enlace => {
+        enlace.classList.add("Ciego");
+      });
+      OpcionTitulo.classList.add("Ciego");
+      Barra.classList.add("AnchoAuto");
+    } else {
+      Opciones.forEach(enlace => {
+        enlace.classList.remove("Ciego");
+      });
+      OpcionTitulo.classList.remove("Ciego");
+      Barra.classList.remove("AnchoAuto");
+    }
+
+  }
+
+  Barra.addEventListener("click", AcortarNavegador);
+}

@@ -34,17 +34,43 @@
     <?php Banner(true,"../../../Recursos/Imagenes/icono.png","Reporte"); ?>
     <main class="Informe">
         <img loading="lazy" src="../../../ImagenesReportes/<?php echo $Muestra['imagen']; ?>" alt="Foto">
-        <p>Colonia: <?php echo $Muestra['nombre_colonia']; ?></p>
-        <p>Calle: <?php echo $Muestra['nombre_calle']; ?></p>
-        <p>Codigo postal: <?php echo $Muestra['codigo_postal']; ?></p>
-        <p>Reporte: <?php echo Traductor($Muestra['tipo_reporte']); ?> </p>
-        <textarea name="" id="" class="Descripcion" rows="8" readonly><?php echo $Muestra['descripcion']; ?></textarea>
-        <label for="mi_mapa">Lugar del reporte:</label>
-        <div>
-            <div id="mi_mapa"></div>
-        </div>
-        <input type="hidden" id="coordenadas" name="mi_mapa" value="<?php echo $Muestra['ubicacion']; ?>" readonly required>
-        <p>Fecha: <?php echo $Muestra['fecha']; ?></p>
+        <br>
+        <table class="acostado">
+            <tr>
+                <td>Colonia:</td>
+                <td><?php echo $Muestra['nombre_colonia']; ?></td>
+            </tr>
+            <tr>
+                <td>Calle:</td>
+                <td><?php echo $Muestra['nombre_calle']; ?></td>
+            </tr>
+            <tr>
+                <td>Codigo postal:</td>
+                <td><?php echo $Muestra['codigo_postal']; ?></td>
+            </tr>
+            <tr>
+                <td>Reporte:</td>
+                <td><?php echo Traductor($Muestra['tipo_reporte']); ?></td>
+            </tr>
+            <tr>
+                <td>Fecha:</td>
+                <td><?php echo $Muestra['fecha']; ?></td>
+            </tr>
+            <tr>
+                <td colspan="2"><textarea name="" id="" class="Descripcion" rows="8" readonly><?php echo $Muestra['descripcion']; ?></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <label for="mi_mapa">Lugar del reporte:</label>
+                    <div class="W100">
+                        <div id="mi_mapa" ></div>
+                    </div>
+                    <input type="hidden" id="coordenadas" name="mi_mapa" value="<?php echo $Muestra['ubicacion']; ?>" readonly required>
+                </td>
+            </tr>
+        </table>
+        
+        
         <a href="ReportesEnColonias.php" class="BOTON BTN__Color_Verde">Regresar</a>
     </main>
 

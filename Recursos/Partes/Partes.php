@@ -40,12 +40,15 @@
         }    
     }
 
-    function TiempoTotal($Fecha) {
+    function TiempoTotal($Fecha, $opcion=false) {
         $Original = new DateTime($Fecha);
         $Actual = new DateTime(); // La actual
         $Tiempo = date_diff($Actual, $Original);
 
-        $Retraso = $Tiempo->days;
+        $Retraso = $Tiempo->days-1;
+        if($opcion) {
+            return $Retraso;
+        }
         switch($Retraso){
             case($Retraso <= 3 ):
                 SemaforoResuelto($Retraso, "FondoVerde");
@@ -69,6 +72,34 @@
 
         }
 
+    }
+
+    function ColorSemaforo($Fecha){
+        $Original = new DateTime($Fecha);
+        $Actual = new DateTime(); // La actual
+        $Tiempo = date_diff($Actual, $Original);
+        $Retraso = $Tiempo->days-1;
+        switch($Retraso){
+            case($Retraso <= 3 ):
+                return "FondoVerde";
+            break;
+
+            case($Retraso >= 4 && $Retraso <= 7 ):
+                return "FondoAmarillo";
+            break;
+
+            case($Retraso >= 8 && $Retraso <= 12 ):
+                return "FondoNaranja";
+            break;
+
+            case($Retraso > 12):
+                return "FondoRojo";
+            break;
+
+            default: 
+                return "FondoNegro";
+                break;
+        }
     }
 
     //Retorna el total de cierto tipo de reporte con base en si estan resueltos o no;
@@ -266,9 +297,23 @@
             ?>
                 <div class="opcion">
                     <a href="Inteligencia/AutoReparacion.php">
-                        <img src="../../Recursos/SVG/IA.svg" alt="Escudo Nacional de México">
+                        <img src="../../Recursos/SVG/opcion9.svg" alt="Asistencia con IA">
                     </a>
                     <p>Asistencia de IA</p>
+                </div>
+        <?php } ;?>
+    <?php }
+?>
+
+<?php 
+    function OpcionUltima() {
+        if($_SESSION['usuario_tipo'] == "Alcalde"){
+            ?>
+                <div class="opcion">
+                    <a href="Ajustes/Configuracion.php">
+                        <img src="../../Recursos/SVG/opcionfinal.svg" alt="Configuracion">
+                    </a>
+                    <p>Ajustes</p>
                 </div>
         <?php } ;?>
     <?php }
