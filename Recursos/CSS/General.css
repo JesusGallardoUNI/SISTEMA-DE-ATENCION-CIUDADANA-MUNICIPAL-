@@ -8,7 +8,7 @@
     --PT: #DA0514;
     --Morena: #8E2C2D;
     --MovimientoCiudadano: #F97613;
-    --Gobierno: var(--PRI);  /* Define un color del partido actual */
+    --Gobierno: var(--Morena);  /* Define un color del partido actual */
 
     --Fondo: #f4f4f4;
     --Salir: #46484B;
@@ -232,7 +232,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 button, input[type="submit"], .BOTON {
     background-color: var(--Gobierno); /*#f97613;*/
     border: 4px solid color-mix(in srgb, var(--Gobierno) 80%, black);
-    color: white;
+    color: white !important;
     min-height: 35px;
     max-height: 70px;
     border-radius: 5px;

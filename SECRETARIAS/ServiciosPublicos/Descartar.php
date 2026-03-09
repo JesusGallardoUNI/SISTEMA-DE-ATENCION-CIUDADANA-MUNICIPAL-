@@ -8,14 +8,17 @@
     //=======================================================//
     //  Aqui empiezo a buscar todos los reportes necesarios  //
     //=======================================================//
-    $Buscar = "SELECT * FROM reportes_colonias WHERE resuelto != 'si' AND tipo_reporte = {$_SESSION['usuario_tipo']}";
+    $Asignado_A = $_SESSION['ID_Empleado'];
+    $Buscar = "SELECT * FROM reportes_colonias WHERE resuelto = 'no' AND tipo_reporte = {$_SESSION['usuario_tipo']} AND id_encargado = $Asignado_A";
     $Ejecutar = mysqli_query($db,$Buscar);
 ?>
 
-<h1 class="TextoCentrado ColorFondo">Listado de reportes pendientes, selecciona un reporte y define el motivo por el cual deceas descartar</h1>
-<table class="Configurar Espacio">
+<h1 class="TextoCentrado ColorFondo">Listado de reportes pendientes por terminar</h1>
+<table class="Configurar Espacio" id="Opcion1">
     <thead>
         <tr>
+            <th>Accion</th>
+            <th>Clave</th>
             <th>Reporte</th>
             <th>Colonia</th>
             <th>Calle</th>
@@ -26,6 +29,8 @@
         <?php while ($Registro = mysqli_fetch_assoc($Ejecutar)): ?>
             <?php if (!empty($Registro['clave'])): ?>
                 <tr>
+                    <td><a href="FormularioDescartar.php?id=<?php echo $Registro['id']; ?>" class="BOTON BTN__Color_Rojo">Descartar</a></td>
+                    <td><?php echo $Registro['clave']; ?></td>
                     <td><?php echo Traductor($Registro['tipo_reporte']); ?></td>
                     <td><?php echo $Registro['nombre_colonia']; ?></td>
                     <td><?php echo $Registro['nombre_calle']; ?></td>

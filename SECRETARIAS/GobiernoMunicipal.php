@@ -22,7 +22,7 @@
                 
                 $_SESSION['Municipio'] = $Usuario['municipio'];
                 $_SESSION['NombreCompleto'] = $Usuario['Nombres'] . " " . $Usuario['Apellidos'];
-
+                $_SESSION['ID_Empleado'] = $Usuario['id'];
                 $Ruta = "";
                 switch($_SESSION['usuario_tipo']){
                     case ("1"): 

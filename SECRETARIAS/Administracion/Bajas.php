@@ -8,7 +8,7 @@
     //============================================================//
     //  Aqui empiezo a buscar todos los funcionarios registrados  //
     //============================================================//
-    $Buscar = "SELECT * FROM servidores_publicos";
+    $Buscar = "SELECT * FROM secretarias";
     $Ejecutar = mysqli_query($db,$Buscar);
 
     //================================================================//
@@ -18,7 +18,7 @@
         $Eliminado = mysqli_real_escape_string($db, $_POST['ServidorEliminar']);
 
         if (!empty($Eliminado)) {
-            $EliminarPersona = "DELETE FROM servidores_publicos WHERE Curp = '$Eliminado'";
+            $EliminarPersona = "DELETE FROM secretarias WHERE Curp = '$Eliminado'";
             $Eliminar = mysqli_query($db, $EliminarPersona);
 
             if ($Eliminar) {

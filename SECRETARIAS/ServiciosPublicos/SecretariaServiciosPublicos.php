@@ -4,12 +4,6 @@
     if(!$Bloqueo){
         header('Location: ../GobiernoMunicipal.php');
     }
-    $db = ConectarDB();
-    //=======================================================//
-    //  Aqui empiezo a buscar todos los reportes necesarios  //
-    //=======================================================//
-    $Buscar = "SELECT * FROM reportes_colonias WHERE resuelto != 'si' AND tipo_reporte = {$_SESSION['usuario_tipo']}";
-    $Ejecutar = mysqli_query($db,$Buscar);
 ?>
 
 <!DOCTYPE html>
@@ -57,17 +51,14 @@
                     <img src="../../Recursos/SVG/informe.svg" alt="">
                     <a href="#" onclick="cargarSeccion(6)">informes</a>
                 </div>
-                <div class="opcion">
-                    <img src="../../Recursos/SVG/opcionfinal.svg" alt="">
-                    <a href="#" onclick="cargarSeccion(7)">ajustes</a>
-                </div>
             </nav>
             <main class="LimiteTabla" id="contenido">
             </main>
         </div>
 
-        <script src="ServiciosPublicos.js"></script>
         <script src="../../Recursos/JS/General.js"></script>
-
+        <script src="ServiciosPublicos.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script><!--ESTE ES PARA EL PDF-->
     </body>
 </html>

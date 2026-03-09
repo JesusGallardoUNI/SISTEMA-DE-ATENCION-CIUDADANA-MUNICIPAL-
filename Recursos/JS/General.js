@@ -47,6 +47,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
+//===========================================//
+//       GENERADOR DE FECHA AUTOMATICA       //
+//===========================================//
+window.Fecha = function(){
+    const Actual = new Date();
+    const Anio = Actual.getFullYear();
+    const Mes = String(Actual.getMonth() + 1).padStart(2, '0');
+    const Dia = String(Actual.getDate()).padStart(2, '0');
+    return `${Anio}-${Mes}-${Dia}`;
+}
 
 
 

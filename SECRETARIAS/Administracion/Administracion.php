@@ -20,20 +20,21 @@
 
     <div class="Cuerpo">
         <nav>
-            <div class="opcion Titulo_opcion">
+            <div class="opcion Titulo_opcion" id="ScrollNavBar">
                 <h2>Menu de opciones</h2>
+                <img src="../../Recursos/SVG/menu.svg" loading="lazy">
             </div>
             <div class="opcion">
                 <img src="../../Recursos/SVG/Altas.svg" alt="">
-                <a href="Altas.php">Altas</a>
+                <a href="Altas.php">Generar altas</a>
             </div>
             <div class="opcion">
                 <img src="../../Recursos/SVG/Cambios.svg" alt="">
-                <a href="Cambios.php">Cambios</a>
+                <a href="Cambios.php">Solicitud de cambios</a>
             </div>
             <div class="opcion">
                 <img src="../../Recursos/SVG/Eliminar.svg" alt="">
-                <a href="Bajas.php">Bajas</a>
+                <a href="Bajas.php">Generar bajas</a>
             </div>
         </nav>
         <section>
@@ -63,5 +64,6 @@
             </table>
         </section>
     </div>
+    <script src="../../Recursos/JS/General.js"></script>
 </body>
 </html>

@@ -5,36 +5,49 @@
         header('Location: ../GobiernoMunicipal.php');
     }
     $db = ConectarDB();
-    //=======================================================//
-    //  Aqui empiezo a buscar todos los reportes necesarios  //
-    //=======================================================//
-    $Buscar = "SELECT * FROM reportes_colonias WHERE resuelto != 'si' AND tipo_reporte = {$_SESSION['usuario_tipo']}";
-    $Ejecutar = mysqli_query($db,$Buscar);
+    $ID_EMPLEADO = $_SESSION['ID_Empleado'];
+    $Empleado = "SELECT * FROM secretarias WHERE id = {$ID_EMPLEADO};";
+    $Busca = mysqli_query($db,$Empleado);
+    if($Busca->num_rows){
+        $Datos = mysqli_fetch_assoc($Busca);
+        $Telefono = $Datos['Telefono'];
+        $Correo = $Datos['Correo'];
+        $Departamento = $Datos['Departamento'];
+
+    }
 ?>
 
 <h1 class="TextoCentrado ColorFondo">Solicitud de cambio de puesto</h1>
-<form action="" class="ContenidoCentrado">
+<form action="" class="ContenidoCentrado" id="Cambio">
 
     <div>
-        <label for="">Fecha actual:</label>
-        <input type="date">
+        <label for="F_Actual">Fecha actual:</label>
+        <input type="date" id="F_Actual" readonly required>
     </div>
     <div>
-        <label for="">Nombre Completo:</label>
-        <input type="text" readonly required>
+        <label for="NombreCompleto">Nombre Completo:</label>
+        <input type="text" value="<?php echo $_SESSION['NombreCompleto'];?>" id="NombreCompleto" readonly required>
     </div>
     <div>
-        <label for="">Cargo actual</label>
-        <input type="text" name="" id="">
+        <label for="Telefono">Telefono:</label>
+        <input type="number" value="<?php echo $Telefono ;?>" id="Telefono"readonly required>
     </div>
     <div>
-        <label for="">Motivos:</label>
-        <textarea name="" id="" rows="3"></textarea>
+        <label for="Correo">Correo:</label>
+        <input type="email" value="<?php echo $Correo ;?>" id="Correo">
+    </div>
+    <div>
+        <label for="CargoActual">Cargo actual</label>
+        <input type="text" value="<?php echo Traductor($Departamento);?>" name="" id="CargoActual">
+    </div>
+    <div>
+        <label for="Motivo">Motivos:</label>
+        <textarea name="" id="Motivo" rows="4"></textarea>
     </div>
     <div>
         <label for="">El cambio sera permantente</label>
-        <select name="" id="">
-            <option value=""></option>
+        <select name="" id="cambio">
+            <option value="" selected disabled>Seleccione una opcion</option>
             <option value="si">si</option>
             <option value="no">no</option>
         </select>

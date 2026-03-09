@@ -8,7 +8,8 @@
     //=======================================================//
     //  Aqui empiezo a buscar todos los reportes necesarios  //
     //=======================================================//
-    $Buscar = "SELECT * FROM reportes_colonias WHERE resuelto != 'si' AND tipo_reporte = {$_SESSION['usuario_tipo']}";
+    $Asignado_A = $_SESSION['ID_Empleado'];
+    $Buscar = "SELECT * FROM reportes_colonias WHERE resuelto = 'no' AND tipo_reporte = {$_SESSION['usuario_tipo']} AND id_encargado = $Asignado_A";
     $Ejecutar = mysqli_query($db,$Buscar);
 ?>
 

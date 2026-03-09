@@ -39,13 +39,14 @@
         $Val4 = mysqli_real_escape_string($db,$_POST["CostoResuelto"]);
         $Val5 = mysqli_real_escape_string($db,$_POST["DescripcionSolucion"]);
         $Val6 = mysqli_real_escape_string($db,$_POST["FechaHoraResuelto"]);
-        $Val7 = mysqli_real_escape_string($db, $_POST["NombreCompleto"]);
+        $Val7 = mysqli_real_escape_string($db, $_POST["DiasRetraso"]);
+        $Val8 = mysqli_real_escape_string($db, $_POST["ID_Encargado"]);
 
         $Identificacion1 = mysqli_real_escape_string($db,$_POST["nombre_colonia"]);
         $Identificacion2 = mysqli_real_escape_string($db,$_POST["tipo_reporte"]);
 
         
-        $SubirSolucion = "INSERT INTO reportes_resueltos (clave, nombre_colonia, tipo_reporte, resuelto, foto, costo, descripcion , fecha_resuelto, nombre) VALUES ('$Val1','$Identificacion1','$Identificacion2','$Val2','$NombreImagen','$Val4','$Val5','$Val6','$Val7');";        
+        $SubirSolucion = "INSERT INTO reportes_resueltos (clave, nombre_colonia, tipo_reporte, resuelto, foto, costo, descripcion , fecha_resuelto, retraso, id_encargado) VALUES ('$Val1','$Identificacion1','$Identificacion2','$Val2','$NombreImagen','$Val4','$Val5','$Val6','$Val7','$Val8');";        
         $Informar = mysqli_query($db,$SubirSolucion);
 
         
@@ -144,11 +145,11 @@
 
             <div>
                 <label for="">Dias de retraso:</label>
-                <input type="number" class="No_Contestar" value="<?php echo TiempoTotal($Resultado['fecha'],true); ?>" required readonly>
+                <input type="number" name="DiasRetraso" class="No_Contestar" value="<?php echo TiempoTotal($Resultado['fecha'],true); ?>" required readonly>
             </div>
 
             <div>
-                <input type="hidden" value="<?php echo $_SESSION['NombreCompleto']; ?>" name="NombreCompleto" required readonly>
+                <input type="text" name="ID_Encargado" value="<?php echo $_SESSION['ID_Empleado']; ?>" name="NombreCompleto" required readonly>
             </div>
         </fieldset>
         <br>

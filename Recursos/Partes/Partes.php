@@ -13,20 +13,17 @@
         }
     }
 
-    //Retorna el total de los reportes con base en si estan resueltos o no; 
-    function Contador(string $resuelto){   
-        $db = ConectarDB(); 
-        $Numero = "SELECT COUNT(*) AS 'total' FROM reportes_colonias WHERE resuelto = '{$resuelto}';";
-        $Ejecucion = mysqli_query($db, $Numero);
-        if ($Ejecucion) {
-            $fila = mysqli_fetch_assoc($Ejecucion);
-            echo $fila['total'];
-            /*
-            if ( $fila['total'] <= 99 ) {
-                echo $fila['total'];
-            }
-            */
-        } else {
+
+    //Retorna la cantidad de registros de una tabla culla columna tenga un valor determinado
+    //Pide 3 parametros [TABLA, COLUMNA, VALOR]
+    function Total(string $TABLA, string $COLUMNA, $VALOR){
+        $db = ConectarDB();
+        $Contador = "SELECT COUNT(*) AS 'TOTAL' FROM {$TABLA} WHERE {$COLUMNA} = '{$VALOR}';";
+        $Ejecutar = mysqli_query($db, $Contador);
+        if($Ejecutar){
+            $Numero = mysqli_fetch_assoc($Ejecutar);
+            echo $Numero['TOTAL'];
+        } else{
             echo "0";
         }
     }
@@ -45,12 +42,28 @@
         $Actual = new DateTime(); // La actual
         $Tiempo = date_diff($Actual, $Original);
 
-        $Retraso = $Tiempo->days-1;
+        $Retraso = $Tiempo->days;
         if($opcion) {
             return $Retraso;
         }
+
+        if($Retraso <= 3){
+            $color = "FondoVerde";
+
+        }elseif($Retraso <= 7){
+            $color = "FondoAmarillo";
+
+        }elseif($Retraso <= 12){
+            $color = "FondoNaranja";
+
+        }else{
+            $color = "FondoRojo";
+        }
+        SemaforoResuelto($Retraso, $color);
+
+        /*
         switch($Retraso){
-            case($Retraso <= 3 ):
+            case($Retraso <= 3):
                 SemaforoResuelto($Retraso, "FondoVerde");
             break;
 
@@ -71,6 +84,7 @@
                 break;
 
         }
+        */
 
     }
 

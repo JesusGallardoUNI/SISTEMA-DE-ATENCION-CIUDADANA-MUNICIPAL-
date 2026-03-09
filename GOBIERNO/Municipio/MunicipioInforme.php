@@ -43,27 +43,35 @@
                 <p>Reglamento interno</p>
             </div>
 
-            <div class="opcion opcion_reporte">
+            <div class="opcion">
                 <a href="ReporteColonias/ReportesEnColonias.php">
-                    <img id="municipio-image" src="../../Recursos/SVG/reportes.svg" alt="Escudo Municipipal de Guadalupe">
+                    <img id="municipio-image" src="../../Recursos/SVG/reportes.svg" alt="Escudo Municipipal de Guadalupe" class="FondoAmarillo">
                 </a>
                 <div>
-                    <?php Contador("no"); ?>
+                    <?php Total("reportes_colonias","resuelto","no"); ?>
                 </div>
                 <p>Reportes al Municipio</p>
             </div>
 
-            <div class="opcion opcion_resuelto">
+            <div class="opcion">
                 <a href="ReporteColonias/ReportesEnColoniasResueltos.php">
-                    <img id="municipio-image" src="../../Recursos/SVG/resuelto.svg" alt="Escudo Municipipal de Guadalupe">
+                    <img id="municipio-image" src="../../Recursos/SVG/resuelto.svg" alt="Escudo Municipipal de Guadalupe" class="FondoVerde">
                 </a>
                 <div>
-                    <?php Contador("si"); ?>
+                    <?php Total("reportes_colonias","resuelto","si"); ?>
                 </div>
                 <p>Reportes atendidos</p>
             </div>
 
-            <?php Opcion6(); ?>
+            <div class="opcion">
+                <a href="ReporteColonias/ReportesEnColoniasDescartado.php">
+                    <img id="municipio-image" src="../../Recursos/SVG/Descartado.svg" alt="Escudo Municipipal de Guadalupe" class="FondoRojo">
+                </a>
+                <div>
+                    <?php Total("reportes_colonias","descartado","si"); ?>
+                </div>
+                <p>Reportes descartados</p>
+            </div>
 
             <div class="opcion">
                  <a href="Estadistica/Datos.php">
@@ -78,8 +86,19 @@
                 </a>
                 <p>Gasto municipal</p>
             </div>
-            
+
             <?php Opcion9(); ?>
+
+            <div class="opcion">
+                 <a href="Secretarias/General.php">
+                    <img src="../../Recursos/SVG/Secretarias.svg" alt="Escudo Nacional de México" class="FondoRojo">
+                </a>
+                <p>Secretarias</p>
+            </div>
+
+            <?php Opcion6(); ?>
+            
+            
 
             <?php OpcionUltima(); ?>
         </div>

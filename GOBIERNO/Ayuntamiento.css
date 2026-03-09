@@ -35,13 +35,6 @@
     position: relative;
 }
 
-.opcion_reporte img {
-    background-color: darkorange;
-}
-
-.opcion_resuelto img {
-    background-color: #45a049;
-}
 
 .principal .contenido .opcion img {
     width: 150px;

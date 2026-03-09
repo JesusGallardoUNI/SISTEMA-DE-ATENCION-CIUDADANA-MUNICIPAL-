@@ -41,7 +41,7 @@
                         <td><input id="Rep4" type="number" readonly value="<?php echo Estadistica(4, "no")?>"></td>
                         <td><input id="Rep7" type="number" readonly value="<?php echo Estadistica(7, "no")?>"></td>
                         <td><input id="Rep8" type="number" readonly value="<?php echo Estadistica(8, "no")?>"></td>
-                        <td><input type="number" readonly value="<?php echo Contador("no")?>"></td>
+                        <td><input type="number" readonly value="<?php echo Total("reportes_colonias","resuelto","no"); ?>"></td>
                     </tr>
                     <tr>
                         <td><p>Si resuelto</p></td>
@@ -50,7 +50,7 @@
                         <td><input id="Sol4" type="number" readonly value="<?php echo Estadistica(4, "si")?>"></td>
                         <td><input id="Sol7" type="number" readonly value="<?php echo Estadistica(7, "si")?>"></td>
                         <td><input id="Sol8" type="number" readonly value="<?php echo Estadistica(8, "si")?>"></td>
-                        <td><input type="number" readonly value="<?php echo Contador("si")?>"></td>
+                        <td><input type="number" readonly value="<?php echo Total("reportes_colonias","resuelto","si"); ?>"></td>
                     </tr>
                 </tbody>
             </table>

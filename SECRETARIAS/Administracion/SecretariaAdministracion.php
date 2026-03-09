@@ -1,5 +1,5 @@
 <?php
-    include "../Recursos/Partes/Partes.php";
+    include "../../Recursos/Partes/Partes.php";
     $db = ConectarDB();
 
     
@@ -29,13 +29,13 @@
                 $_SESSION['usuario_tipo'] = 'administracion';
                 //$_SESSION['url'] = "/MUNICIPAL/FUNCIONARIOS/AccesoAdministracion.php";   //Este puede ser descartado en un futuro
                 
-                header('Location: Administracion/Administracion.php');
+                header('Location: Administracion.php');
             } else {
-                //echo '<div id="alerta" class="alerta alerta__malo">la contraseña no es correcta</div>';
+                echo '<div id="alerta" class="alerta alerta__malo">la contraseña no es correcta</div>';
                 //Integra las nuevas alertas de la libreria
             }
         }else{
-            //echo  '<div id="alerta" class="alerta alerta__malo">el correo no existe</div>';
+            echo  '<div id="alerta" class="alerta alerta__malo">el correo no existe</div>';
             //Integra las nuevas alertas de la libreria
         }
     }
@@ -48,11 +48,11 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Atención Ciudadana - Inicio de Sesión</title>
-        <link rel="stylesheet" href="../Recursos/CSS/General.css">
-        <script src="../Recursos/JS/General.js"></script>
+        <link rel="stylesheet" href="../../Recursos/CSS/General.css">
+        <script src="../../Recursos/JS/General.js"></script>
     </head>
     <body>
-        <?php Banner(true,"../Recursos/Imagenes/icono.png","Municipio de Guadalupe","Secretaria de administración"); ?>
+        <?php Banner(true,"../../Recursos/Imagenes/icono.png","Municipio de Guadalupe","Secretaria de administración"); ?>
         <h2>Acceso al panel de control</h2>
         <form method="POST">
             <div>

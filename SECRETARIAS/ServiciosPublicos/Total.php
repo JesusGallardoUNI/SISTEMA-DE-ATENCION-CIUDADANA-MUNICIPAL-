@@ -8,8 +8,18 @@
     //=======================================================//
     //  Aqui empiezo a buscar todos los reportes necesarios  //
     //=======================================================//
-    $Buscar = "SELECT * FROM reportes_colonias WHERE resuelto != 'si' AND tipo_reporte = {$_SESSION['usuario_tipo']}";
+    $Buscar = "SELECT * FROM reportes_colonias WHERE resuelto = 'no' AND tipo_reporte = {$_SESSION['usuario_tipo']} AND id_encargado IS NULL;";
     $Ejecutar = mysqli_query($db,$Buscar);
+
+    if($_SERVER["REQUEST_METHOD"] === "POST"){
+        $IDENTIFICACION = mysqli_real_escape_string($db, $_POST["Integrar"]);
+        $Asignado_A = $_SESSION['ID_Empleado'];
+        $Query = "UPDATE reportes_colonias SET id_encargado = $Asignado_A WHERE id = $IDENTIFICACION;";
+        $Asignar = mysqli_query($db, $Query);
+        if($Asignar){
+            echo "<div id='alerta'></div>";
+        }
+    }
 ?>
 
 <h1 class="TextoCentrado ColorFondo">Selecciona un reporte para integrarlo a tu bitacora de trabajo</h1>
@@ -29,8 +39,8 @@
                 <tr>
                     <td>
                         <center>
-                            <form method="POST" class="elemento W80">
-                                <input type="hidden" name="Seleccionar" value="<?php echo $Registro['nombre_colonia']; ?>">
+                            <form method="POST" class="elemento W80 FormularioTotal" id="">
+                                <input type="hidden" name="Integrar" value="<?php echo $Registro['id']; ?>">
                                 <input type="submit" value="Integrar" class="BOTON BOTON_CERO BTN__Color_Verde">
                             </form>
                         </center>
