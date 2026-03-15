@@ -6,55 +6,72 @@
     }
     $db = ConectarDB();
     $ID_EMPLEADO = $_SESSION['ID_Empleado'];
-    $Empleado = "SELECT * FROM secretarias WHERE id = {$ID_EMPLEADO};";
+    $Empleado = "SELECT * FROM secretarias WHERE id_encargado = {$ID_EMPLEADO};";
     $Busca = mysqli_query($db,$Empleado);
     if($Busca->num_rows){
         $Datos = mysqli_fetch_assoc($Busca);
         $Telefono = $Datos['Telefono'];
         $Correo = $Datos['Correo'];
         $Departamento = $Datos['Departamento'];
+    }
+    //Ahora agregar la funcion para subir la informacion a la base de datos
+    if($_SERVER["REQUEST_METHOD"] === "POST"){
+        
 
+
+        $VAL1 = mysqli_real_escape_string($db, $_POST["F_Actual"]);
+        $VAL2 = mysqli_real_escape_string($db, $_POST["NombreCompleto"]);
+        $VAL3 = mysqli_real_escape_string($db, $_POST["CargoActual"]);
+        $VAL4 = mysqli_real_escape_string($db, $_POST["CargoCambio"]);
+        $VAL5 = mysqli_real_escape_string($db, $_POST["Permanente"]);
+        $VAL6 = mysqli_real_escape_string($db, $_POST["Motivo"]);
+        $Solicitud = "INSERT INTO solicitud_cambios (fecha, id_empleado, nombre, cargo_actual, cargo_nuevo,	cambio_permanente, motivos) VALUES ('$VAL1','$ID_EMPLEADO','$VAL2','$VAL3','$VAL4','$VAL5','$VAL6');";
+        $Accion = mysqli_query($db, $Solicitud);
+        if($Accion){
+            header("LOcation: SecretariaServiciosPublicos.php");
+        }
     }
 ?>
 
 <h1 class="TextoCentrado ColorFondo">Solicitud de cambio de puesto</h1>
-<form action="" class="ContenidoCentrado" id="Cambio">
+<form action="Cambio.php" class="ContenidoCentrado" id="Cambio" method="POST">
 
     <div>
         <label for="F_Actual">Fecha actual:</label>
-        <input type="date" id="F_Actual" readonly required>
+        <input type="date" value="<?php echo date('Y-m-d'); ?>" id="F_Actual" name="F_Actual" readonly required>
     </div>
     <div>
         <label for="NombreCompleto">Nombre Completo:</label>
-        <input type="text" value="<?php echo $_SESSION['NombreCompleto'];?>" id="NombreCompleto" readonly required>
+        <input type="text" value="<?php echo $_SESSION['NombreCompleto'];?>" id="NombreCompleto" name="NombreCompleto" readonly required>
     </div>
     <div>
         <label for="Telefono">Telefono:</label>
-        <input type="number" value="<?php echo $Telefono ;?>" id="Telefono"readonly required>
+        <input type="number" value="<?php echo $Telefono ;?>" id="Telefono" readonly required>
     </div>
     <div>
         <label for="Correo">Correo:</label>
-        <input type="email" value="<?php echo $Correo ;?>" id="Correo">
+        <input type="email" value="<?php echo $Correo ;?>" id="Correo" name="Correo" readonly required>
     </div>
     <div>
         <label for="CargoActual">Cargo actual</label>
-        <input type="text" value="<?php echo Traductor($Departamento);?>" name="" id="CargoActual">
+        <input type="hidden" name="CargoActual" value="<?php echo $Departamento;?>">
+        <input type="text" value="<?php echo Traductor($Departamento);?>" id="CargoActual" readonly required>
     </div>
     <div>
         <label for="Motivo">Motivos:</label>
-        <textarea name="" id="Motivo" rows="4"></textarea>
+        <textarea name="Motivo" id="Motivo" rows="4"></textarea>
     </div>
     <div>
-        <label for="">El cambio sera permantente</label>
-        <select name="" id="cambio">
+        <label for="Permanente">El cambio sera permantente</label>
+        <select name="Permanente" id="Permanente">
             <option value="" selected disabled>Seleccione una opcion</option>
             <option value="si">si</option>
             <option value="no">no</option>
         </select>
     </div>
     <div>
-        <label for="">Selecciona dependencia que quieres cambiar</label>
-        <select id="reporte" name="reporte" required>
+        <label for="CargoCambio">Selecciona dependencia que quieres cambiar</label>
+        <select id="CargoCambio" name="CargoCambio" required>
             <option value="" selected disabled>Seleccione dependencia</option>
             <!-- <option value="1">Agua potable, drenaje, alcantarillado, tratamiento y disposición de sus aguas residuales</option> -->
             <option value="2">Alumbrado público</option>

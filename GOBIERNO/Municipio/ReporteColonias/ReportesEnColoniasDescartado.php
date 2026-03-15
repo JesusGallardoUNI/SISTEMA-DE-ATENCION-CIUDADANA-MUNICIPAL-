@@ -50,17 +50,17 @@
             <div class="opcion" id="Opcion2">
                 <img src="../../../Recursos/SVG/opcion2.svg" alt="">
                 <a href="?tipo=2">b) Alumbrado público</a>
-                <div class="Total"><?php echo Estadistica(2, "si")?></div>
+                <div class="Total"><?php echo Descartados(2, "si")?></div>
             </div>
             <div class="opcion" id="Opcion3">
                 <img src="../../../Recursos/SVG/opcion3.svg" alt="">
                 <a href="?tipo=3">c) Limpia, recolección, traslado, tratamiento y disposición final de residuos</a>
-                <div class="Total"><?php echo Estadistica(3, "si")?></div>
+                <div class="Total"><?php echo Descartados(3, "si")?></div>
             </div>
             <div class="opcion" id="Opcion4">
                 <img src="../../../Recursos/SVG/opcion4.svg" alt="">
                 <a href="?tipo=4">d) Mercados y centrales de abasto</a>
-                <div class="Total"><?php echo Estadistica(4, "si")?></div>
+                <div class="Total"><?php echo Descartados(4, "si")?></div>
             </div>
             <!--
             <div class="opcion" id="Opcion5">
@@ -77,32 +77,16 @@
             <div class="opcion" id="Opcion7">
                 <img src="../../../Recursos/SVG/opcion7.svg" alt="">
                 <a href="?tipo=7">g) Calles, parques y jardines y su equipamiento</a>
-                <div class="Total"><?php echo Estadistica(7, "si")?></div>
+                <div class="Total"><?php echo Descartados(7, "si")?></div>
             </div>
             <div class="opcion" id="Opcion8">
                 <img src="../../../Recursos/SVG/opcion8.svg" alt="">
                 <a href="?tipo=8">h) Seguridad pública, policía preventiva municipal y tránsito</a>
-                <div class="Total"><?php echo Estadistica(8, "si")?></div>
+                <div class="Total"><?php echo Descartados(8, "si")?></div>
             </div>
         </nav>
         <main class="Contenido">
             <div class="Contenido__Encabezado">
-                <table id="ReportesDashboard" class="Configurar Configurar__Local">
-                    <thead>
-                        <th class="FondoVerde">Sin retraso</th>
-                        <th class="FondoAmarillo">Retraso leve</th>
-                        <th class="FondoNaranja">Retraso considerable</th>
-                        <th class="FondoRojo">Retraso crítico</th>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td id="Reportes_Verde">3</td>
-                            <td id="Reportes_Amarillo">4</td>
-                            <td id="Reportes_Naranja">1</td>
-                            <td id="Reportes_Rojo">1</td>
-                        </tr>
-                    </tbody>
-                </table>
                 <p><?php echo $muestra = isset($Dato) ? $Dato : Traductor($_GET['tipo']);?></p>
             </div>
             <div class="Muestra" id="infoSection">
@@ -111,8 +95,8 @@
             <div class="Contenido_Reportes">
                 <?php while ($Registro = mysqli_fetch_assoc($Ejecucion)): ?>
                     <div class="Reporte">
-                        <?php TiempoTotal($Registro['fecha']); ?>
-                        <a href="ProblemaResuelto.php?id=<?php echo $Registro['id']; ?>">
+                        
+                        <a href="ProblemaDescartado.php?id=<?php echo $Registro['id']; ?>">
                             <img loading="lazy" src="../../../ImagenesReportes/<?php echo $Registro['imagen']; ?>" alt="Foto">
                             <p>Colonia: <?php echo $Registro['nombre_colonia']; ?></p>
                             <p>Calle: <?php echo $Registro['nombre_calle']; ?></p>

@@ -17,6 +17,12 @@
     $Soluion = "SELECT * FROM reportes_resueltos WHERE clave = '$Copia'";
     $Obtencion = mysqli_query($db, $Soluion);
     $OtraMuestra = mysqli_fetch_assoc($Obtencion);
+
+    $Persona = $OtraMuestra['id_encargado'];
+    $Busca = "SELECT * FROM secretarias WHERE id_encargado = $Persona;";
+    $Ejecuta = mysqli_query($db, $Busca);
+    $Dato = mysqli_fetch_assoc($Ejecuta);
+    $Nombre = $Dato["Nombres"] . " " . $Dato["Apellidos"];
 ?>
 
 <!DOCTYPE html>
@@ -62,8 +68,7 @@
             <tr>
                 <td>Civil que reporta: <?php echo $Muestra['nombre_persona'];?></td>
                 <td>
-                    <p>Encargado de atenderlo: <?php echo $OtraMuestra['nombre'];?></p>
-                    <p>Estado: </p>
+                    <p>Encargado de atenderlo: <?php echo $Nombre;?></p>
                 </td>
             </tr>
             <tr>

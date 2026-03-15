@@ -10,13 +10,20 @@
     $Resultado = mysqli_query($db, $Query);
     $Muestra = mysqli_fetch_assoc($Resultado);
 
-    //=================================================================================//
-    // Aqui quiero que me muestre la informacion de los funcionarios que lo atendieron //
-    //=================================================================================//
-    $Copia = $Muestra['clave'];
-    $Soluion = "SELECT * FROM reportes_resueltos WHERE clave = '$Copia'";
+    
+    $Soluion = "SELECT * FROM reportes_descartados WHERE id_reporte = $id;";
     $Obtencion = mysqli_query($db, $Soluion);
     $OtraMuestra = mysqli_fetch_assoc($Obtencion);
+    $Persona = $OtraMuestra["encargado"];
+    $TipoDescarte = $OtraMuestra["tipo"];
+    $MotivoDescarte = $OtraMuestra["motivo"];
+
+    //==================================================================================//
+    // Aqui quiero que me muestre la informacion de los funcionarios que lo descartaron //
+    //==================================================================================//
+    $Busca = "SELECT * FROM secretarias WHERE id_encargado = $Persona;";
+    $Seleccion = mysqli_query($db, $Busca);
+    $Nombre = mysqli_fetch_assoc($Seleccion);
 ?>
 
 <!DOCTYPE html>
@@ -41,11 +48,10 @@
     <main class="Informe">
         <table class="acostado">
             <tr>
-                <td><img loading="lazy" src="../../../ImagenesReportes/<?php echo $Muestra['imagen']; ?>" alt="Foto"></td>
-                <td><img loading="lazy" src="../../../ReportesResueltos/<?php echo $OtraMuestra['foto']; ?>" alt="Foto"></td>
+                <td colspan="2"><img loading="lazy" src="../../../ImagenesReportes/<?php echo $Muestra['imagen']; ?>" alt="Foto"></td>
             </tr>
             <tr>
-                <td>
+                <td colspan="2">
                     <p>Clave reporte: <?php echo $Muestra['clave']; ?></p>
                     <p>Fecha de reporte: <?php echo $Muestra['fecha']; ?></p>
                     <p>Colonia: <?php echo $Muestra['nombre_colonia']; ?></p>
@@ -53,22 +59,16 @@
                     <p>Codigo postal: <?php echo $Muestra['codigo_postal']; ?></p>
                     <p>Reporte: <?php echo Traductor($Muestra['tipo_reporte']); ?> </p>
                 </td>
-                <td>
-                    <p>Clave resuelto: <?php echo $OtraMuestra['clave']; ?></p>
-                    <p>Fecha de resuelto: <?php echo $OtraMuestra['fecha_resuelto']; ?></p>
-                    <p>Costo: $<?php echo $OtraMuestra['costo']; ?></p>
-                </td>
             </tr>
             <tr>
                 <td>Civil que reporta: <?php echo $Muestra['nombre_persona'];?></td>
                 <td>
-                    <p>Encargado de atenderlo: <?php echo $OtraMuestra['nombre'];?></p>
-                    <p>Estado: </p>
+                    <p>Encargado que descarto el reporte: <?php echo $Nombre['Nombres'] . " " . $Nombre['Apellidos'];?></p>
                 </td>
             </tr>
             <tr>
                 <td><textarea class="Descripcion" rows="8" readonly><?php echo $Muestra['descripcion']; ?></textarea></td>
-                <td><textarea class="Descripcion" rows="8" readonly><?php echo $OtraMuestra['descripcion']; ?></textarea></td>
+                <td><textarea class="Descripcion" rows="8" readonly><?php echo $TipoDescarte . " // " . $MotivoDescarte; ?></textarea></td>
             </tr>
             <tr>
                 <td colspan="2">
@@ -80,7 +80,7 @@
         
         <input type="hidden" id="coordenadas" name="mi_mapa" value="<?php echo $Muestra['ubicacion']; ?>" readonly required>
     </main>
-    <a href="ReportesEnColoniasResueltos.php" class="BOTON BTN__Color_Verde">Regresar</a>
+    <a href="ReportesEnColoniasDescartado.php" class="BOTON BTN__Color_Verde">Regresar</a>
     
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="../../../Recursos/JS/General.js"></script>

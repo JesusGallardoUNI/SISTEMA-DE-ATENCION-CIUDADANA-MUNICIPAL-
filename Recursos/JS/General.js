@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ================== ALERTA (solo si existe) ==================
   const alerta = document.getElementById("alerta");
   const ReporteAlerta = document.getElementById("alerta__resuelto");
+  const ReporteDescartado = document.getElementById("ReporteDescartar");
   const Funcionario = document.getElementById("Funcionario");
 
   if (alerta) {
@@ -38,6 +39,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  if(ReporteDescartado){
+    Swal.fire({
+      title: "Reporte descartado correctamente",
+      text: "Las autoridades investigaran mas a detalle",
+      icon: "success"
+    }).then(() => {
+      window.location.href = 'SecretariaServiciosPublicos.php';
+    });
+  }
+
   if(Funcionario){
     Swal.fire({
       title: "Funcionario registrado correctamente",
@@ -47,16 +58,22 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
+
+
 //===========================================//
-//       GENERADOR DE FECHA AUTOMATICA       //
+// GENERADOR DE ALERTAS POR MEDIO DE FUNCION //
 //===========================================//
-window.Fecha = function(){
-    const Actual = new Date();
-    const Anio = Actual.getFullYear();
-    const Mes = String(Actual.getMonth() + 1).padStart(2, '0');
-    const Dia = String(Actual.getDate()).padStart(2, '0');
-    return `${Anio}-${Mes}-${Dia}`;
+window.Muestra_Alerta = function(titulo, mensaje, icono){
+    Swal.fire({
+      title: titulo,
+      text: mensaje,
+      icon: `${icono}`,
+      draggable: true
+    });
 }
+
+
+
 
 
 

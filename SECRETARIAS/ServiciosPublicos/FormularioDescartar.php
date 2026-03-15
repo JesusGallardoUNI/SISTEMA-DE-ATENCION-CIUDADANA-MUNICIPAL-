@@ -34,7 +34,7 @@
         $Actualizar = mysqli_query($db, $Localiza);
         
         if($Ejecutar && $Actualizar) {
-            echo "<div id='alerta'></div>";
+            echo "<div id='ReporteDescartar'></div>";
         }
     }
 
@@ -105,6 +105,7 @@
             <div>
                 <label for="MotivOpcion">Selecciona la opcion del motivo</label>
                 <select name="MotivOpcion" id="MotivOpcion">
+                    <option value="" disabled selected>Selecciona una opcion</option>
                     <option value="Reporte repetido">Reporte repetido</option>
                     <option value="Reporte ya resuelto">Reporte ya resuelto</option>
                     <option value="Reporte falso">Reporte falso</option>

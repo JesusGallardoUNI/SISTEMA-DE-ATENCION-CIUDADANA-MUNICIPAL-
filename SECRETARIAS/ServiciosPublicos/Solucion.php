@@ -140,7 +140,7 @@
             </div>
             <div>
                 <label for="FechaHoraResuelto">Fecha y hora de acceso:</label>
-                <input type="datetime-local" name="FechaHoraResuelto" id="FechaHoraResuelto" required readonly>
+                <input type="date" name="FechaHoraResuelto" id="FechaHoraResuelto" value="<?php echo date('Y-m-d'); ?>" required readonly>
             </div>
 
             <div>
@@ -149,7 +149,7 @@
             </div>
 
             <div>
-                <input type="text" name="ID_Encargado" value="<?php echo $_SESSION['ID_Empleado']; ?>" name="NombreCompleto" required readonly>
+                <input type="hidden" name="ID_Encargado" value="<?php echo $_SESSION['ID_Empleado']; ?>" name="NombreCompleto" required readonly>
             </div>
         </fieldset>
         <br>
@@ -162,7 +162,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><!--Este sirve para mostrar alertas-->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="../FUNCIONARIOS.js"></script>
     <script src="../../Recursos/JS/General.js"></script>
+    <script src="../FUNCIONARIOS.js"></script>
 </body>
 </html>

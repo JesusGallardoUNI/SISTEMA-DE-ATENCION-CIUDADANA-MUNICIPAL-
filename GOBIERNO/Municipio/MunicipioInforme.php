@@ -91,16 +91,13 @@
 
             <div class="opcion">
                  <a href="Secretarias/General.php">
-                    <img src="../../Recursos/SVG/Secretarias.svg" alt="Escudo Nacional de México" class="FondoRojo">
+                    <img src="../../Recursos/SVG/Secretarias.svg" alt="Escudo Nacional de México">
                 </a>
-                <p>Secretarias</p>
+                <p>Servidores</p>
             </div>
 
             <?php Opcion6(); ?>
             
-            
-
-            <?php OpcionUltima(); ?>
         </div>
         <!--
         <form id="infoForm">

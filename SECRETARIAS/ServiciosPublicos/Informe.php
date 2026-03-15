@@ -14,3 +14,12 @@
 
 
 <h1 class="TextoCentrado ColorFondo">Informes actuales:</h1>
+
+
+<div>
+    <ul>
+        <li>
+            <p>Fecha de ultimo cambio: </p>
+        </li>
+    </ul>
+</div>

@@ -82,6 +82,7 @@ async function generatePDF() {
 const Datos = document.getElementById("Datos");
 if(Datos) {
     //Esto es de los inputs de la tabla donde los reportes NO estan resueltos
+    //R = Reporte
     const R2 = parseInt(document.querySelector("#Rep2").value, 10);
     const R3 = parseInt(document.querySelector("#Rep3").value, 10);
     const R4 = parseInt(document.querySelector("#Rep4").value, 10);
@@ -89,11 +90,20 @@ if(Datos) {
     const R8 = parseInt(document.querySelector("#Rep8").value, 10);
 
     //Esto es de los inputs de la tabla donde los reportes SI estan resueltos
+    //S = Solucionado
     const S2 = parseInt(document.querySelector("#Sol2").value, 10);
     const S3 = parseInt(document.querySelector("#Sol3").value, 10);
     const S4 = parseInt(document.querySelector("#Sol4").value, 10);
     const S7 = parseInt(document.querySelector("#Sol7").value, 10);
     const S8 = parseInt(document.querySelector("#Sol8").value, 10);
+
+    //Esto es de los inputs de la tabla donde los reportes SI estan descartados
+    //D = Descartado
+    const D2 = parseInt(document.getElementById("Descartado2").value, 10);
+    const D3 = parseInt(document.getElementById("Descartado3").value, 10);
+    const D4 = parseInt(document.getElementById("Descartado4").value, 10);
+    const D7 = parseInt(document.getElementById("Descartado7").value, 10);
+    const D8 = parseInt(document.getElementById("Descartado8").value, 10);
 
 
 
@@ -103,21 +113,29 @@ if(Datos) {
         data: {
             labels: [
                 'Alumbrado Público',
-                'Limpia, recolección, traslado, tratamiento y disposición final de residuos',
-                'Mercados y centrales de abastos',
-                'Calles, parques y jardines y su equipamiento',
-                'Seguridad pública, policía preventiva municipal y tránsito'
+                ['Limpia, recolección, traslado,', 'tratamiento y disposición final', 'de residuos'],
+                ['Mercados y centrales','de abastos'],
+                ['Calles, parques y','jardines y su equipamiento'],
+                ['Seguridad pública,','policía preventiva','municipal y tránsito']
             ],
             datasets: [
         {
             label: 'Reportes atendidos',
             data: [S2, S3, S4, S7, S8],
-            borderWidth: 2
+            borderWidth: 2,
+            backgroundColor: 'rgba(40, 167, 69, 0.7)',
         },
         {
             label: 'Reportes pendientes',
             data: [R2, R3, R4, R7, R8],
-            borderWidth: 2
+            borderWidth: 2,
+            backgroundColor: 'rgba(255, 193, 7, 0.7)',
+        },
+        {
+            label: 'Reportes descartados',
+            data: [D2,D3,D4,D7,D8],
+            borderWidth: 2,
+            backgroundColor: 'rgba(220, 53, 69, 0.7)',
         }
     ]
         },

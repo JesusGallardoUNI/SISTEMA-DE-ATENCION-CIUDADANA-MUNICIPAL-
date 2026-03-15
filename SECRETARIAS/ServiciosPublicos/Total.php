@@ -41,7 +41,7 @@
                         <center>
                             <form method="POST" class="elemento W80 FormularioTotal" id="">
                                 <input type="hidden" name="Integrar" value="<?php echo $Registro['id']; ?>">
-                                <input type="submit" value="Integrar" class="BOTON BOTON_CERO BTN__Color_Verde">
+                                <input type="submit" value="Integrar" class="BOTON BOTON_CERO BTN__Color_Verde" title="Da doble clic para integrarlo">
                             </form>
                         </center>
                     </td>

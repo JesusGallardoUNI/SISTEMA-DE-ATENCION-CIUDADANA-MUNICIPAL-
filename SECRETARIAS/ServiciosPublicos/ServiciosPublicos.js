@@ -82,48 +82,109 @@ document.addEventListener("submit", function(e){
 function GenerarPDF_Cambio(){
     //Aqui agarro TODOS los valores del formulario
     let Actual = document.getElementById("F_Actual").value;         //Fecha
-    let Nombre= document.getElementById("NombreCompleto").value;    //Nombre completo
+    let Nombre = document.getElementById("NombreCompleto").value;    //Nombre completo
     let Telefono = document.getElementById("Telefono").value;       //Telefono
     let Correo = document.getElementById("Correo").value;           //Correo
     let Cargo = document.getElementById("CargoActual").value;       //Cargo
     let Motivo = document.getElementById("Motivo").value;           //Motivo
-    let OpcionesCambio = document.getElementById("cambio");         //Cambio
+    let OpcionesCambio = document.getElementById("Permanente");         //Cambio
     const OpcionesCambio_Texto = OpcionesCambio.selectedOptions[0].text;
-    let OpcionesDependencia = document.getElementById("reporte");   //Dependencia
+    let OpcionesDependencia = document.getElementById("CargoCambio");   //Dependencia
     const OpcionesDependencia_Texto = OpcionesDependencia.selectedOptions[0].text;
 
     
     
-    //Aqui empiezo a darle el formato al PDF
+    
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
-    doc.text('Solicitud de cambio de cargo', 10, 10);
 
-    doc.text(`Fecha: ${Actual}`, 50, 15);
-    doc.text(`Nombre: ${Nombre}`, 10, 15);
-    doc.text(`Telefono: ${Telefono}`, 10, 20);
-    doc.text(`Correo: ${Correo}`, 10, 25);
-    doc.text(`Area asignada: ${Cargo}`, 10, 30);
-    doc.text(`Yo deceo que mi cambio ${OpcionesCambio_Texto} sea de forma permantente`, 10, 35);
-    doc.text(`Y que mi area sea ${OpcionesDependencia_Texto}`, 10, 40);   
-    doc.text(`Motivo: ${Motivo}`, 10, 60);
-    doc.save('a4.pdf');
+    //Aqui empiezo a darle el formato al PDF
+
+    //===---TIPO HEADER---===//
+    //Agregar una imagen
+    const imagen = "../../Recursos/Imagenes/icono.png";
+    doc.addImage(imagen,"PNG", 10, 12, 20, 20);
+
+
+    doc.setFontSize(22);
+    doc.setTextColor(67, 45, 215); // RGB valor Para color de letras
+    doc.text('Solicitud de cambio de cargo', 60, 24);
+    
+    doc.setFontSize(10);
+    doc.text(`Fecha: ${Actual}`, 165, 15);
+    doc.line(40, 25, 180, 25);          //Te crea una linea
+
+    
+    //===---TIPO TABLA---===//
+    doc.autoTable({
+        startY: 40,
+        head: [["", ""]],
+        body: [
+        ["Nombre:", Nombre],
+        ["Telefono:", Telefono],
+        ["Correo:", Correo],
+        ["Area asignada actual:", Cargo],
+        ["Area a cambiar:", OpcionesDependencia_Texto],
+        ],
+        headStyles: { fillColor: [242, 92, 63] },
+        margin: { left: 20, right: 20 },
+    });
+    
+    //===---TIPO DESCRIPCION---===//
+    doc.setTextColor(49, 201, 80); //VERDE
+    doc.setFontSize(10);
+    
+    doc.setDrawColor(200, 200, 200);
+    doc.setFillColor(248, 249, 250);
+    doc.roundedRect(20, 95, 170, 50, 2, 2, "FD");
+    
+    let Texto = `Motivo: ${Motivo}, Yo deceo que mi cambio ${OpcionesCambio_Texto} sea de forma permantente Y que mi area sea ${OpcionesDependencia_Texto} `;
+    
+    let Muestra_Texto = doc.splitTextToSize(Texto, 160);
+    
+    doc.text(Muestra_Texto, 25, 100);
+
+    doc.setFontSize(12);
+    doc.text("Movimiento aprobado",25,160);
+
+    doc.rect(25, 165, 4, 4);
+    doc.text("Si",30,169);
+
+    doc.rect(25, 175, 4, 4);
+    doc.text("No",30,179);
+
+    doc.text("Firma de conformidad",130,160);
+    doc.line(120, 180, 180, 180);
+    doc.text(Nombre,120,185);
+
+    doc.text("Fecha de recibido",25,200);
+    doc.line(60, 200, 100, 200);
+
+
+    doc.text("Nombre de quien recibe",25,210);
+    doc.line(75, 210, 150, 210);
+
+    doc.text("Firma",25,220);
+    doc.line(40, 220, 100, 220);
+
+
+
+    doc.save('Solicitud de cambio.pdf');
 }
 
 
-console.log("Prueba");
+
 document.addEventListener("submit", function(e){
 
     if(e.target.id === "Cambio"){
         e.preventDefault();
+        Muestra_Alerta("Reporte completo","El reporte a sido enviado a la autoridad correspondiente","success");
+        GenerarPDF_Cambio();
         
 
-        alert("Generando reporte");
-        GenerarPDF_Cambio();
-
-
-        //e.target.submit(); 
-
+        setTimeout(() => {
+            e.target.submit();
+        }, 1400);
     }
 
 });

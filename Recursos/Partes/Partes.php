@@ -1,5 +1,6 @@
 <?php
     require_once __DIR__ . "/../Informacion.php";
+    date_default_timezone_set('America/Mexico_City');
 
 
     //Aplica para servidores publicos y el alcalde
@@ -120,6 +121,18 @@
     function Estadistica(int $tipo , string $resuelto) {
         $db = ConectarDB();
         $Reporte1 = "SELECT COUNT(*) AS 'Total' FROM reportes_colonias WHERE tipo_reporte = $tipo AND resuelto = '{$resuelto}';";
+        $R = mysqli_query($db,$Reporte1);
+        if ($R && $Total = mysqli_fetch_assoc($R)) {
+            return $Total['Total'];
+        } else {
+            return int(0);
+        }
+    }
+
+    //Retorna el total de cierto tipo de reporte con base en si estan descartados o no;
+    function Descartados(int $tipo , string $descartado) {
+        $db = ConectarDB();
+        $Reporte1 = "SELECT COUNT(*) AS 'Total' FROM reportes_colonias WHERE tipo_reporte = $tipo AND descartado = '{$descartado}';";
         $R = mysqli_query($db,$Reporte1);
         if ($R && $Total = mysqli_fetch_assoc($R)) {
             return $Total['Total'];
@@ -311,23 +324,9 @@
             ?>
                 <div class="opcion">
                     <a href="Inteligencia/AutoReparacion.php">
-                        <img src="../../Recursos/SVG/opcion9.svg" alt="Asistencia con IA">
+                        <img src="../../Recursos/SVG/opcion9.svg" alt="Asistencia con IA" class="FondoRojo">
                     </a>
                     <p>Asistencia de IA</p>
-                </div>
-        <?php } ;?>
-    <?php }
-?>
-
-<?php 
-    function OpcionUltima() {
-        if($_SESSION['usuario_tipo'] == "Alcalde"){
-            ?>
-                <div class="opcion">
-                    <a href="Ajustes/Configuracion.php">
-                        <img src="../../Recursos/SVG/opcionfinal.svg" alt="Configuracion">
-                    </a>
-                    <p>Ajustes</p>
                 </div>
         <?php } ;?>
     <?php }
