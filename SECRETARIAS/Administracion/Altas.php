@@ -28,7 +28,7 @@
         $Val10 = mysqli_real_escape_string($db,$_POST["Curp"]);
         //$Val11 = mysqli_real_escape_string($db,$_POST[""]);
 
-        $SubirSolucion = "INSERT INTO servidores_publicos (Nombres, Apellidos, Edad, Sexo, FDN, Telefono, Departamento, Correo, Acceso, Curp) VALUES ('$Val1','$Val2',$Val3,'$Val4','$Val5',$Val6,'$Val7','$Val8','$Val9','$Val10');";        
+        $SubirSolucion = "INSERT INTO secretarias (Nombres, Apellidos, Edad, Sexo, FDN, Telefono, Departamento, Correo, Acceso, Curp) VALUES ('$Val1','$Val2',$Val3,'$Val4','$Val5',$Val6,'$Val7','$Val8','$Val9','$Val10');";        
         $Informar = mysqli_query($db,$SubirSolucion);
         
 
@@ -117,7 +117,7 @@
             </fieldset>
             <br>
             <input type="submit" value="Registar">
-            <a href="Administracion.php" class="BOTON BTN__Color_Verde">Regresar</a>
+            <a href="SecretariaAdministracion.php" class="BOTON BTN__Color_Verde">Regresar</a>
         </form>
     </body>
 </html>

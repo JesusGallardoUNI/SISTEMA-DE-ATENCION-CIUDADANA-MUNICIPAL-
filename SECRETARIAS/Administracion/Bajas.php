@@ -44,7 +44,7 @@
     <body>
         <?php Banner(true,"../../Recursos/Imagenes/icono.png","Gobierno de Guadalupe","Baja de personal"); ?>
         <br><br>
-        <a href="Administracion.php" class="BOTON">Regresar</a>
+        <a href="SecretariaAdministracion.php" class="BOTON">Regresar</a>
         <br><br>
         <table class="Configurar Configurar__Mediano">
             <thead>

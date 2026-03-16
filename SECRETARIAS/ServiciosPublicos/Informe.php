@@ -21,6 +21,7 @@
                 <td>Fecha de solicitud:<?php echo $Registro['fecha']; ?>.</td>
                 <td>Cambio: <?php echo Traductor($Registro['cargo_nuevo']); ?>.</td>
                 <td>Aprobado: <?php echo $Registro['Aprobado'] ?? "Pendiente"; ?>.</td>
+                <td>Indicaciones: <?php echo $Registro['indicaciones'] ?? "Pendiente"; ?>.</td>
             </li>
         <?php endwhile; ?>
     </ul>

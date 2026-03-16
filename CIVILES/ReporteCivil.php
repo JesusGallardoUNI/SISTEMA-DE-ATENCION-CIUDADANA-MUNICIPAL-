@@ -61,7 +61,7 @@
         $SubirReporte = "INSERT INTO reportes_colonias (nombre_persona, telefono_persona, correo_persona, estado, municipio, codigo_postal, nombre_colonia, tipo_reporte, descripcion, nombre_calle, ubicacion, imagen, fecha, clave, resuelto) VALUES ('$Identificacion1', '$Identificacion2', '$Identificacion3','$Campo1','$Campo2','$Campo3','$Campo4','$Campo5','$Campo6','$Campo7','$Campo8','$NombreImagen','$Campo10','$Campo11','$Campo12')";
         $Agregar = mysqli_query($db, $SubirReporte);
         if ($Agregar) {
-            echo "<div id='alerta'></div>";
+            echo "<div id='AlertaSolicitud'></div>";
         }
     }
 ?>

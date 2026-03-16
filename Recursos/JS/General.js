@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const ReporteAlerta = document.getElementById("alerta__resuelto");
   const ReporteDescartado = document.getElementById("ReporteDescartar");
   const Funcionario = document.getElementById("Funcionario");
+  const AlertaSolicitud = document.getElementById("AlertaSolicitud");
 
   if (alerta) {
     // Ocultar al hacer clic
@@ -15,18 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }).then(() => {
       window.location.href = 'ReporteCivil.php';
     });
-    /*
-    alerta.addEventListener("click", () => {
-      alerta.classList.add("Ciego");
-    });
-
-    // Ocultar automáticamente después de 4 segundos
-    setTimeout(() => {
-      alerta.style.transition = "opacity 1s";
-      alerta.style.opacity = "0";
-      setTimeout(() => alerta.remove(), 1000);
-    }, 4000);
-    */
   }
 
   if(ReporteAlerta){
@@ -55,6 +44,18 @@ document.addEventListener("DOMContentLoaded", () => {
       text: "Ahora puedes acceder al sistema",
       icon: "success"
     })
+  }
+
+  if (AlertaSolicitud) {
+    // Ocultar al hacer clic
+    Swal.fire({
+      title: "Reporte subido correctamente",
+      text: "El solicitante recibio la informacion",
+      icon: "success",
+      draggable: true
+    }).then(() => {
+      window.location.href = 'ListaCambios.php';
+    });
   }
 
 
