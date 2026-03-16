@@ -1,5 +1,3 @@
-
-
 function validarYGenerarPDF() {
     // Obtener valores de los campos
     const estado = document.getElementById('estado').value;

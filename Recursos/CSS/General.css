@@ -8,7 +8,7 @@
     --PT: #DA0514;
     --Morena: #8E2C2D;
     --MovimientoCiudadano: #F97613;
-    --Gobierno: var(--PRI);  /* Define un color del partido actual */
+    --Gobierno: var(--MovimientoCiudadano);  /* Define un color del partido actual */
 
     --Fondo: #f4f4f4;
     --Salir: #46484B;
@@ -114,8 +114,8 @@ main {
 }
 
 .ContenidoCentrado {
-    display: block;
-    margin: 0 auto;
+    display: block !important;
+    margin: 0 auto !important;
 }
 
 .Horizontal {
@@ -128,8 +128,24 @@ main {
     height: 400px;
 }
 
+.VH25 {
+    height: 25vh !important;
+}
+
+.VH50 {
+    height: 50vh !important;
+}
+
+.VH75 {
+    height: 75vh !important;
+}
+
+.VW25 {
+    width: 25vw !important;
+}
+
 .VW50 {
-    width: 50vw;
+    width: 50vw !important;
 }
 
 .W100 {

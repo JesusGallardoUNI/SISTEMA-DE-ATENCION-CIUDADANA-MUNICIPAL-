@@ -5,11 +5,9 @@
         header('Location: ../GobiernoMunicipal.php');
     }
     $db = ConectarDB();
-    //=======================================================//
-    //  Aqui empiezo a buscar todos los reportes necesarios  //
-    //=======================================================//
-    $Buscar = "SELECT * FROM reportes_colonias WHERE resuelto != 'si' AND tipo_reporte = {$_SESSION['usuario_tipo']}";
-    $Ejecutar = mysqli_query($db,$Buscar);
+    $ID = $_SESSION['ID_Empleado'];
+    $Informe = "SELECT * FROM solicitud_cambios WHERE id_empleado = $ID;";
+    $Traer = mysqli_query($db, $Informe);
 ?>
 
 
@@ -18,8 +16,12 @@
 
 <div>
     <ul>
-        <li>
-            <p>Fecha de ultimo cambio: </p>
-        </li>
+        <?php while ($Registro = mysqli_fetch_assoc($Traer)): ?>
+            <li>
+                <td>Fecha de solicitud:<?php echo $Registro['fecha']; ?>.</td>
+                <td>Cambio: <?php echo Traductor($Registro['cargo_nuevo']); ?>.</td>
+                <td>Aprobado: <?php echo $Registro['Aprobado'] ?? "Pendiente"; ?>.</td>
+            </li>
+        <?php endwhile; ?>
     </ul>
 </div>

@@ -1,28 +1,28 @@
 
 function cargarSeccion(Opcion) {
-    let Ruta="";
-    switch(Opcion) {
-        case 0: 
+    let Ruta = "";
+    switch (Opcion) {
+        case 0:
             Ruta = "Total.php";
-        break;
-        case 1: 
+            break;
+        case 1:
             Ruta = "Pendiente.php";
-        break;
-        case 2: 
+            break;
+        case 2:
             Ruta = "Completado.php";
-        break;
-        case 3: 
+            break;
+        case 3:
             Ruta = "Descartar.php";
-        break;
-        case 4: 
+            break;
+        case 4:
             Ruta = "Estadistica.php";
-        break;
-        case 5: 
+            break;
+        case 5:
             Ruta = "Cambio.php";
-        break;
-        case 6: 
+            break;
+        case 6:
             Ruta = "Informe.php";
-        break;
+            break;
 
 
     }
@@ -34,17 +34,17 @@ function cargarSeccion(Opcion) {
             Muestra.replaceChildren();
             */
             document.getElementById("contenido").innerHTML = "";
-            
-            
+
+
             document.getElementById("contenido").innerHTML = contenido;
 
             //Adiciones particulares:
-            //Para Cambio.php
-            let Actual = document.getElementById("F_Actual");               //Fecha
-            if(Actual){
-                Actual.value = Fecha();
+            //Para Estadistica.php
+            const Estadistica = document.getElementById("Estadistica");
+            if (Estadistica) {
+                Grafica(Estadistica);
             }
-            
+
 
         });
 }
@@ -56,22 +56,22 @@ function cargarSeccion(Opcion) {
 //================================================//
 const BASE = "/GUADALUPE/SECRETARIAS/ServiciosPublicos/";
 // Delegación global
-document.addEventListener("submit", function(e){
-    if(e.target.classList.contains("FormularioTotal")){
+document.addEventListener("submit", function (e) {
+    if (e.target.classList.contains("FormularioTotal")) {
         e.preventDefault();
         let datos = new FormData(e.target);
         fetch(BASE + "Total.php", {
             method: "POST",
             body: datos
         })
-        .then(res => res.text())
-        .then(html => {
-            // Recargamos la tabla actualizada
-            document.getElementById("contenido").innerHTML = html;
-        })
-        .catch(error => {
-            console.error("Error:", error);
-        });
+            .then(res => res.text())
+            .then(html => {
+                // Recargamos la tabla actualizada
+                document.getElementById("contenido").innerHTML = html;
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
     }
 });
 
@@ -79,7 +79,7 @@ document.addEventListener("submit", function(e){
 //================================================//
 //                    Para PDF                    //
 //================================================//
-function GenerarPDF_Cambio(){
+function GenerarPDF_Cambio() {
     //Aqui agarro TODOS los valores del formulario
     let Actual = document.getElementById("F_Actual").value;         //Fecha
     let Nombre = document.getElementById("NombreCompleto").value;    //Nombre completo
@@ -92,9 +92,9 @@ function GenerarPDF_Cambio(){
     let OpcionesDependencia = document.getElementById("CargoCambio");   //Dependencia
     const OpcionesDependencia_Texto = OpcionesDependencia.selectedOptions[0].text;
 
-    
-    
-    
+
+
+
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
 
@@ -103,68 +103,68 @@ function GenerarPDF_Cambio(){
     //===---TIPO HEADER---===//
     //Agregar una imagen
     const imagen = "../../Recursos/Imagenes/icono.png";
-    doc.addImage(imagen,"PNG", 10, 12, 20, 20);
+    doc.addImage(imagen, "PNG", 10, 12, 20, 20);
 
 
     doc.setFontSize(22);
     doc.setTextColor(67, 45, 215); // RGB valor Para color de letras
     doc.text('Solicitud de cambio de cargo', 60, 24);
-    
+
     doc.setFontSize(10);
     doc.text(`Fecha: ${Actual}`, 165, 15);
     doc.line(40, 25, 180, 25);          //Te crea una linea
 
-    
+
     //===---TIPO TABLA---===//
     doc.autoTable({
         startY: 40,
         head: [["", ""]],
         body: [
-        ["Nombre:", Nombre],
-        ["Telefono:", Telefono],
-        ["Correo:", Correo],
-        ["Area asignada actual:", Cargo],
-        ["Area a cambiar:", OpcionesDependencia_Texto],
+            ["Nombre:", Nombre],
+            ["Telefono:", Telefono],
+            ["Correo:", Correo],
+            ["Area asignada actual:", Cargo],
+            ["Area a cambiar:", OpcionesDependencia_Texto],
         ],
         headStyles: { fillColor: [242, 92, 63] },
         margin: { left: 20, right: 20 },
     });
-    
+
     //===---TIPO DESCRIPCION---===//
     doc.setTextColor(49, 201, 80); //VERDE
     doc.setFontSize(10);
-    
+
     doc.setDrawColor(200, 200, 200);
     doc.setFillColor(248, 249, 250);
     doc.roundedRect(20, 95, 170, 50, 2, 2, "FD");
-    
+
     let Texto = `Motivo: ${Motivo}, Yo deceo que mi cambio ${OpcionesCambio_Texto} sea de forma permantente Y que mi area sea ${OpcionesDependencia_Texto} `;
-    
+
     let Muestra_Texto = doc.splitTextToSize(Texto, 160);
-    
+
     doc.text(Muestra_Texto, 25, 100);
 
     doc.setFontSize(12);
-    doc.text("Movimiento aprobado",25,160);
+    doc.text("Movimiento aprobado", 25, 160);
 
     doc.rect(25, 165, 4, 4);
-    doc.text("Si",30,169);
+    doc.text("Si", 30, 169);
 
     doc.rect(25, 175, 4, 4);
-    doc.text("No",30,179);
+    doc.text("No", 30, 179);
 
-    doc.text("Firma de conformidad",130,160);
+    doc.text("Firma de conformidad", 130, 160);
     doc.line(120, 180, 180, 180);
-    doc.text(Nombre,120,185);
+    doc.text(Nombre, 120, 185);
 
-    doc.text("Fecha de recibido",25,200);
+    doc.text("Fecha de recibido", 25, 200);
     doc.line(60, 200, 100, 200);
 
 
-    doc.text("Nombre de quien recibe",25,210);
+    doc.text("Nombre de quien recibe", 25, 210);
     doc.line(75, 210, 150, 210);
 
-    doc.text("Firma",25,220);
+    doc.text("Firma", 25, 220);
     doc.line(40, 220, 100, 220);
 
 
@@ -174,13 +174,13 @@ function GenerarPDF_Cambio(){
 
 
 
-document.addEventListener("submit", function(e){
+document.addEventListener("submit", function (e) {
 
-    if(e.target.id === "Cambio"){
+    if (e.target.id === "Cambio") {
         e.preventDefault();
-        Muestra_Alerta("Reporte completo","El reporte a sido enviado a la autoridad correspondiente","success");
+        Muestra_Alerta("Reporte completo", "El reporte a sido enviado a la autoridad correspondiente", "success");
         GenerarPDF_Cambio();
-        
+
 
         setTimeout(() => {
             e.target.submit();
@@ -188,3 +188,39 @@ document.addEventListener("submit", function(e){
     }
 
 });
+
+
+//================================================//
+//                Para Estadistica                //
+//================================================//
+const Grafica = (Estadistica) => {
+    //
+    const Pendientes = Number(document.getElementById("Pendientes").value);
+    const Resueltos = Number(document.getElementById("Resueltos").value);
+    const Descartados = Number(document.getElementById("Descartados").value);
+
+    const data = {
+        labels: [
+            'Descartado',
+            'Resuelto',
+            'Pendiente'
+        ],
+        datasets: [{
+            label: 'Total: ',
+            data: [Descartados, Resueltos, Pendientes],
+            backgroundColor: [
+                'rgb(220, 53, 69)',
+                'rgb(40, 167, 69)',
+                'rgb(255, 193, 7)'
+            ],
+            hoverOffset: 4
+        }]
+    };
+
+
+    new Chart(Estadistica, {
+        type: 'pie',
+        data: data,
+    });
+
+}

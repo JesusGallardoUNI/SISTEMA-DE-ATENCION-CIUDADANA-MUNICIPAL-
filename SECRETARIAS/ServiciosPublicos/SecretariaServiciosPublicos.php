@@ -60,6 +60,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script><!--ESTE ES PARA EL PDF-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script><!--ESTE ES PARA EL PDF-->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><!--ESTE ES PARA ALERTAS-->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script><!--ESTE ES PARA GRAFICOS-->
 
         <script src="../../Recursos/JS/General.js"></script>
         <script src="ServiciosPublicos.js"></script>
