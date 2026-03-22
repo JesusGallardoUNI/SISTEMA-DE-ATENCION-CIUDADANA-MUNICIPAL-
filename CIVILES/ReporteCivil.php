@@ -79,12 +79,20 @@
 
     <!--Importante no borrar, sirve para la api del mapa-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-    <script src="../Recursos/JS/General.js"></script>
-    <script src="ReporteCivil.js"></script>
 </head>
-<body>
+<body class="Relativo">
     <?php Banner(true,"../Recursos/Imagenes/icono.png","Atención Ciudadana","Ingrese su reporte"); ?>
     
+    <div class="Anuncio Color_Back" id="Anuncio">
+        <img src="../Recursos/SVG/Anuncio.svg" alt="">
+        <div class="Ciego">
+            <h4>¿Realizaste un reporte y quieres saber el seguimiento?</h4>
+            <h4>Consulta el estado de tu reporte</h4>
+            <p>Ingresa tu clave de reporte para conocer el avance y seguimiento de tu reporte en tiempo real.</p>
+            <a href="BuscaReporte.php" class="BOTON BTN__Color_Verde">Consultar mi reporte</a>
+        </div>
+    </div>
+
     <form method="POST" action="ReporteCivil.php" enctype="multipart/form-data">
 
         <fieldset>
@@ -183,7 +191,7 @@
         <!-- Fecha y hora de acceso -->
         <div>
             <label for="fechaHora">Fecha y hora de acceso:</label>
-            <input type="datetime-local" id="fechaHora" name="fechaHora" readonly>
+            <input type="date" id="fechaHora" name="fechaHora" value="<?php echo date('Y-m-d'); ?>" readonly>
         </div>
 
         <!-- Clave unica de reporte -->
@@ -223,8 +231,8 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><!--Este sirve para mostrar alertas-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script><!--Este sirve para crear PDF-->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script><!--Este sirve para mostrar un mapa-->
+    <script src="../Recursos/JS/General.js"></script>
     <script src="ReporteCivil.js"></script>
-
 
 </body>
 </html>

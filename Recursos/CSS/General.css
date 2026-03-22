@@ -55,6 +55,9 @@
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.8)
 }
 
+.Color_Back {
+    background-color: var(--Gobierno);
+}
 
 body {
     font-family: Arial, sans-serif;
@@ -103,6 +106,9 @@ main {
 /*==========================================================================*/
 /*                          PARA CLASES GENERALES                           */                                                                                                                                                            
 /*==========================================================================*/
+.Relativo {
+    position: relative !important;
+}
 .Ciego {
     display: none !important;
 }

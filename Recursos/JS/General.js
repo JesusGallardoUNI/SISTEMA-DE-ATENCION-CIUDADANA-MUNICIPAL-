@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const ReporteDescartado = document.getElementById("ReporteDescartar");
   const Funcionario = document.getElementById("Funcionario");
   const AlertaSolicitud = document.getElementById("AlertaSolicitud");
+  const ErrorReporte = document.getElementById("ErrorReporte");
 
   if (alerta) {
     // Ocultar al hacer clic
@@ -56,6 +57,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }).then(() => {
       window.location.href = 'ListaCambios.php';
     });
+  }
+
+  if (ErrorReporte) {
+    // Ocultar al hacer clic
+    Swal.fire({
+      title: "Error",
+      text: "Clave de reporte no existe",
+      icon: "error",
+      draggable: true
+    })
   }
 
 

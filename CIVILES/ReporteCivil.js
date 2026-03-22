@@ -24,20 +24,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-// Función para actualizar la fecha y hora
-function actualizarFechaHora() {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const day = String(now.getDate()).padStart(2, '0');
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    const formattedDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
-    document.getElementById('fechaHora').value = formattedDateTime;
-}
-
-// Llamada a actualizarFechaHora al cargar la página
-document.addEventListener("DOMContentLoaded", actualizarFechaHora);
+//
+//
+//
+const Anuncio = document.getElementById("Anuncio");
+const Mensaje = Anuncio.querySelector(".Ciego");
+Anuncio.addEventListener("click", ()=> {
+    //
+    Mensaje.classList.toggle("Ciego");
+    if(Mensaje.classList.contains("Ciego")){
+        console.log("Checo");
+    } else {
+        console.log("Perez");
+    }
+});
 
 
 
