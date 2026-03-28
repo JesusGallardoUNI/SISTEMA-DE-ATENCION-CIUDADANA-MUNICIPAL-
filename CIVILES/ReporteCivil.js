@@ -27,17 +27,32 @@ document.addEventListener("DOMContentLoaded", () => {
 //
 //
 //
+
+
+
+const fondo = document.getElementById("fondo");
 const Anuncio = document.getElementById("Anuncio");
 const Mensaje = Anuncio.querySelector(".Ciego");
 Anuncio.addEventListener("click", ()=> {
     //
+    const anchoVentana = window.innerWidth;
     Mensaje.classList.toggle("Ciego");
+    if(anchoVentana <= 548) {
+        fondo.classList.toggle("Anunciofondo");
+        Anuncio.classList.toggle("AnuncioCompleto");
+    }else {
+        // Opcional: Asegurarse de quitarla si la pantalla es grande
+        Anuncio.classList.remove("AnuncioCompleto");
+        fondo.classList.remove("Anunciofondo");
+    }
+
     if(Mensaje.classList.contains("Ciego")){
         console.log("Checo");
     } else {
         console.log("Perez");
     }
 });
+
 
 
 

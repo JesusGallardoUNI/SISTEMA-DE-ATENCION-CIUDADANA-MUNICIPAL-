@@ -71,10 +71,11 @@ p {
     margin: 10px 0 0;
 }
 
-#signature-pad {
+#firma {
     width: 100%;
     border: 1px solid #ccc;
     border-radius: 5px;
+    margin-bottom: 20px;
 }
 
 

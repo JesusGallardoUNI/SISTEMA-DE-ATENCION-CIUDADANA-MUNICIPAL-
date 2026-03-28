@@ -83,13 +83,15 @@
 <body class="Relativo">
     <?php Banner(true,"../Recursos/Imagenes/icono.png","Atención Ciudadana","Ingrese su reporte"); ?>
     
-    <div class="Anuncio Color_Back" id="Anuncio">
-        <img src="../Recursos/SVG/Anuncio.svg" alt="">
-        <div class="Ciego">
-            <h4>¿Realizaste un reporte y quieres saber el seguimiento?</h4>
-            <h4>Consulta el estado de tu reporte</h4>
-            <p>Ingresa tu clave de reporte para conocer el avance y seguimiento de tu reporte en tiempo real.</p>
-            <a href="BuscaReporte.php" class="BOTON BTN__Color_Verde">Consultar mi reporte</a>
+    <div id="fondo">
+        <div class="Anuncio Color_Back" id="Anuncio">
+            <img src="../Recursos/SVG/Anuncio.svg" alt="">
+            <div class="Ciego">
+                <h4>¿Realizaste un reporte y quieres saber el seguimiento?</h4>
+                <h4>Consulta el estado de tu reporte</h4>
+                <p>Ingresa tu clave de reporte para conocer el avance y seguimiento de tu reporte en tiempo real.</p>
+                <a href="BuscaReporte.php" class="BOTON ColorOscuro">Consultar mi reporte</a>
+            </div>
         </div>
     </div>
 

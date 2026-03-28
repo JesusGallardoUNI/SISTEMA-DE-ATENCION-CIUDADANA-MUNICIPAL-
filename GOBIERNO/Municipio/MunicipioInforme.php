@@ -96,40 +96,18 @@
                 <p>Servidores</p>
             </div>
 
+            <div class="opcion">
+                 <a href="Transparencia/informe.php">
+                    <img src="../../Recursos/SVG/Transparencia.svg" alt="Escudo Nacional de México">
+                </a>
+                <p>Publicar informes</p>
+            </div>
+
             <?php Opcion6(); ?>
             
         </div>
-        <!--
-        <form id="infoForm">
-            <div class="form-group">
-                <label for="estado">Nombre del Estado:</label>
-                <input type="text" id="estado" name="estado" value="Nuevo León" readonly>
-            </div>
-            <div class="form-group">
-                <label for="municipio">Nombre del Municipio:</label>
-                <input type="text" id="municipio" name="municipio" value="Guadalupe" readonly>
-            </div>
-            <div class="form-group">
-                <label for="alcalde">Nombre del Alcalde:</label>
-                <input type="text" id="alcalde" name="alcalde" value="<?php echo $_SESSION['Nombre']; ?>" readonly required>
-            </div>
-            <div class="form-group">
-                <label for="fecha">Fecha:</label>
-                <input type="date" id="fecha" name="fecha" required>
-            </div>
-            <div class="form-group">
-                <label for="firma">Firma Digital:</label>
-                <canvas id="signature-pad" width="400" height="200"></canvas>
-                <button type="button" onclick="clearSignature()">Borrar Firma</button>
-            </div>
-            <button type="button" onclick="generatePDF()">Aceptar</button>
-        </form>
-        -->
-        
     </main>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
-    <script src="../Ayuntamiento.js"></script>
+    
 </body>
 </html>

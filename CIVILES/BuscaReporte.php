@@ -93,13 +93,8 @@
             <tr>
                 <td>Reporte descartado: <?php echo $Col4 ?? "";?></td>
             </tr>
-
         </tbody>
     </table>
-
-    
-
-    
 
     <footer>
         <div class="footer_imagenes footer_facultades">

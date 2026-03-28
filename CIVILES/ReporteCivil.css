@@ -19,6 +19,21 @@
     text-align: center;
 }
 
+.AnuncioCompleto {
+    min-width: 80vw !important;
+    left: 50%;
+    transform: translateX(-50%) !important;
+}
+
+.Anunciofondo {
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 100vw !important;
+    height: 100vh !important;
+    position: fixed;
+    top: 0px;        
+    z-index: 9990 !important;
+}
+
 .Anuncio:hover{
     transform: scale(1.1);
 }
@@ -113,6 +128,12 @@ footer div img {
         height: 25%;
     }
 
+    .Anuncio {
+        position: fixed;
+        max-width: 200px !important;
+        z-index: 9999 !important;
+    }
+
 }
 
 
@@ -151,6 +172,16 @@ footer div img {
     .footer_texto:last-of-type {
         padding-top: 20px;
         border-top: white 2px solid;
+    }
+
+    .Anuncio {
+        position: fixed;
+        right: 0px;
+        z-index: 9999 !important;
+    }
+
+    .Anuncio:hover{
+        transform: none;
     }
 
 }

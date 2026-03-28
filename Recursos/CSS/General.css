@@ -12,6 +12,7 @@
 
     --Fondo: #f4f4f4;
     --Salir: #46484B;
+    --Oscuro: #202124;
 
     /* Este apartado indica el color de los reportes */
     --Verde: #28A745;
@@ -57,6 +58,12 @@
 
 .Color_Back {
     background-color: var(--Gobierno);
+}
+
+.ColorOscuro {
+    background-color: var(--Oscuro) !important;
+    color: var(--Fondo) !important;
+    border: 4px solid color-mix(in srgb, var(--Oscuro) 80%, white) !important;
 }
 
 body {
