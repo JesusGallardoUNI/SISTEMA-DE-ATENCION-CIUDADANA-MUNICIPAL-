@@ -230,6 +230,20 @@
         }
         return $Resultado;
     }
+
+
+    //Esto es para ReporteCivil y genera una clave aleatoria mas simple
+    function generarClave($longitud = 8) {
+        $caracteres = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789';
+        $max = strlen($caracteres) - 1;
+        $clave = '';
+
+        for ($i = 0; $i < $longitud; $i++) {
+            $clave .= $caracteres[random_int(0, $max)];
+        }
+
+        return $clave;
+    }
 ?>
 
 

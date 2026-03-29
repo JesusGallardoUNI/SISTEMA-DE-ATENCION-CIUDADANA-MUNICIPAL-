@@ -9,6 +9,16 @@
     //====================================================//
 
 
+    //============================================================//
+    //                      Crea clave unica                      //
+    //============================================================//
+    do {
+        $Clave = generarClave(8);
+        $Query = "SELECT * FROM reportes_colonias WHERE clave = '$Clave';";
+        $existe = mysqli_query($db, $Query);
+    } while(mysqli_num_rows($existe) > 0);
+
+
     if($_SERVER["REQUEST_METHOD"] === "POST"){
         //==========================================================//
         //  Guarda los valores para guardarlos en la base de datos  //
@@ -26,22 +36,10 @@
         $Campo8 = mysqli_real_escape_string($db, $_POST["mi_mapa"] ?? 0);
         $Campo9 = $_FILES["imagen"];
         $Campo10 = mysqli_real_escape_string($db, $_POST["fechaHora"] ?? 0);
+        $Campo11 = mysqli_real_escape_string($db, $_POST["Clave"] ?? 0);
 
 
-        //============================================================//
-        //  Crea el num_pila a través de la cantidad de reportes      //
-        //  de la colonia seleccionada                                //
-        //============================================================//
-        $consultaConteo = "SELECT COUNT(*) AS total FROM reportes_colonias WHERE nombre_colonia = ?";
-        $stmt = mysqli_prepare($db, $consultaConteo);
-        mysqli_stmt_bind_param($stmt, 's', $Campo4);
-        mysqli_stmt_execute($stmt);
-        mysqli_stmt_bind_result($stmt, $totalReportes);
-        mysqli_stmt_fetch($stmt);
-        mysqli_stmt_close($stmt);
-        $num_pila = $totalReportes++;
-        $Campo11 = mysqli_real_escape_string($db,$_POST["Clave"]);
-        $Campo11 = $Campo11 . $num_pila . "]";
+        
 
         //==============================================//
         //   Aqui subir el reporte a la base de datos   //
@@ -61,7 +59,7 @@
         $SubirReporte = "INSERT INTO reportes_colonias (nombre_persona, telefono_persona, correo_persona, estado, municipio, codigo_postal, nombre_colonia, tipo_reporte, descripcion, nombre_calle, ubicacion, imagen, fecha, clave, resuelto) VALUES ('$Identificacion1', '$Identificacion2', '$Identificacion3','$Campo1','$Campo2','$Campo3','$Campo4','$Campo5','$Campo6','$Campo7','$Campo8','$NombreImagen','$Campo10','$Campo11','$Campo12')";
         $Agregar = mysqli_query($db, $SubirReporte);
         if ($Agregar) {
-            echo "<div id='AlertaSolicitud'></div>";
+            echo "<div id='ReporteCivil'></div>";
         }
     }
 ?>
@@ -95,7 +93,7 @@
         </div>
     </div>
 
-    <form method="POST" action="ReporteCivil.php" enctype="multipart/form-data">
+    <form method="POST" action="ReporteCivil.php" enctype="multipart/form-data" id="FormularioReporte">
 
         <fieldset>
             <legend>Datos de identificacion</legend>
@@ -190,19 +188,17 @@
             <input type="file" id="imagen" name="imagen" accept="image/jpeg, image/png" required>
         </div>
 
-        <!-- Fecha y hora de acceso -->
+        <!-- Fecha de acceso -->
         <div>
-            <label for="fechaHora">Fecha y hora de acceso:</label>
+            <label for="fechaHora">Fecha de acceso:</label>
             <input type="date" id="fechaHora" name="fechaHora" value="<?php echo date('Y-m-d'); ?>" readonly>
         </div>
 
-        <!-- Clave unica de reporte -->
         <div class="Ciego">
-            <label for="Clave">Clave del reporte:</label>
-            <input type="text" name="Clave" id="Clave" required readonly>
+            <input type="text" id="Clave" name="Clave" value="<?php echo $Clave; ?>" readonly required>
         </div>
 
-        <input type="submit" value="Enviar reporte" onclick="generarPDF()">
+        <input type="submit" value="Enviar reporte">
     </form>
 
     <footer>
@@ -231,7 +227,8 @@
 
     
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><!--Este sirve para mostrar alertas-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script><!--Este sirve para crear PDF-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script><!--ESTE ES PARA EL PDF-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script><!--ESTE ES PARA EL PDF-->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script><!--Este sirve para mostrar un mapa-->
     <script src="../Recursos/JS/General.js"></script>
     <script src="ReporteCivil.js"></script>
