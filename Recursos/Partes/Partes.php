@@ -159,7 +159,7 @@
 
         $db = ConectarDB();
         $RP = "SELECT 
-            colonias_guadalupe.nombre_colonia,
+            colonias_guadalupe.nombre,
 
             COALESCE(SUM(CASE 
                 WHEN reportes_resueltos.tipo_reporte = 2 
@@ -193,10 +193,10 @@
 
         FROM colonias_guadalupe
         {$filtro} JOIN reportes_resueltos
-            ON colonias_guadalupe.nombre_colonia = reportes_resueltos.nombre_colonia
+            ON colonias_guadalupe.nombre = reportes_resueltos.nombre
 
-        GROUP BY colonias_guadalupe.nombre_colonia
-        ORDER BY colonias_guadalupe.nombre_colonia ASC;";
+        GROUP BY colonias_guadalupe.nombre
+        ORDER BY colonias_guadalupe.nombre ASC;";
         //echo $RP;  //Muestra todo el query
         $resultado = mysqli_query($db, $RP);
 
@@ -204,7 +204,7 @@
 
         if($resultado){            
             while ($fila = mysqli_fetch_assoc($resultado)) {
-                //echo " Colonia: " . $fila['nombre_colonia'] .  " \t Gasto: $" . $fila['Gasto'] . "<br>";
+                //echo " Colonia: " . $fila['nombre'] .  " \t Gasto: $" . $fila['Gasto'] . "<br>";
                 $datos[] = $fila;
             }
         } else {
@@ -294,13 +294,16 @@
 ?>
 
 <?php
-    function Footer (string $titulo="Municipio de Guadalupe", string $Contexto="") {
+    function Footer (bool $imagen, string $url, string $titulo="Municipio de Guadalupe", string $Contexto="") {
         ?>
-            <footer>
-                <img src="/Recursos/Imagenes/icono.png" alt="Logo" class="logo">
+            <footer class="Footer_Creditos">
+                <?php if($imagen){ ?>
+                    <img src="<?php echo $url;?>" alt="Logo" class="logo">
+                <?php } ?>
+                
                 <div>
-                    <h1><?php echo $titulo ?></h1>
-                    <h2><?php echo $Contexto ?></h2>
+                    <h4><?php echo $titulo ?></h4>
+                    <h4><?php echo $Contexto ?></h4>
                 </div>
             </footer>
         <?php

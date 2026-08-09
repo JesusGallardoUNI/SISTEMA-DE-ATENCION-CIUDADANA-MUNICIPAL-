@@ -57,7 +57,7 @@ function mostrarColonias(colonias) {
         const p = document.createElement("p");
 
         // Insertamos el nombre de la colonia
-        p.textContent = colonia.nombre_colonia;
+        p.textContent = colonia.nombre;
 
         // Agregamos el <p> dentro del contenedor
         contenedor.appendChild(p);

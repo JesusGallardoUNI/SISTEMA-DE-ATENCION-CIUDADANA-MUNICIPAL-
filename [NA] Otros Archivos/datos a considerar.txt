@@ -1,4 +1,4 @@
-generacion de nomenclatura de reporte
+generacion de nomenclatura de reporte //YA ES OBSOLETA
 
 [id_estado] / [id_municipio] / [id_colonia] - [id_tipoReporte] - [num_pila]
 

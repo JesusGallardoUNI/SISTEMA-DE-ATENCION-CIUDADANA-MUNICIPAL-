@@ -6,8 +6,8 @@ AFTER UPDATE ON colonias_guadalupe
 FOR EACH ROW
 BEGIN
     UPDATE reportes_colonias
-    SET nombre_colonia = NEW.nombre_colonia
-    WHERE nombre_colonia = OLD.nombre_colonia;
+    SET nombre = NEW.nombre
+    WHERE nombre = OLD.nombre;
 END //
 
 DELIMITER ;
@@ -20,7 +20,7 @@ AFTER DELETE ON colonias_guadalupe
 FOR EACH ROW
 BEGIN
     DELETE FROM reportes_colonias
-    WHERE nombre_colonia = OLD.nombre_colonia;
+    WHERE nombre = OLD.nombre;
 END //
 
 DELIMITER ;

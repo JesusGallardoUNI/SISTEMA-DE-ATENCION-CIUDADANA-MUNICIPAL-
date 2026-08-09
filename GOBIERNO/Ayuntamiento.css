@@ -1,5 +1,24 @@
 /*
 ||=====================================================================||
+||               Este apartado es para inicio de seccion               ||
+||=====================================================================||
+*/
+
+
+.Pares img {
+    object-fit: cover;
+    object-position: right;
+
+    
+    width: 100%;           /* Define el ancho que deseas para el contenedor de la imagen */
+    height: 100%;
+    
+    border-bottom-right-radius: 20px !important;
+    border-top-right-radius: 20px !important;
+}
+
+/*
+||=====================================================================||
 ||             Este apartado es para la principal seccion              ||
 ||=====================================================================||
 */

@@ -87,7 +87,7 @@ def coordenadas_guadalupe():
 # Generar reportes
 # ---------------------------
 
-cantidad = 90
+cantidad = 100
 
 for i in range(cantidad):
 

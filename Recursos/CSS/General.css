@@ -19,6 +19,7 @@
     --Amarillo: #FFC107;
     --Naranja: #FF851B;
     --Rojo: #DC3545;
+    --Blanco: white;
     
 }
 
@@ -113,6 +114,16 @@ main {
 /*==========================================================================*/
 /*                          PARA CLASES GENERALES                           */                                                                                                                                                            
 /*==========================================================================*/
+.Footer_Creditos {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--Oscuro);
+    width: 100%;
+    color: var(--Fondo);
+}
+
 .Relativo {
     position: relative !important;
 }
@@ -169,6 +180,10 @@ main {
     width: 80% !important;
 }
 
+.MB20 {
+    margin-bottom: 20px;
+}
+
 .LimiteTabla {
     height: 98vh !important;
     overflow-y: auto;
@@ -186,6 +201,15 @@ main {
 /*==========================================================================*/
 /*                            PARA EL FORMULARIO                            */                                                                                                                                                            
 /*==========================================================================*/
+.opcionuno:hover {
+    cursor: pointer;
+    transition: all 0.25s ease;
+    background-color: color-mix(in srgb, var(--Gobierno) 30%, transparent);
+    border: 2px solid color-mix(in srgb, var(--Gobierno) 60%, white);
+    border-radius: 12px;
+    box-sizing: border-box;
+}
+
 .elemento {
     padding: 0;
     margin-top: 0px;
@@ -222,9 +246,10 @@ label {
 }
 
 input, select, textarea {
+    transition: all 0.25s ease;
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 2px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
 }
@@ -415,11 +440,15 @@ input[type="submit"]:hover, button:hover, .BOTON:hover {
 
     header {
         flex-direction: column;
+
+        .logo {
+            margin-right: 0;
+        }
+
+        
     }
 
-    header .logo {
-        margin-right: 0;
-    }
+     
 
     form {
         width: 80%;
@@ -613,4 +642,23 @@ input[type="submit"]:hover, button:hover, .BOTON:hover {
 
 .Configurar a {
     color: blue;
+}
+
+
+/*==========================================================================*/
+/*                           ACOMODO DE ELEMENTOS                           */
+/*==========================================================================*/
+
+.Pares {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+
+    div {
+        overflow: hidden !important;
+    }
+}
+
+.Pares_Abajo {
+    align-items: end;
 }

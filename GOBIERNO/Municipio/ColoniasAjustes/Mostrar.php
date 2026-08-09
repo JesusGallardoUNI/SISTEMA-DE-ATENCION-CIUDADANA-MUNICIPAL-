@@ -12,13 +12,13 @@
         $Nombre = mysqli_real_escape_string($db, $_POST['Nombre']);
         if (!empty($Nombre)) {
             // Verificar si ya existe esa colonia
-            $ConsultaExistente = "SELECT * FROM colonias_guadalupe WHERE nombre_colonia = '$Nombre'";
+            $ConsultaExistente = "SELECT * FROM colonias_guadalupe WHERE nombre = '$Nombre'";
             $Resultado = mysqli_query($db, $ConsultaExistente);
 
             if (mysqli_num_rows($Resultado) > 0) {
                 echo "<script>alert('Esta colonia ya existe.');</script>";
             } else {
-                $AgregarColonia = "INSERT INTO colonias_guadalupe (nombre_colonia) VALUES ('$Nombre')";
+                $AgregarColonia = "INSERT INTO colonias_guadalupe (nombre) VALUES ('$Nombre')";
                 $Insertar = mysqli_query($db, $AgregarColonia);
 
                 if ($Insertar) {
@@ -40,7 +40,7 @@
         $ColoniaNombre = mysqli_real_escape_string($db, $_POST['NombreEliminar']);
 
         if (!empty($ColoniaNombre)) {
-            $EliminarColonia = "DELETE FROM colonias_guadalupe WHERE nombre_colonia = '$ColoniaNombre'";
+            $EliminarColonia = "DELETE FROM colonias_guadalupe WHERE nombre = '$ColoniaNombre'";
             $Eliminar = mysqli_query($db, $EliminarColonia);
 
             if ($Eliminar) {
@@ -99,14 +99,14 @@
             </thead>
             <tbody>
                 <?php while ($Registro = mysqli_fetch_assoc($Tabla)): ?>
-                    <?php if (!empty($Registro['nombre_colonia'])): ?>
+                    <?php if (!empty($Registro['nombre'])): ?>
                         <tr>
-                            <td><?php echo $Registro['nombre_colonia']; ?></td>
-                            <td><a href="Actualizar.php?nombre_colonia=<?php echo urlencode($Registro['nombre_colonia']); ?>" class="BOTON BOTON_CERO BTN__Color_Verde">Cambiar nombre</a></td>
+                            <td><?php echo $Registro['nombre']; ?></td>
+                            <td><a href="Actualizar.php?nombre=<?php echo urlencode($Registro['nombre']); ?>" class="BOTON BOTON_CERO BTN__Color_Verde">Cambiar nombre</a></td>
                             <td>
                                 <center>
                                     <form method="POST" class="elemento">
-                                        <input type="hidden" name="NombreEliminar" value="<?php echo $Registro['nombre_colonia']; ?>">
+                                        <input type="hidden" name="NombreEliminar" value="<?php echo $Registro['nombre']; ?>">
                                         <input type="submit" value="Eliminar colonia" class="BOTON BOTON_CERO BTN__Color_Rojo">
                                     </form>
                                 </center>

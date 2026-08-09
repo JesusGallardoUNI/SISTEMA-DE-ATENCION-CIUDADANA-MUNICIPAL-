@@ -38,7 +38,7 @@
         <table class="acostado">
             <tr>
                 <td>Colonia:</td>
-                <td><?php echo $Muestra['nombre_colonia']; ?></td>
+                <td><?php echo $Muestra['nombre']; ?></td>
             </tr>
             <tr>
                 <td>Calle:</td>

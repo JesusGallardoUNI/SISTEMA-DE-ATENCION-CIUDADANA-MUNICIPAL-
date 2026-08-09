@@ -4,16 +4,16 @@
     if(!$Bloqueo){
         header('Location: ../../Ayuntamiento.php');
     }
-    $nombre_colonia = $_GET['nombre_colonia'];
+    $nombre = $_GET['nombre'];
     $db = ConectarDB();
     
     //Obtener los datos de la colonia
-    $Consulta = "SELECT * FROM colonias_guadalupe WHERE nombre_colonia = '{$nombre_colonia}'";
+    $Consulta = "SELECT * FROM colonias_guadalupe WHERE nombre = '{$nombre}'";
     $Resultado = mysqli_query($db, $Consulta);   
     $Propiedad = mysqli_fetch_assoc($Resultado);
 
 
-    $Valor1 = $Propiedad['nombre_colonia'];
+    $Valor1 = $Propiedad['nombre'];
 
     //==============================================================================//
     //  Este es para actualizar el nombre de la colonia del municipio de guadalupe  //
@@ -22,10 +22,10 @@
         $Valor1 = mysqli_real_escape_string($db,$_POST['Nombre']);
 
         //Verificar que ese nombre no exista en la base de datos, si existe no hacer nada, caso contrario si actualiza
-        $Existe = "SELECT * FROM colonias_guadalupe WHERE nombre_colonia = '$Valor1'";
+        $Existe = "SELECT * FROM colonias_guadalupe WHERE nombre = '$Valor1'";
         $Resultado = mysqli_query($db, $Existe);
         if(mysqli_num_rows($Resultado) === 0){
-            $ActualizarColonia = "UPDATE colonias_guadalupe SET nombre_colonia = '$Valor1' WHERE nombre_colonia = '{$nombre_colonia}'";
+            $ActualizarColonia = "UPDATE colonias_guadalupe SET nombre = '$Valor1' WHERE nombre = '{$nombre}'";
             $Actualizar = mysqli_query($db, $ActualizarColonia);
             if($Actualizar){
                 header("Location: Mostrar.php");

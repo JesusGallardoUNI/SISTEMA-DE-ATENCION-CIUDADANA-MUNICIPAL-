@@ -1,5 +1,5 @@
 //Solo te retorna gasto total de un tipo de reporte para cada colonia
-SELECT colonias_guadalupe.nombre_colonia, reportes_resueltos.tipo_reporte, COALESCE(SUM(reportes_resueltos.costo), 0) AS Gasto FROM colonias_guadalupe INNER JOIN reportes_resueltos ON colonias_guadalupe.nombre_colonia = reportes_resueltos.nombre_colonia AND reportes_resueltos.tipo_reporte = 2 GROUP BY colonias_guadalupe.nombre_colonia ORDER BY colonias_guadalupe.nombre_colonia ASC
+SELECT colonias_guadalupe.nombre, reportes_resueltos.tipo_reporte, COALESCE(SUM(reportes_resueltos.costo), 0) AS Gasto FROM colonias_guadalupe INNER JOIN reportes_resueltos ON colonias_guadalupe.nombre = reportes_resueltos.nombre AND reportes_resueltos.tipo_reporte = 2 GROUP BY colonias_guadalupe.nombre ORDER BY colonias_guadalupe.nombre ASC
 
 
 

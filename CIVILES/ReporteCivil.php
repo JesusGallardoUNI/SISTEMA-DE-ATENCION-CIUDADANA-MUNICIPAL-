@@ -27,9 +27,18 @@
         $Identificacion2 = mysqli_real_escape_string($db, $_POST["telefono_persona"] ?? 0);
         $Identificacion3 = mysqli_real_escape_string($db, $_POST["correo_persona"] ?? "");
         $Campo1 = mysqli_real_escape_string($db, $_POST["estado"] ?? 0);
-        $Campo2 = mysqli_real_escape_string($db, $_POST["municipio"] ?? 0);
-        $Campo3 = mysqli_real_escape_string($db, $_POST["codigoPostal"] ?? 0);
-        $Campo4 = mysqli_real_escape_string($db, $_POST["colonia"] ?? 0);
+        $Campo2 = mysqli_real_escape_string($db, $_POST["municipio"] ?? 0);   
+        
+        $Campo4 = mysqli_real_escape_string($db, $_POST["colonia"] ?? 0);   //NOMBRE
+        //BUSCAMOS EL CODIGO POSTAL POR MEDIO DEL CAMPO COLONIA
+        $BuscarCodigo = "SELECT codigo_postal FROM colonias_guadalupe WHERE nombre = '$Campo4'";
+        $EjecutaCP = mysqli_query($db , $BuscarCodigo);
+        $PrimerDato = mysqli_fetch_assoc($EjecutaCP);
+        $Campo3 = $PrimerDato["codigo_postal"];     //CODIGO POSTAL SE OBTIENE DE LA ANTERIOR CONSULTA CON BASE EN EL NOMBRE
+
+        
+        
+
         $Campo5 = mysqli_real_escape_string($db, $_POST["reporte"] ?? 0);
         $Campo6 = mysqli_real_escape_string($db, $_POST["Descripcion"] ?? 0);
         $Campo7 = mysqli_real_escape_string($db, $_POST["calle"] ?? 0);
@@ -56,7 +65,7 @@
         $Campo12 = "no";
 
 
-        $SubirReporte = "INSERT INTO reportes_colonias (nombre_persona, telefono_persona, correo_persona, estado, municipio, codigo_postal, nombre_colonia, tipo_reporte, descripcion, nombre_calle, ubicacion, imagen, fecha, clave, resuelto) VALUES ('$Identificacion1', '$Identificacion2', '$Identificacion3','$Campo1','$Campo2','$Campo3','$Campo4','$Campo5','$Campo6','$Campo7','$Campo8','$NombreImagen','$Campo10','$Campo11','$Campo12')";
+        $SubirReporte = "INSERT INTO reportes_colonias (nombre_persona, telefono_persona, correo_persona, estado, municipio, codigo_postal, nombre_colonia, tipo_reporte, descripcion, nombre_calle, ubicacion, imagen, fecha, clave, resuelto) VALUES ('$Identificacion1', '$Identificacion2', '$Identificacion3','$Campo1','$Campo2','$Campo3','$Campo4','$Campo5','$Campo6','$Campo7','$Campo8','$NombreImagen','$Campo10','$Campo11','$Campo12');";
         $Agregar = mysqli_query($db, $SubirReporte);
         if ($Agregar) {
             echo "<div id='ReporteCivil'></div>";
@@ -79,15 +88,13 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 </head>
 <body class="Relativo">
-    <?php Banner(true,"../Recursos/Imagenes/icono.png","Atención Ciudadana","Ingrese su reporte"); ?>
+    <?php Banner(true,"../Recursos/Imagenes/icono.png","Atención Ciudadana Guadalupe Nuevo León","Ingrese los datos para su reporte"); ?>
     
     <div id="fondo">
         <div class="Anuncio Color_Back" id="Anuncio">
             <img src="../Recursos/SVG/Anuncio.svg" alt="">
             <div class="Ciego">
                 <h4>¿Realizaste un reporte y quieres saber el seguimiento?</h4>
-                <h4>Consulta el estado de tu reporte</h4>
-                <p>Ingresa tu clave de reporte para conocer el avance y seguimiento de tu reporte en tiempo real.</p>
                 <a href="BuscaReporte.php" class="BOTON ColorOscuro">Consultar mi reporte</a>
             </div>
         </div>
@@ -101,38 +108,35 @@
             <!-- Nombre del ciudadano que lo reporta -->
             <div>
                 <label for="nombre_persona">Ingresa tu nombre:</label>
-                <input type="text" id="nombre_persona" name="nombre_persona" required>
+                <input type="text" class="opcionuno" id="nombre_persona" name="nombre_persona" required>
             </div>
 
+            
+            <p>Ingresa al menos un método de contacto (Teléfono o Correo)</p>
+            <hr>
             <!-- Telefono del ciudadano que lo reporta -->
             <div>
                 <label for="telefono_persona">Ingresa tu numero telefono:</label>
-                <input type="number" id="telefono_persona" name="telefono_persona">
+                <input type="number" class="opcionuno" id="telefono_persona" name="telefono_persona">
             </div>
 
             <!-- Correo del ciudadano que lo reporta -->
             <div>
                 <label for="correo_persona">Ingresa tu correo:</label>
-                <input type="email" id="correo_persona" name="correo_persona">
+                <input type="email" class="opcionuno" id="correo_persona" name="correo_persona">
             </div>
         </fieldset> <br>
 
         <!-- Nombre del Estado -->
-        <div>
+        <div class="Ciego">
             <label for="estado">Nombre del Estado:</label>
             <input type="text" id="estado" name="estado" value="Nuevo León" class="No_Contestar" readonly required>
         </div>
     
         <!-- Nombre del Municipio -->
-        <div>
+        <div class="Ciego">
             <label for="municipio">Nombre del Municipio:</label>
             <input type="text" id="municipio" name="municipio" value="Guadalupe" class="No_Contestar" readonly required>
-        </div>
-
-        <!-- Código Postal -->
-        <div>
-            <label for="codigoPostal">Código Postal:</label>
-            <input type="text" maxlength="5" pattern="\d{5}" id="codigoPostal" name="codigoPostal" title="Ingrese los cinco digitos numericos" required>
         </div>
 
         <!-- Nombre de la Colonia -->
@@ -141,7 +145,7 @@
             <select id="colonia" name="colonia" required>
                 <option value="" selected disabled>Seleccione una colonia</option>        
                 <?php while($Lista1 = mysqli_fetch_assoc($ListaColonias)):  ?>
-                    <option value="<?php echo $Lista1['nombre_colonia'] ?>" title="<?php echo $Lista1['id'] ?>"><?php echo $Lista1['nombre_colonia'] ?></option>
+                    <option value="<?php echo $Lista1['nombre'] ?>" title="<?php echo $Lista1['id'] ?>"><?php echo $Lista1['nombre'] ?></option>
                 <?php endwhile; ?>
             </select>
         </div>
@@ -149,7 +153,7 @@
         <!-- Nombre de la Calle -->
         <div>
             <label for="calle">Nombre de la Calle:</label>
-            <input type="text" id="calle" name="calle" maxlength="50" required>
+            <input type="text" class="opcionuno" id="calle" name="calle" maxlength="50" required>
         </div>
 
         <!-- Tipo de reporte -->  
@@ -172,12 +176,15 @@
         <!-- Descripcion de reporte -->
         <div>
             <label for="Descripcion">Descripción del reporte:</label>
-            <textarea name="Descripcion" id="Descripcion" maxlength="400" rows="8" required></textarea>
+            <textarea name="Descripcion" class="opcionuno" id="Descripcion" maxlength="400" rows="8" required></textarea>
         </div>
 
         <!-- Mapa -->
         <div>
-            <label for="mi_mapa">Ubica el lugar:</label>
+            <div class="Pares Pares_Abajo">
+                <label for="mi_mapa">Ubica el lugar:</label>
+                <p id="GPS" class="GPS opcionuno">📍 Usar mi ubicación actual</p>
+            </div>
             <div id="mi_mapa"></div>
             <input type="text" id="coordenadas" name="mi_mapa" class="Ciego" required>
         </div>
@@ -185,13 +192,13 @@
         <!-- Imagen de referencia -->
         <div>
             <label for="imagen">Imagen de referencia:</label>
-            <input type="file" id="imagen" name="imagen" accept="image/jpeg, image/png" required>
+            <input type="file" class="opcionuno" id="imagen" name="imagen" accept="image/jpeg, image/png" required>
         </div>
 
         <!-- Fecha de acceso -->
-        <div>
+        <div class="Ciego">
             <label for="fechaHora">Fecha de acceso:</label>
-            <input type="date" id="fechaHora" name="fechaHora" value="<?php echo date('Y-m-d'); ?>" readonly>
+            <input type="date" class="opcionuno" id="fechaHora" name="fechaHora" value="<?php echo date('Y-m-d'); ?>" readonly>
         </div>
 
         <div class="Ciego">
@@ -212,7 +219,7 @@
             <h3>Proyecto desarrollado por: Jesús Gallardo</h3>
             <h4>Esto no es un sitio oficial por parte del <span>Gobierno municipal de Guadalupe</span></h4>
             <hr>
-            <h4><a href="https://guadalupe.gob.mx/noticia/atiende-lupita-de-forma-rapida-reportes-de-guadalupenses">Enlace directo al sitio oficial <span>Da clic aqui</span></a></h4>
+            <h4>Enlace directo a informacion oficial <a href="https://guadalupe.gob.mx/noticia/atiende-lupita-de-forma-rapida-reportes-de-guadalupenses"><span>Da clic aqui</span></a> o manda un mensaje a Whatsapp Bot<span> 81 80 30 6000</span></h4>
         </div>
 
         <div>
@@ -226,10 +233,10 @@
     </footer>
 
     
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><!--Este sirve para mostrar alertas-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script><!--ESTE ES PARA EL PDF-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script><!--ESTE ES PARA EL PDF-->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script><!--Este sirve para mostrar un mapa-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>                                                                                     <!--Este sirve para mostrar alertas-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>                                                             <!--ESTE ES PARA EL PDF-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>                                      <!--ESTE ES PARA EL PDF-->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>  <!--Este sirve para mostrar un mapa-->
     <script src="../Recursos/JS/General.js"></script>
     <script src="ReporteCivil.js"></script>
 

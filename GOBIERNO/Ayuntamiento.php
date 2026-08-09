@@ -41,22 +41,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atención Ciudadana - Inicio de Sesión</title>
     <link rel="stylesheet" href="../Recursos/CSS/General.css">
+    <link rel="stylesheet" href="Ayuntamiento.css">
 </head>
 <body>
     <?php Banner(true,"../Recursos/Imagenes/icono.png","Municipio de Guadalupe"); ?>
-    <h2>Sistema de Atención Ciudadana</h2>
-    <form method="POST">
-        <div>
-            <label for="Correo">Correo: </label>
-            <input name="Correo" id="Correo" type="email" required>
-        </div>
-        <div>
-            <label for="contrasena">Contraseña:</label>
-            <input type="password" id="contrasena" name="contrasena" required>
-        </div>
+    <section class="VH75 Pares">
+        <div><img src="../Recursos/Imagenes/Presidencia.jpeg" alt=""></div>
+        <div class="W100">
+            <h2 class="TextoCentrado MB20">Sistema de Atención Ciudadana</h2>
+            <form method="POST" class="ContenidoCentrado">
+                <div>
+                    <label for="Correo">Correo: </label>
+                    <input name="Correo" class="opcionuno" id="Correo" type="email" required>
+                </div>
+                <div>
+                    <label for="contrasena">Contraseña:</label>
+                    <input type="password" class="opcionuno" id="contrasena" name="contrasena" required>
+                </div>
 
-        <input type="submit" value="Ingresar">
-    </form>
+                <input type="submit" value="Ingresar">
+            </form>
+        </div>
+    </section>
+    
+
+    <?php Footer(true, "../Recursos/Imagenes/icono.png"); ?>
     <script src="../Recursos/JS/General.js"></script>
 </body>
 </html>

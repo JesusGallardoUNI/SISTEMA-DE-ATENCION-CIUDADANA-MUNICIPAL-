@@ -40,7 +40,7 @@
                     foreach ($registros as $fila) {
                         ?>
                             <tr>
-                                <td><?= $fila['nombre_colonia'] ?></td>
+                                <td><?= $fila['nombre'] ?></td>
                                 <td>$<?= $fila['gasto_tipo_2'] ?? 0 ?></td>
                                 <td>$<?= $fila['gasto_tipo_3'] ?? 0 ?></td>
                                 <td>$<?= $fila['gasto_tipo_4'] ?? 0 ?></td>

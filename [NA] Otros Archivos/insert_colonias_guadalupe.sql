@@ -1,5 +1,5 @@
 USE gobierno_municipal;
-INSERT INTO colonias_guadalupe (nombre_colonia) VALUES
+INSERT INTO colonias_guadalupe (nombre) VALUES
 ('10 de Mayo'),
 ('13 de Mayo'),
 ('15 de Mayo'),

@@ -54,7 +54,7 @@
                 <td colspan="2">
                     <p>Clave reporte: <?php echo $Muestra['clave']; ?></p>
                     <p>Fecha de reporte: <?php echo $Muestra['fecha']; ?></p>
-                    <p>Colonia: <?php echo $Muestra['nombre_colonia']; ?></p>
+                    <p>Colonia: <?php echo $Muestra['nombre']; ?></p>
                     <p>Calle: <?php echo $Muestra['nombre_calle']; ?></p>
                     <p>Codigo postal: <?php echo $Muestra['codigo_postal']; ?></p>
                     <p>Reporte: <?php echo Traductor($Muestra['tipo_reporte']); ?> </p>

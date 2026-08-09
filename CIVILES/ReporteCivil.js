@@ -1,3 +1,22 @@
+//=======================//
+//   DATOS UNIVERDALES   //
+//=======================//
+const Servicios = {
+    1: "Agua potable, drenaje, alcantarillado, tratamiento y disposición de sus aguas residuales",
+    2: "Alumbrado público",
+    3: "Limpia, recolección, traslado, tratamiento y disposición final de residuos",
+    4: "Mercados y centrales de abasto",
+    5: "Panteones",
+    6: "Rastro",
+    7: "Calles, parques y jardines y su equipamiento",
+    8: "Seguridad pública, policía preventiva municipal y tránsito"
+}
+
+//
+//
+//
+
+
 //=====================================//
 //   ESTO ES PARA BUSCAR INFORMACION   //
 //=====================================//
@@ -25,9 +44,6 @@ Anuncio.addEventListener("click", ()=> {
 });
 
 
-//=================================================================//
-//   Esta funcion no funciona actualmente, debo checar el porque   //
-//=================================================================//
 document.getElementById("FormularioReporte").addEventListener("submit", function(e) {
     e.preventDefault(); // 🚨 evita que se envíe el formulario
     generarPDF();
@@ -46,9 +62,9 @@ function generarPDF() {
     //Reporte
     const estado = document.getElementById('estado').value;
     const municipio = document.getElementById('municipio').value;
-    const codigoPostal = document.getElementById('codigoPostal').value;
     const colonia = document.getElementById('colonia');
-    const reporte = document.getElementById('reporte');
+    const valor_reporte = document.getElementById('reporte').value;
+    const reporte = Servicios[valor_reporte];
     const descripcion = document.getElementById('Descripcion').value;
     const calle = document.getElementById('calle').value;
     const coordenadas = document.getElementById('coordenadas').value;
@@ -64,9 +80,9 @@ function generarPDF() {
     if(!telefono && !correo) Mensaje.push("Necesitamos tu numero de telefono o correo para comunicarnos");
 
     //Para los datos del reporte
-    if (!codigoPostal) Mensaje.push("Código Postal");
+    
     if (!colonia.value) Mensaje.push("Nombre de la Colonia");
-    if (!reporte.value) Mensaje.push("Tipo de Reporte");
+    if (!reporte) Mensaje.push("Tipo de Reporte");
     if (!descripcion) Mensaje.push("Descripcion del reporte");
     if (!calle) Mensaje.push("Nombre de la Calle");
     if (!coordenadas) Mensaje.push("Seleccione en el mapa la hubicacion");
@@ -84,7 +100,7 @@ function generarPDF() {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
     const idColonia = colonia.selectedIndex;
-    const idTipoReporte = reporte.selectedIndex;
+    
     
 
     doc.setFont("Arial");
@@ -92,7 +108,7 @@ function generarPDF() {
     doc.text(fechaHora, 150, 10);
     doc.text(`Clave de Reporte: ${Clave}`, 15, 10);
 
-    const contenido = `A día de hoy, el Estado libre y soberano de ${estado}, en el municipio de ${municipio}, código postal ${codigoPostal}, se hace el presente el reporte en cuestión a "${reporte.value}" que se encuentra en la colonia ${colonia.value}, en la calle ${calle} para darle a conocer a los funcionarios responsables el hecho de atender el presente reporte y resolver la problemática.`;
+    const contenido = `A día de hoy, el Estado libre y soberano de ${estado}, en el municipio de ${municipio}, se hace el presente el reporte en cuestión a "${reporte}" que se encuentra en la colonia ${colonia.value}, en la calle ${calle} para darle a conocer a los funcionarios responsables el hecho de atender el presente reporte y resolver la problemática.`;
     const lineasDeTexto = doc.splitTextToSize(contenido, 180);
     let yPosition = 30;
 
@@ -106,9 +122,16 @@ function generarPDF() {
         doc.addImage(base64Image, 'JPEG', 15, yPosition, 180, 120);
 
         doc.save('reporte_ciudadano.pdf');
-
-        document.getElementById("FormularioReporte").submit();
-
+        
+        // Ocultar al hacer clic
+        Swal.fire({
+        title: "Reporte subido correctamente",
+        text: `Tu reporte esta en espera para su temprana atencion, pronto nos comunicaremos con tigo, tu clave de reporte es ${Clave} recuerda que tambien lo puedes encontrar en el PDF y consultar el seguimiento de tu reporte, dando clic en la lupa y despues ingresas la clave`,
+        icon: "success",
+        draggable: true
+        }).then(() => {
+            document.getElementById("FormularioReporte").submit();
+        });
     };
 }
 
@@ -146,3 +169,44 @@ var map = L.map('mi_mapa').setView([25.67688, -100.25943], 15);
         marker.setLatLng(e.latlng)
               .bindPopup("Nueva ubicación: " + lat + ", " + lng);
     });
+
+
+
+    const GPS = document.getElementById("GPS");
+
+GPS.addEventListener("click", () => {
+
+    if (!navigator.geolocation) {
+        alert("Tu navegador no permite obtener la ubicación.");
+        return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+        (posicion) => {
+
+            const lat = posicion.coords.latitude;
+            const lng = posicion.coords.longitude;
+
+            console.log("Latitud:", lat);
+            console.log("Longitud:", lng);
+
+            // Guardar coordenadas en el input
+            document.getElementById("coordenadas").value =
+                `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+
+            // Mover el marcador
+            marker.setLatLng([lat, lng])
+                  .bindPopup("📍 Tu ubicación actual")
+                  .openPopup();
+
+            // Centrar el mapa
+            map.setView([lat, lng], 17);
+        },
+
+        (error) => {
+            console.error(error);
+
+            alert("No fue posible obtener tu ubicación.");
+        }
+    );
+});

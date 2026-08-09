@@ -28,7 +28,7 @@
             <?php if (!empty($Registro['clave'])): ?>
                 <tr>
                     <td><?php echo Traductor($Registro['tipo_reporte']); ?></td>
-                    <td><?php echo $Registro['nombre_colonia']; ?></td>
+                    <td><?php echo $Registro['nombre']; ?></td>
                     <td><?php echo $Registro['nombre_calle']; ?></td>
                     <td class="<?php echo ColorSemaforo($Registro['fecha']); ?>"><?php echo $Registro['fecha']; ?></td>
                 </tr>

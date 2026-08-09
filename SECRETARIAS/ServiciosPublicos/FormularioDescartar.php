@@ -67,7 +67,7 @@
             </div>
             <div>
                 <label>Nombre de la Colonia:</label>
-                <input type="text" id="nombre_colonia" name="nombre_colonia" value="<?php echo $Resultado['nombre_colonia']; ?>" readonly>
+                <input type="text" id="nombre" name="nombre" value="<?php echo $Resultado['nombre']; ?>" readonly>
             </div>
             <div>
                 <label> Tipo de reporte realizado:</label>

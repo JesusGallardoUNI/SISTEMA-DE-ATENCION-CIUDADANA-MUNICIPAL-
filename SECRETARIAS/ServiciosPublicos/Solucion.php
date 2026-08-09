@@ -42,11 +42,11 @@
         $Val7 = mysqli_real_escape_string($db, $_POST["DiasRetraso"]);
         $Val8 = mysqli_real_escape_string($db, $_POST["ID_Encargado"]);
 
-        $Identificacion1 = mysqli_real_escape_string($db,$_POST["nombre_colonia"]);
+        $Identificacion1 = mysqli_real_escape_string($db,$_POST["nombre"]);
         $Identificacion2 = mysqli_real_escape_string($db,$_POST["tipo_reporte"]);
 
         
-        $SubirSolucion = "INSERT INTO reportes_resueltos (clave, nombre_colonia, tipo_reporte, resuelto, foto, costo, descripcion , fecha_resuelto, retraso, id_encargado) VALUES ('$Val1','$Identificacion1','$Identificacion2','$Val2','$NombreImagen','$Val4','$Val5','$Val6','$Val7','$Val8');";        
+        $SubirSolucion = "INSERT INTO reportes_resueltos (clave, nombre, tipo_reporte, resuelto, foto, costo, descripcion , fecha_resuelto, retraso, id_encargado) VALUES ('$Val1','$Identificacion1','$Identificacion2','$Val2','$NombreImagen','$Val4','$Val5','$Val6','$Val7','$Val8');";        
         $Informar = mysqli_query($db,$SubirSolucion);
 
         
@@ -89,7 +89,7 @@
             </div>
             <div>
                 <label>Nombre de la Colonia:</label>
-                <input type="text" id="nombre_colonia" name="nombre_colonia" value="<?php echo $Resultado['nombre_colonia']; ?>" readonly>
+                <input type="text" id="nombre" name="nombre" value="<?php echo $Resultado['nombre']; ?>" readonly>
             </div>
             <div>
                 <label> Tipo de reporte realizado:</label>

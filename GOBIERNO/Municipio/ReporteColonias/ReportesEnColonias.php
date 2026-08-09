@@ -113,7 +113,7 @@
                             <?php TiempoTotal($Registro['fecha']); ?>
                             <a href="Problema.php?id=<?php echo $Registro['id']; ?>">
                                 <img loading="lazy" src="../../../ImagenesReportes/<?php echo $Registro['imagen']; ?>" alt="Foto">
-                                <p>Colonia: <?php echo $Registro['nombre_colonia']; ?></p>
+                                <p>Colonia: <?php echo $Registro['nombre']; ?></p>
                                 <p>Calle: <?php echo $Registro['nombre_calle']; ?></p>
                             </a>
                         </div>

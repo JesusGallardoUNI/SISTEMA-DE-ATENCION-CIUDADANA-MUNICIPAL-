@@ -1,23 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
   // ================== ALERTA (solo si existe) ==================
-  const ReporteCivil = document.getElementById("ReporteCivil");
+  //const ReporteCivil = document.getElementById("ReporteCivil");   //Lo mando a reportecivil.js porque no supe transferir los valores a otros archivos
   const ReporteAlerta = document.getElementById("alerta__resuelto");
   const ReporteDescartado = document.getElementById("ReporteDescartar");
   const Funcionario = document.getElementById("Funcionario");
   const AlertaSolicitud = document.getElementById("AlertaSolicitud");
   const ErrorReporte = document.getElementById("ErrorReporte");
 
-  if (ReporteCivil) {
-    // Ocultar al hacer clic
-    Swal.fire({
-      title: "Reporte subido correctamente",
-      text: "En espera para su pronta atencion, pronto nos comunicaremos con tigo, recuerda que con el PDF puedes consultar el avance de tu reporte, dando clic en la lupa y despues ingresas la clave",
-      icon: "success",
-      draggable: true
-    }).then(() => {
-      window.location.href = 'ReporteCivil.php';
-    });
-  }
+  
 
   if(ReporteAlerta){
     Swal.fire({
