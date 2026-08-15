@@ -65,6 +65,7 @@ function generarPDF() {
     const colonia = document.getElementById('colonia');
     const valor_reporte = document.getElementById('reporte').value;
     const reporte = Servicios[valor_reporte];
+    const especificacion = document.querySelector('input[name="especificacion"]:checked')?.value;
     const descripcion = document.getElementById('Descripcion').value;
     const calle = document.getElementById('calle').value;
     const coordenadas = document.getElementById('coordenadas').value;
@@ -107,8 +108,15 @@ function generarPDF() {
     doc.setFontSize(12);
     doc.text(fechaHora, 150, 10);
     doc.text(`Clave de Reporte: ${Clave}`, 15, 10);
+    doc.text(`Nombre: ${nombre}`, 15, 15);
+    if(telefono) {
+        doc.text(`Telefono: ${telefono}`, 15, 20);
+    }
+    if(correo) {
+        doc.text(`Correo: ${correo}`, 15, 25);
+    }
 
-    const contenido = `A día de hoy, el Estado libre y soberano de ${estado}, en el municipio de ${municipio}, se hace el presente el reporte en cuestión a "${reporte}" que se encuentra en la colonia ${colonia.value}, en la calle ${calle} para darle a conocer a los funcionarios responsables el hecho de atender el presente reporte y resolver la problemática.`;
+    const contenido = `A día de hoy, el Estado libre y soberano de ${estado}, en el municipio de ${municipio}, se hace el presente el reporte en cuestión a la seccion "${reporte}" donde se especifica "${especificacion}" y que se encuentra en la colonia ${colonia.value}, en la calle ${calle} para darle a conocer a los funcionarios responsables el hecho de atender el presente reporte y resolver la problemática.`;
     const lineasDeTexto = doc.splitTextToSize(contenido, 180);
     let yPosition = 30;
 

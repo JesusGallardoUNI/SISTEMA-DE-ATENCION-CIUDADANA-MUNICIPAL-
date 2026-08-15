@@ -100,50 +100,7 @@ p {
 
 
 
-/*
-||=====================================================================||
-||             Este apartado es para la seccion Facultades             ||
-||=====================================================================||
-*/
 
-.container {
-    padding: 20px;
-    max-width: 1000px;
-    margin: 20px auto;
-    background-color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-}
-
-.content {
-    text-align: left;
-    margin: 0 auto;
-    max-width: 800px;
-}
-
-.content h2 {
-    margin: 0;
-    text-align: center;
-    color: var(--Gobierno);
-    font-size: 30px;
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-ul li {
-    padding: 5px 0;
-}
-
-ul li::before {
-    content: "•";
-    color: var(--Gobierno);
-    display: inline-block;
-    width: 1em;
-    list-style: none;
-}
 
 
 /*

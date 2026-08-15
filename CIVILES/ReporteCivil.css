@@ -2,6 +2,53 @@ form {
     width: 70%;
 }
 
+.OpcionesReportes {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 12px;
+    .ReporteOpcion {
+        background-color: var(--Gobierno);
+
+        box-sizing: border-box;
+        overflow: hidden;
+        border: 2px solid transparent;
+
+        display: inline-flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: start;
+        padding: 5px;
+        
+        border-radius: 12px;
+        
+        
+        transition: all 0.25s ease;
+
+        input[type="radio"] {
+            display: none;
+        }
+
+        &:has(input[type="radio"]:hover) {
+            cursor: pointer;
+            
+            background-color: color-mix(in srgb, var(--Gobierno) 30%, transparent);
+            border: 2px solid color-mix(in srgb, var(--Gobierno) 60%, white);
+            
+        }
+        
+        &:has(input[type="radio"]:checked) {
+            background-color: color-mix(in srgb, var(--Gobierno) 70%, transparent);
+            border: 2px solid color-mix(in srgb, var(--Gobierno) 20%, var(--Oscuro));
+            color: var(--Oscuro); /* Para que resalte el texto */
+            box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+        }
+    }
+}
+
+
+
 .GPS {
     cursor: pointer;
     text-transform: uppercase;
@@ -66,16 +113,9 @@ form {
     transform: scale(1.1);
 }
 
-
 .Anuncio img {
     width: 50px;
 }
-
-
-
-
-
-
 
 span {
     color: var(--Gobierno);
@@ -116,7 +156,6 @@ footer a {
 .footer_texto {
     text-align: center;
 }
-
 
 footer div img {
     margin: 5%;

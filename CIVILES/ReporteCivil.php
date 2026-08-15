@@ -40,6 +40,7 @@
         
 
         $Campo5 = mysqli_real_escape_string($db, $_POST["reporte"] ?? 0);
+        $Especificacion = mysqli_real_escape_string($db, $_POST["especificacion"] ?? '');
         $Campo6 = mysqli_real_escape_string($db, $_POST["Descripcion"] ?? 0);
         $Campo7 = mysqli_real_escape_string($db, $_POST["calle"] ?? 0);
         $Campo8 = mysqli_real_escape_string($db, $_POST["mi_mapa"] ?? 0);
@@ -65,7 +66,7 @@
         $Campo12 = "no";
 
 
-        $SubirReporte = "INSERT INTO reportes_colonias (nombre_persona, telefono_persona, correo_persona, estado, municipio, codigo_postal, nombre_colonia, tipo_reporte, descripcion, nombre_calle, ubicacion, imagen, fecha, clave, resuelto) VALUES ('$Identificacion1', '$Identificacion2', '$Identificacion3','$Campo1','$Campo2','$Campo3','$Campo4','$Campo5','$Campo6','$Campo7','$Campo8','$NombreImagen','$Campo10','$Campo11','$Campo12');";
+        $SubirReporte = "INSERT INTO reportes_colonias (nombre_persona, telefono_persona, correo_persona, estado, municipio, codigo_postal, nombre_colonia, tipo_reporte, especificacion, descripcion, nombre_calle, ubicacion, imagen, fecha, clave, resuelto) VALUES ('$Identificacion1', '$Identificacion2', '$Identificacion3','$Campo1','$Campo2','$Campo3','$Campo4','$Campo5','$Especificacion','$Campo6','$Campo7','$Campo8','$NombreImagen','$Campo10','$Campo11','$Campo12');";
         $Agregar = mysqli_query($db, $SubirReporte);
         if ($Agregar) {
             echo "<div id='ReporteCivil'></div>";
@@ -156,21 +157,29 @@
             <input type="text" class="opcionuno" id="calle" name="calle" maxlength="50" required>
         </div>
 
-        <!-- Tipo de reporte -->  
+        <!-- Tipo de reporte General-->  
         <!-- Eliminar: 1 5 6; SOLO PONERLOS COMENTADOS -->
         <div>
             <label for="reporte">Reporte que se quiere hacer:</label>
             <select id="reporte" name="reporte" required>
                 <option value="" selected disabled>Seleccione un tipo de reporte</option>
-                <!-- <option value="1">Agua potable, drenaje, alcantarillado, tratamiento y disposición de sus aguas residuales</option> -->
+                <option value="1">Agua potable, drenaje, alcantarillado, tratamiento y disposición de sus aguas residuales</option>
                 <option value="2">Alumbrado público</option>
                 <option value="3">Limpia, recolección, traslado, tratamiento y disposición final de residuos</option>
                 <option value="4">Mercados y centrales de abasto</option>
-                <!-- <option value="5">Panteones</option> -->
+                <option value="5">Panteones</option>
                 <!-- <option value="6">Rastro</option> -->
                 <option value="7">Calles, parques y jardines y su equipamiento</option>
                 <option value="8">Seguridad pública, policía preventiva municipal y tránsito</option>
             </select>
+        </div>
+
+        <!-- Tipo de reporte Particular-->
+        <div>
+            <label>Selecciona el problema en especifico: </label>
+            <div id="OpcionesReportes" class="OpcionesReportes">
+            </div>
+
         </div>
 
         <!-- Descripcion de reporte -->
@@ -220,6 +229,8 @@
             <h4>Esto no es un sitio oficial por parte del <span>Gobierno municipal de Guadalupe</span></h4>
             <hr>
             <h4>Enlace directo a informacion oficial <a href="https://guadalupe.gob.mx/noticia/atiende-lupita-de-forma-rapida-reportes-de-guadalupenses"><span>Da clic aqui</span></a> o manda un mensaje a Whatsapp Bot<span> 81 80 30 6000</span></h4>
+            <hr>
+            <h4><a href="Aviso.php">Consulta aqui el <span>Aviso de privasidad</span></a></h4>
         </div>
 
         <div>
@@ -239,6 +250,7 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>  <!--Este sirve para mostrar un mapa-->
     <script src="../Recursos/JS/General.js"></script>
     <script src="ReporteCivil.js"></script>
+    <script src="API_Servicios.js"></script>
 
 </body>
 </html>
