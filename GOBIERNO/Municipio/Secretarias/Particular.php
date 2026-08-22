@@ -8,7 +8,7 @@
 
     //Datos del empleado
     $ID = $_GET["id"];
-    $Empleado = "SELECT * FROM secretarias WHERE id_encargado = $ID;";
+    $Empleado = "SELECT * FROM secretarias_cuentas WHERE id_encargado = $ID;";
     $Ejecuta = mysqli_query($db, $Empleado);
     $Busca = mysqli_fetch_assoc($Ejecuta);
 
@@ -18,7 +18,7 @@
     $Muestra = mysqli_fetch_assoc($TotalMuestra);
 
     //Dame todos los reportes del empleado
-    $Listado = "SELECT rep.clave, rep.tipo_reporte, rep.nombre, rep.nombre_calle, res.costo, res.retraso FROM reportes_colonias rep LEFT JOIN reportes_resueltos res ON rep.clave = res.clave WHERE rep.id_encargado = $ID AND rep.resuelto = 'si';";
+    $Listado = "SELECT rep.clave, rep.tipo_reporte, rep.nombre_colonia, rep.nombre_calle, res.costo, res.retraso FROM reportes_colonias rep LEFT JOIN reportes_resueltos res ON rep.clave = res.clave WHERE rep.id_encargado = $ID AND rep.resuelto = 'si';";
     $TablaListado = mysqli_query($db,$Listado);
 ?>
 
@@ -56,7 +56,7 @@
                     <tr>
                         <td><?php echo $Miembro['clave'];?></td>
                         <td><?php echo Traductor($Miembro['tipo_reporte']);?></td>
-                        <td><?php echo $Miembro['nombre'];?></td>
+                        <td><?php echo $Miembro['nombre_colonia'];?></td>
                         <td><?php echo $Miembro['nombre_calle'];?></td>
                         <td><?php echo $Miembro['costo'];?></td>
                         <td><?php echo $Miembro['retraso'];?></td>

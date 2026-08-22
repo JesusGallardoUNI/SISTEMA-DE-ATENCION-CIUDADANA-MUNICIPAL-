@@ -42,12 +42,13 @@
                     <img src="../../../Recursos/SVG/inicio.svg" alt="">
                     <a href="../MunicipioInforme.php">Volver a la página principal</a>
                 </div>
-                <!--
+                
                 <div class="opcion" id="Opcion1">
                     <img src="../../../Recursos/SVG/opcion1.svg" alt="">
                     <a href="?tipo=1">a) Agua potable, drenaje, alcantarillado, tratamiento y disposición de sus aguas residuales</a>
+                    <div class="Total"><?php echo Estadistica(1, "no")?></div>
                 </div>
-                -->
+                
                 <div class="opcion" id="Opcion2">
                     <img src="../../../Recursos/SVG/opcion2.svg" alt="">
                     <a href="?tipo=2">b) Alumbrado público</a>
@@ -63,12 +64,13 @@
                     <a href="?tipo=4">d) Mercados y centrales de abasto</a>
                     <div class="Total"><?php echo Estadistica(4, "no")?></div>
                 </div>
-                <!--
+                
                 <div class="opcion" id="Opcion5">
                     <img src="../../../Recursos/SVG/opcion5.svg" alt="">
                     <a href="?tipo=5">e) Panteones</a>
+                    <div class="Total"><?php echo Estadistica(5, "no")?></div>
                 </div>
-                -->
+                
                 <!--
                 <div class="opcion" id="Opcion6">
                     <img src="../../../Recursos/SVG/opcion6.svg" alt="">
@@ -88,7 +90,6 @@
             </nav>
             <main class="Contenido">
                 <div class="Contenido__Encabezado">
-
                     <table id="ReportesDashboard" class="Configurar Configurar__Local">
                         <thead>
                             <th class="FondoVerde">Sin retraso</th>
@@ -112,9 +113,8 @@
                         <div class="Reporte">
                             <?php TiempoTotal($Registro['fecha']); ?>
                             <a href="Problema.php?id=<?php echo $Registro['id']; ?>">
-                                <img loading="lazy" src="../../../ImagenesReportes/<?php echo $Registro['imagen']; ?>" alt="Foto">
-                                <p>Colonia: <?php echo $Registro['nombre']; ?></p>
-                                <p>Calle: <?php echo $Registro['nombre_calle']; ?></p>
+                                <p>Codigo postal: <?php echo $Registro['codigo_postal']; ?> Colonia:  <?php echo $Registro['nombre_colonia']; ?> Calle: <?php echo $Registro['nombre_calle']; ?></p>
+                                <p>Grupo: <?php echo Traductor($Registro['tipo_reporte']); ?>  Reporte: <?php echo $Registro['especificacion'] ? $Registro['especificacion'] : "nada" ; ?></p>
                             </a>
                         </div>
                     <?php endwhile; ?>

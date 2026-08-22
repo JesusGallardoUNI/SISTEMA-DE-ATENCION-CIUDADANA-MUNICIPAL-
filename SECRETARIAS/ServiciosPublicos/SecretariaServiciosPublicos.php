@@ -13,6 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Atención Ciudadana - Inicio de Sesión</title>
         <link rel="stylesheet" href="../../Recursos/CSS/General.css">
+        <link rel="stylesheet" href="../FUNCIONARIOS.css">
     </head>
     <body>
         <?php Banner(true,"../../Recursos/Imagenes/icono.png","Municipio de Guadalupe","Secretaria de servicios publicos", true, "../../Recursos/SVG/Cerrar.svg", "../../Recursos/Partes/Salir.php"); ?>

@@ -13,7 +13,7 @@
         $Fin = mysqli_real_escape_string($db, $_POST["Fin"]);
         $Resuelto = mysqli_real_escape_string($db, $_POST["Informe"]);
         $Descripcion = mysqli_real_escape_string($db, $_POST["Descripcion"]);
-        $Query = "SELECT r.codigo_postal, r.nombre, r.tipo_reporte, rr.costo, r.fecha, rr.fecha_resuelto FROM reportes_colonias r LEFT JOIN reportes_resueltos rr ON r.clave = rr.clave WHERE r.resuelto = '$Resuelto' AND r.fecha BETWEEN '$Inicio' AND '$Fin';";    
+        $Query = "SELECT r.codigo_postal, r.nombre_colonia, r.tipo_reporte, rr.costo, r.fecha, rr.fecha_resuelto FROM reportes_colonias r LEFT JOIN reportes_resueltos rr ON r.clave = rr.clave WHERE r.resuelto = '$Resuelto' AND r.fecha BETWEEN '$Inicio' AND '$Fin';";    
         $Ejecuta = mysqli_query($db, $Query);
 
         //=================================================//

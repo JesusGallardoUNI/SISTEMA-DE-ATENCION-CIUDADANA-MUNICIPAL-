@@ -193,7 +193,7 @@
 
         FROM colonias_guadalupe
         {$filtro} JOIN reportes_resueltos
-            ON colonias_guadalupe.nombre = reportes_resueltos.nombre
+            ON colonias_guadalupe.nombre = reportes_resueltos.nombre_colonia
 
         GROUP BY colonias_guadalupe.nombre
         ORDER BY colonias_guadalupe.nombre ASC;";

@@ -56,9 +56,20 @@
     <?php Banner(true,"../../Recursos/Imagenes/icono.png","Atención Ciudadana","Detalles del reporte"); ?>
     <form method="POST"  enctype="multipart/form-data">
         <fieldset>
+            <legend>Datos de identificación</legend>
+            <div>
+                <label>Nombre:</label>
+                <input type="text" value="<?php echo $Resultado['nombre_persona']; ?>" readonly>
+            </div>
+            <div>
+                <label>Telefono:</label>
+                <input type="number" value="<?php echo $Resultado['telefono_persona']; ?>" readonly>
+            </div>
+        </fieldset><br>
+        <fieldset>
             <legend>Datos del reporte:</legend>
             <div>
-                <label>Clave de reporte:</label>
+                <label>Folio:</label>
                 <input type="text" id="Clave" name="Clave1" value="<?php echo $Resultado['clave']; ?>" readonly>
             </div>
             <div>
@@ -67,7 +78,11 @@
             </div>
             <div>
                 <label>Nombre de la Colonia:</label>
-                <input type="text" id="nombre" name="nombre" value="<?php echo $Resultado['nombre']; ?>" readonly>
+                <input type="text" id="nombre" name="nombre" value="<?php echo $Resultado['nombre_colonia']; ?>" readonly>
+            </div>
+            <div>
+                <label>Nombre de la calle:</label>
+                <input type="text" id="Calle_Colonia" value="<?php echo $Resultado['nombre_calle']; ?>" readonly>
             </div>
             <div>
                 <label> Tipo de reporte realizado:</label>
@@ -77,10 +92,6 @@
             <div>
                 <label for="Descripcion">Descripción del reporte:</label>
                 <textarea name="Descripcion" id="Descripcion" maxlength="400" rows="8" readonly><?php echo $Resultado['descripcion']; ?></textarea>
-            </div>
-            <div>
-                <label>Nombre de la calle:</label>
-                <input type="text" id="Calle_Colonia" value="<?php echo $Resultado['nombre_calle']; ?>" readonly>
             </div>
             <div>
                 <label>Lugar del reporte:</label>

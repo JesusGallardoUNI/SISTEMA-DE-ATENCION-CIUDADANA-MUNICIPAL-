@@ -1,12 +1,12 @@
 <?php
-    include "../../Recursos/Partes/Partes.php";
+    include "../../../Recursos/Partes/Partes.php";
     $Bloqueo = Seguridad();
     if(!$Bloqueo){
-        header('Location: ../GobiernoMunicipal.php');
+        header('Location: ../../GobiernoMunicipal.php');
     }
     $db = ConectarDB();
     $ID_EMPLEADO = $_SESSION['ID_Empleado'];
-    $Empleado = "SELECT * FROM secretarias WHERE id_encargado = {$ID_EMPLEADO};";
+    $Empleado = "SELECT * FROM secretarias_cuentas WHERE id_encargado = {$ID_EMPLEADO};";
     $Busca = mysqli_query($db,$Empleado);
     if($Busca->num_rows){
         $Datos = mysqli_fetch_assoc($Busca);
@@ -28,13 +28,13 @@
         $Solicitud = "INSERT INTO solicitud_cambios (fecha, id_empleado, nombre, cargo_actual, cargo_nuevo,	cambio_permanente, motivos) VALUES ('$VAL1','$ID_EMPLEADO','$VAL2','$VAL3','$VAL4','$VAL5','$VAL6');";
         $Accion = mysqli_query($db, $Solicitud);
         if($Accion){
-            header("LOcation: SecretariaServiciosPublicos.php");
+            header("Location: ../SecretariaServiciosPublicos.php");
         }
     }
 ?>
 
 <h1 class="TextoCentrado ColorFondo">Solicitud de cambio de puesto</h1>
-<form action="Cambio.php" class="ContenidoCentrado" id="Cambio" method="POST">
+<form action="Acciones/Cambio.php" class="ContenidoCentrado" id="Cambio" method="POST">
 
     <div>
         <label for="F_Actual">Fecha actual:</label>

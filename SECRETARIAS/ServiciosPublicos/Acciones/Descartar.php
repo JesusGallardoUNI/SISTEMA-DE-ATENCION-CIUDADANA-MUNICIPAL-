@@ -1,8 +1,8 @@
 <?php
-    include "../../Recursos/Partes/Partes.php";
+    include "../../../Recursos/Partes/Partes.php";
     $Bloqueo = Seguridad();
     if(!$Bloqueo){
-        header('Location: ../GobiernoMunicipal.php');
+        header('Location: ../../GobiernoMunicipal.php');
     }
     $db = ConectarDB();
     //=======================================================//
@@ -13,11 +13,12 @@
     $Ejecutar = mysqli_query($db,$Buscar);
 ?>
 
-<h1 class="TextoCentrado ColorFondo">Listado de reportes pendientes por terminar</h1>
+<h1 class="TextoCentrado ColorFondo">Listado de reportes pendientes selecciona uno para descartar</h1>
 <table class="Configurar Espacio" id="Opcion1">
     <thead>
         <tr>
-            <th>Clave</th>
+            <th>Accion</th>
+            <th>Folio</th>
             <th>Reporte</th>
             <th>Colonia</th>
             <th>Calle</th>
@@ -28,9 +29,10 @@
         <?php while ($Registro = mysqli_fetch_assoc($Ejecutar)): ?>
             <?php if (!empty($Registro['clave'])): ?>
                 <tr>
-                    <td><a href="Solucion.php?clave=<?php echo $Registro['clave']; ?>"><?php echo $Registro['clave']; ?></a></td>
+                    <td><a href="FormularioDescartar.php?id=<?php echo $Registro['id']; ?>" class="BOTON BTN__Color_Rojo">Descartar</a></td>
+                    <td><?php echo $Registro['clave']; ?></td>
                     <td><?php echo Traductor($Registro['tipo_reporte']); ?></td>
-                    <td><?php echo $Registro['nombre']; ?></td>
+                    <td><?php echo $Registro['nombre_colonia']; ?></td>
                     <td><?php echo $Registro['nombre_calle']; ?></td>
                     <td class="<?php echo ColorSemaforo($Registro['fecha']); ?>"><?php echo $Registro['fecha']; ?></td>
                 </tr>

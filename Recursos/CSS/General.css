@@ -511,9 +511,12 @@ ul li::before {
 
 .Cuerpo {
     display: flex;
-    justify-content: stretch; 
+    justify-content: space-between; 
     align-items: stretch;
     width: 100%;
+
+    max-height: calc(145vh - 10px); 
+    box-sizing: border-box;
 }
 
 .Cuerpo nav {
@@ -525,7 +528,8 @@ ul li::before {
     flex-direction: column;
     width: 15%;
     align-items: center;
-    height: 100% !important;
+
+    
 }
 
 .Cuerpo .opcion {
@@ -700,6 +704,7 @@ ul li::before {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     align-items: center;
+    height: 100%;
 
     div {
         overflow: hidden !important;

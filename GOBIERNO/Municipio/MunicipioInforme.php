@@ -22,21 +22,21 @@
         <h2>Menu de operaciones</strong></h2>
         <div class="contenido">
 
-            <div class="opcion">
+            <div class="opcion Ciego">
                 <a href="Facultades/Federal.php">
                     <img src="../../Recursos/Imagenes/Mexico.png" alt="Escudo Nacional de México">
                 </a>
                 <p>Legislación federal</p>
             </div>
 
-            <div class="opcion">
+            <div class="opcion Ciego">
                 <a href="Facultades/Estatal.php">
                     <img src="../../Recursos/Imagenes/NuevoLeón.png" alt="Escudo Estatal de Nuevo León">
                 </a>
                 <p>Legislacion estatal</p>
             </div>
 
-            <div class="opcion">
+            <div class="opcion Ciego">
                 <a href="Facultades/Reglamento.php">
                     <img src="../../Recursos/Imagenes/Guadalupe.png" alt="Escudo Estatal de Nuevo León">
                 </a>
@@ -87,7 +87,7 @@
                 <p>Gasto municipal</p>
             </div>
 
-            <?php Opcion9(); ?>
+            <!-- Agregar Funcion Opcion9() de php para cargar la IA-->
 
             <div class="opcion">
                  <a href="Secretarias/General.php">

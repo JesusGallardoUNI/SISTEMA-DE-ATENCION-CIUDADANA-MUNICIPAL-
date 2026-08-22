@@ -8,7 +8,7 @@
     //$Personal = Tabla("secretarias");
 
     //Me trae todo el personal de las secretarias 
-    $Personal = "SELECT s.id_encargado, s.Departamento, CONCAT(s.Nombres, ' ', s.Apellidos) AS 'NombreCompleto', COUNT(r.id_encargado) AS Resueltos FROM secretarias s LEFT JOIN reportes_colonias r ON s.id_encargado = r.id_encargado WHERE r.resuelto = 'si' GROUP BY s.id_encargado;";
+    $Personal = "SELECT s.id_encargado, s.Departamento, CONCAT(s.Nombres, ' ', s.Apellidos) AS 'NombreCompleto', COUNT(r.id_encargado) AS Resueltos FROM secretarias_cuentas s LEFT JOIN reportes_colonias r ON s.id_encargado = r.id_encargado WHERE r.resuelto = 'si' GROUP BY s.id_encargado;";
     $Buscar = mysqli_query($db,$Personal);
 
 ?>

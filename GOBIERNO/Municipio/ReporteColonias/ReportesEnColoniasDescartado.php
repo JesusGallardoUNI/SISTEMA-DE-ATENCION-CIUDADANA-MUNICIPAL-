@@ -89,17 +89,13 @@
             <div class="Contenido__Encabezado">
                 <p><?php echo $muestra = isset($Dato) ? $Dato : Traductor($_GET['tipo']);?></p>
             </div>
-            <div class="Muestra" id="infoSection">
-                <h2>Información Detallada</h2>
-            </div>
+            
             <div class="Contenido_Reportes">
                 <?php while ($Registro = mysqli_fetch_assoc($Ejecucion)): ?>
                     <div class="Reporte">
-                        
                         <a href="ProblemaDescartado.php?id=<?php echo $Registro['id']; ?>">
-                            <img loading="lazy" src="../../../ImagenesReportes/<?php echo $Registro['imagen']; ?>" alt="Foto">
-                            <p>Colonia: <?php echo $Registro['nombre']; ?></p>
-                            <p>Calle: <?php echo $Registro['nombre_calle']; ?></p>
+                            <p>Codigo postal: <?php echo $Registro['codigo_postal']; ?> Colonia:  <?php echo $Registro['nombre_colonia']; ?> Calle: <?php echo $Registro['nombre_calle']; ?></p>
+                            <p>Grupo: <?php echo Traductor($Registro['tipo_reporte']); ?>  Reporte: <?php echo $Registro['especificacion'] ? $Registro['especificacion'] : "nada" ; ?></p>
                         </a>
                     </div>
                 <?php endwhile; ?>

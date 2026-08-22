@@ -1,8 +1,8 @@
 <?php
-    include "../../Recursos/Partes/Partes.php";
+    include "../../../Recursos/Partes/Partes.php";
     $Bloqueo = Seguridad();
     if(!$Bloqueo){
-        header('Location: ../GobiernoMunicipal.php');
+        header('Location: ../../GobiernoMunicipal.php');
     }
     $db = ConectarDB();
     $ID = $_SESSION['ID_Empleado'];

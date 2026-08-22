@@ -3,25 +3,25 @@ function cargarSeccion(Opcion) {
     let Ruta = "";
     switch (Opcion) {
         case 0:
-            Ruta = "Total.php";
+            Ruta = "Acciones/Total.php";        //YA
             break;
         case 1:
-            Ruta = "Pendiente.php";
+            Ruta = "Acciones/Pendiente.php";    //YA
             break;
         case 2:
-            Ruta = "Completado.php";
+            Ruta = "Acciones/Completado.php";   //YA
             break;
         case 3:
-            Ruta = "Descartar.php";
+            Ruta = "Acciones/Descartar.php";    //YA
             break;
         case 4:
-            Ruta = "Estadistica.php";
+            Ruta = "Acciones/Estadistica.php";  //YA (ARREGLAR EL DATO DE CUANDO ES DESCARTADO YA NO SEA PENDIENTE)
             break;
         case 5:
-            Ruta = "Cambio.php";
+            Ruta = "Acciones/Cambio.php";
             break;
         case 6:
-            Ruta = "Informe.php";
+            Ruta = "Acciones/Informe.php";      //YA
             break;
 
 
@@ -54,13 +54,13 @@ function cargarSeccion(Opcion) {
 //================================================//
 //                Para formularios                //
 //================================================//
-const BASE = "/GUADALUPE/SECRETARIAS/ServiciosPublicos/";
+const BASE = "/GUADALUPE/SECRETARIAS/ServiciosPublicos";
 // Delegación global
 document.addEventListener("submit", function (e) {
     if (e.target.classList.contains("FormularioTotal")) {
         e.preventDefault();
         let datos = new FormData(e.target);
-        fetch(BASE + "Total.php", {
+        fetch(BASE + "/Acciones/Total.php", {
             method: "POST",
             body: datos
         })
@@ -170,6 +170,7 @@ function GenerarPDF_Cambio() {
 
 
     doc.save('Solicitud de cambio.pdf');
+    
 }
 
 

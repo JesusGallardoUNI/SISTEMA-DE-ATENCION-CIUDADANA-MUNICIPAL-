@@ -46,7 +46,7 @@
         $Identificacion2 = mysqli_real_escape_string($db,$_POST["tipo_reporte"]);
 
         
-        $SubirSolucion = "INSERT INTO reportes_resueltos (clave, nombre, tipo_reporte, resuelto, foto, costo, descripcion , fecha_resuelto, retraso, id_encargado) VALUES ('$Val1','$Identificacion1','$Identificacion2','$Val2','$NombreImagen','$Val4','$Val5','$Val6','$Val7','$Val8');";        
+        $SubirSolucion = "INSERT INTO reportes_resueltos (clave, nombre_colonia, tipo_reporte, resuelto, foto, costo, descripcion , fecha_resuelto, retraso, id_encargado) VALUES ('$Val1','$Identificacion1','$Identificacion2','$Val2','$NombreImagen','$Val4','$Val5','$Val6','$Val7','$Val8');";        
         $Informar = mysqli_query($db,$SubirSolucion);
 
         
@@ -77,10 +77,23 @@
 <body>
     <?php Banner(true,"../../Recursos/Imagenes/icono.png","Atención Ciudadana","Detalles del reporte"); ?>
     <form method="POST"  enctype="multipart/form-data">
+        <!--Datos de identificacion-->
+        <fieldset>
+            <legend>Datos de identificación:</legend>
+            <div>
+                <label>Nombre:</label>
+                <input type="text" value="<?php echo $Resultado['nombre_persona']; ?>" readonly>
+            </div>
+            <div>
+                <label>Telefono:</label>
+                <input type="number" value="<?php echo $Resultado['telefono_persona']; ?>" readonly>
+            </div>
+        </fieldset><br>
+        <!--Datos del reporte-->
         <fieldset>
             <legend>Datos del reporte:</legend>
             <div>
-                <label>Clave de reporte:</label>
+                <label>Folio:</label>
                 <input type="text" id="Clave" value="<?php echo $Resultado['clave']; ?>" readonly>
             </div>
             <div>
@@ -89,7 +102,11 @@
             </div>
             <div>
                 <label>Nombre de la Colonia:</label>
-                <input type="text" id="nombre" name="nombre" value="<?php echo $Resultado['nombre']; ?>" readonly>
+                <input type="text" id="nombre" name="nombre" value="<?php echo $Resultado['nombre_colonia']; ?>" readonly>
+            </div>
+            <div>
+                <label>Nombre de la calle:</label>
+                <input type="text" id="Calle_Colonia" value="<?php echo $Resultado['nombre_calle']; ?>" readonly>
             </div>
             <div>
                 <label> Tipo de reporte realizado:</label>
@@ -99,10 +116,6 @@
             <div>
                 <label for="Descripcion">Descripción del reporte:</label>
                 <textarea name="Descripcion" id="Descripcion" maxlength="400" rows="8" readonly><?php echo $Resultado['descripcion']; ?></textarea>
-            </div>
-            <div>
-                <label>Nombre de la calle:</label>
-                <input type="text" id="Calle_Colonia" value="<?php echo $Resultado['nombre_calle']; ?>" readonly>
             </div>
             <div>
                 <label>Lugar del reporte:</label>
@@ -118,11 +131,11 @@
                 <label for="">Fecha del reporte:</label>
                 <input type="text" value="<?php echo $Resultado['fecha']; ?>" readonly required>
             </div>
-        </fieldset>
-
+        </fieldset><br>
+        <!--Datos a contestar-->
         <fieldset>
             <legend>Contesta los campos:</legend>
-            <div>
+            <div class="Ciego">
                 <label for="ClaveResuelto">Clave de reporte:</label>
                 <input type="text" name="ClaveResuelto" id="ClaveResuelto" value="<?php echo $Resultado['clave']; ?>" required readonly>
             </div>
@@ -139,7 +152,7 @@
                 <textarea name="DescripcionSolucion" id="DescripcionSolucion" rows="8" maxlength="200" required></textarea>
             </div>
             <div>
-                <label for="FechaHoraResuelto">Fecha y hora de acceso:</label>
+                <label for="FechaHoraResuelto">Fecha de acceso:</label>
                 <input type="date" name="FechaHoraResuelto" id="FechaHoraResuelto" value="<?php echo date('Y-m-d'); ?>" required readonly>
             </div>
 

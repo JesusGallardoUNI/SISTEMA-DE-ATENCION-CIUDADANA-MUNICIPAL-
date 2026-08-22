@@ -117,7 +117,9 @@ p {
     background-color: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    width: 75%;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .Contenido .Contenido__Encabezado {
@@ -130,31 +132,34 @@ p {
 
 .Contenido .Contenido_Reportes {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     column-gap: 8px;
     background-color: #f4f4f4;
     width: auto;
-    max-height: 85vh;
+    flex: 1;
+    
     overflow-y: auto;
     overflow-x: hidden;
 }
 
 .Contenido .Contenido_Reportes .Reporte {
     position: relative;
-    width: 80%;
-    padding: 10px;
-    margin: 10px 0;
+    width: 95%;
+    max-height: 65px;
+    padding: 5px;
+    margin: 5px 0px;
     background-color: color-mix(in srgb, var(--Gobierno) 75%, white);
     border: 3px dotted var(--Gobierno);
     color: white;
     font-weight: 600;
     border-radius: 5px;
     cursor: pointer;
+    transition: all 0.3s ease-in-out;
 }
 
 .Contenido .Contenido_Reportes .Reporte .Tiempo {
     position: absolute;
-    left: 85%;
+    left: 97%;
     top: -12px;
     width: 40px;
     height: 40px;
@@ -165,18 +170,10 @@ p {
 }
 
 .Contenido .Contenido_Reportes .Reporte:hover {
-    transform: scale(1.15);
-    transition: transform 0.3s ease-in-out;
+    background-color: color-mix(in srgb, var(--Gobierno) 50%, white);
 }
 
-.Contenido .Contenido_Reportes .Reporte img {
-    display: block;
-    margin: 0 auto;
-    width: 90%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 8px;
-}
+
 
 
 

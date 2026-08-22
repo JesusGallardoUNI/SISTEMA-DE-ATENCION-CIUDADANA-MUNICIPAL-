@@ -21,7 +21,7 @@
     //==================================================================================//
     // Aqui quiero que me muestre la informacion de los funcionarios que lo descartaron //
     //==================================================================================//
-    $Busca = "SELECT * FROM secretarias WHERE id_encargado = $Persona;";
+    $Busca = "SELECT * FROM secretarias_cuentas WHERE id_encargado = $Persona;";
     $Seleccion = mysqli_query($db, $Busca);
     $Nombre = mysqli_fetch_assoc($Seleccion);
 ?>
@@ -52,10 +52,9 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <p>Clave reporte: <?php echo $Muestra['clave']; ?></p>
-                    <p>Fecha de reporte: <?php echo $Muestra['fecha']; ?></p>
-                    <p>Colonia: <?php echo $Muestra['nombre']; ?></p>
-                    <p>Calle: <?php echo $Muestra['nombre_calle']; ?></p>
+                    <p>Folio: <?php echo $Muestra['clave']; ?> Fecha de reporte: <?php echo $Muestra['fecha']; ?></p>
+                    <p>Colonia: <?php echo $Muestra['nombre_colonia']; ?> Calle: <?php echo $Muestra['nombre_calle']; ?></p>
+
                     <p>Codigo postal: <?php echo $Muestra['codigo_postal']; ?></p>
                     <p>Reporte: <?php echo Traductor($Muestra['tipo_reporte']); ?> </p>
                 </td>

@@ -6,7 +6,7 @@
         $Cuenta = mysqli_real_escape_string($db, $_POST['Correo']);
         $Clave = mysqli_real_escape_string($db, $_POST['Clave']);
  
-        $Consulta = "SELECT * FROM secretarias WHERE Correo = '{$Cuenta}';";
+        $Consulta = "SELECT * FROM secretarias_cuentas WHERE Correo = '{$Cuenta}';";
         $Resultado = mysqli_query($db, $Consulta);
 
         if($Resultado->num_rows){

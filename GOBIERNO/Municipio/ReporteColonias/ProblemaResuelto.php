@@ -19,7 +19,7 @@
     $OtraMuestra = mysqli_fetch_assoc($Obtencion);
 
     $Persona = $OtraMuestra['id_encargado'];
-    $Busca = "SELECT * FROM secretarias WHERE id_encargado = $Persona;";
+    $Busca = "SELECT * FROM secretarias_cuentas WHERE id_encargado = $Persona;";
     $Ejecuta = mysqli_query($db, $Busca);
     $Dato = mysqli_fetch_assoc($Ejecuta);
     $Nombre = $Dato["Nombres"] . " " . $Dato["Apellidos"];
@@ -47,20 +47,23 @@
     <main class="Informe">
         <table class="acostado">
             <tr>
+                <td colspan="2">
+                    <p>Folio: <?php echo $Muestra['clave']; ?></p>
+                </td>
+            </tr>
+            <tr>
                 <td><img loading="lazy" src="../../../ImagenesReportes/<?php echo $Muestra['imagen']; ?>" alt="Foto"></td>
                 <td><img loading="lazy" src="../../../ReportesResueltos/<?php echo $OtraMuestra['foto']; ?>" alt="Foto"></td>
             </tr>
             <tr>
                 <td>
-                    <p>Clave reporte: <?php echo $Muestra['clave']; ?></p>
                     <p>Fecha de reporte: <?php echo $Muestra['fecha']; ?></p>
-                    <p>Colonia: <?php echo $Muestra['nombre']; ?></p>
+                    <p>Colonia: <?php echo $Muestra['nombre_colonia']; ?></p>
                     <p>Calle: <?php echo $Muestra['nombre_calle']; ?></p>
                     <p>Codigo postal: <?php echo $Muestra['codigo_postal']; ?></p>
                     <p>Reporte: <?php echo Traductor($Muestra['tipo_reporte']); ?> </p>
                 </td>
                 <td>
-                    <p>Clave resuelto: <?php echo $OtraMuestra['clave']; ?></p>
                     <p>Fecha de resuelto: <?php echo $OtraMuestra['fecha_resuelto']; ?></p>
                     <p>Costo: $<?php echo $OtraMuestra['costo']; ?></p>
                 </td>

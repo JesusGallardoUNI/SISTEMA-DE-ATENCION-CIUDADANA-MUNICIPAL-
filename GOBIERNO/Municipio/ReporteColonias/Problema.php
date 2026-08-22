@@ -37,8 +37,20 @@
         <br>
         <table class="acostado">
             <tr>
+                <td>Folio:</td>
+                <td><?php echo $Muestra['clave']; ?></td>
+            </tr>
+            <tr>
+                <td>Nombre:</td>
+                <td><?php echo $Muestra['nombre_persona']; ?></td>
+            </tr>
+            <tr>
+                <td>Telefono:</td>
+                <td><?php echo $Muestra['telefono_persona']; ?></td>
+            </tr>
+            <tr>
                 <td>Colonia:</td>
-                <td><?php echo $Muestra['nombre']; ?></td>
+                <td><?php echo $Muestra['nombre_colonia']; ?></td>
             </tr>
             <tr>
                 <td>Calle:</td>
@@ -49,7 +61,7 @@
                 <td><?php echo $Muestra['codigo_postal']; ?></td>
             </tr>
             <tr>
-                <td>Reporte:</td>
+                <td>Grupo:</td>
                 <td><?php echo Traductor($Muestra['tipo_reporte']); ?></td>
             </tr>
             <tr>

@@ -1,8 +1,8 @@
 <?php
-    include "../../Recursos/Partes/Partes.php";
+    include "../../../Recursos/Partes/Partes.php";
     $Bloqueo = Seguridad();
     if(!$Bloqueo){
-        header('Location: ../GobiernoMunicipal.php');
+        header('Location: ../../GobiernoMunicipal.php');
     }
     $db = ConectarDB();
     //=======================================================//
@@ -27,7 +27,7 @@
     <thead>
         <tr>
             <th>Accion</th>
-            <th>Clave</th>
+            <th>Folio</th>
             <th>Reporte</th>
             <th>Colonia</th>
             <th>Fecha de reporte</th>
@@ -47,7 +47,7 @@
                     </td>
                     <td><?php echo $Registro['clave']; ?></td>
                     <td><?php echo Traductor($Registro['tipo_reporte']); ?></td>
-                    <td><?php echo $Registro['nombre']; ?></td>
+                    <td><?php echo $Registro['nombre_colonia']; ?></td>
                     <td class="<?php echo ColorSemaforo($Registro['fecha']); ?>"><?php echo $Registro['fecha']; ?></td>
                 </tr>
             <?php endif; ?>
