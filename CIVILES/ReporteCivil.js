@@ -51,15 +51,14 @@ document.getElementById("FormularioReporte").addEventListener("submit", function
 });
 
 
-function generarPDF() {
-    
 
-    //Persona
+
+async function generarPDF() {
+    // Persona
     const nombre = document.getElementById('nombre_persona').value;
     const telefono = document.getElementById('telefono_persona').value;
-    const correo = document.getElementById('correo_persona').value;
 
-    //Reporte
+    // Reporte
     const estado = document.getElementById('estado').value;
     const municipio = document.getElementById('municipio').value;
     const colonia = document.getElementById('colonia');
@@ -70,73 +69,159 @@ function generarPDF() {
     const calle = document.getElementById('calle').value;
     const coordenadas = document.getElementById('coordenadas').value;
     const imagenInput = document.getElementById('imagen'); 
-    const fechaHora = document.getElementById('fechaHora').value;
-    const Clave = document.getElementById('Clave').value;
+    const DatoFecha = document.getElementById('fechaHora').value;
+    const [Anio, Mes, Dia] = DatoFecha ? DatoFecha.split("-") : ["--", "--", "----"];
+
+    const fechaHora = `${Dia}/${Mes}/${Anio}`;
+    const Folio = document.getElementById('Clave').value;
 
     // Validación de campos
     const Mensaje = [];
-    
-    //Para los datos de la persona
-    if(!nombre) Mensaje.push("Tu nombre");
-    if(!telefono && !correo) Mensaje.push("Necesitamos tu numero de telefono o correo para comunicarnos");
-
-    //Para los datos del reporte
-    
-    if (!colonia.value) Mensaje.push("Nombre de la Colonia");
-    if (!reporte) Mensaje.push("Tipo de Reporte");
-    if (!descripcion) Mensaje.push("Descripcion del reporte");
-    if (!calle) Mensaje.push("Nombre de la Calle");
-    if (!coordenadas) Mensaje.push("Seleccione en el mapa la hubicacion");
-    if (!imagenInput.value) Mensaje.push("Imagen de Referencia");
+    if (!nombre) Mensaje.push("Tu nombre");
+    if (!telefono) Mensaje.push("Tu teléfono");
+    if (!colonia.value) Mensaje.push("Nombre de la colonia");
+    if (!reporte) Mensaje.push("Tipo de reporte");
+    if (!descripcion) Mensaje.push("Descripción del reporte");
+    if (!calle) Mensaje.push("Nombre de la calle");
+    if (!coordenadas) Mensaje.push("Ubicación en el mapa");
+    if (!imagenInput.files.length) Mensaje.push("Imagen de referencia");
 
     if (Mensaje.length > 0) {
         Swal.fire({
             title: "Reporte incompleto",
             text: "Asegúrate de completar los siguientes campos: " + Mensaje.join(", "),
             icon: "warning"
-        })
+        });
         return;
     }
 
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
-    const idColonia = colonia.selectedIndex;
+
+
+    const mapaElemento = document.getElementById('mi_mapa');
+
+    // Captura visual del contenedor del mapa
+    const mapaCanvas = await html2canvas(mapaElemento, {
+        useCORS: true,       // Permite cargar tiles/imágenes externas de OpenStreetMap
+        allowTaint: false,
+        scale: 2             // Mejora la resolución de la captura
+    });
     
+    const mapaBase64 = mapaCanvas.toDataURL('image/jpeg', 0.95);
+
+
+    // Estilos globales
+    doc.setFont("helvetica", "normal");
+
+    // --- ENCABEZADO ---
+    const imagenLogo = "../Recursos/Imagenes/icono.png";
+    doc.addImage(imagenLogo, "PNG", 14, 10, 18, 18);
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(16);
+    doc.setTextColor(30, 41, 59); // Slate dark
+    doc.text("Gobierno Municipal de Guadalupe", 38, 18);
+    
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(9);
+    doc.setTextColor(100, 116, 139);
     
 
-    doc.setFont("Arial");
-    doc.setFontSize(12);
-    doc.text(fechaHora, 150, 10);
-    doc.text(`Clave de Reporte: ${Clave}`, 15, 10);
-    doc.text(`Nombre: ${nombre}`, 15, 15);
-    if(telefono) {
-        doc.text(`Telefono: ${telefono}`, 15, 20);
-    }
-    if(correo) {
-        doc.text(`Correo: ${correo}`, 15, 25);
-    }
+    doc.setFontSize(10);
+    doc.text(`Fecha: ${fechaHora}`, 196, 18, { align: "right" });
 
-    const contenido = `A día de hoy, el Estado libre y soberano de ${estado}, en el municipio de ${municipio}, se hace el presente el reporte en cuestión a la seccion "${reporte}" donde se especifica "${especificacion}" y que se encuentra en la colonia ${colonia.value}, en la calle ${calle} para darle a conocer a los funcionarios responsables el hecho de atender el presente reporte y resolver la problemática.`;
-    const lineasDeTexto = doc.splitTextToSize(contenido, 180);
-    let yPosition = 30;
+    // Línea divisora superior
+    doc.setDrawColor(242, 92, 63);
+    doc.setLineWidth(0.8);
+    doc.line(14, 32, 196, 32);
 
-    lineasDeTexto.forEach(linea => doc.text(linea, 15, yPosition += 10));
-    yPosition += 20;
+    // --- BLOQUE DATOS CIUDADANO / FOLIO ---
+    doc.setFillColor(248, 250, 252);
+    doc.roundedRect(14, 36, 182, 22, 2, 2, "F");
 
+    doc.setFontSize(10);
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(225, 29, 72); // Color destacado para el Folio
+    doc.text(`Folio: ${Folio}`, 20, 44);
+
+    doc.setFont("helvetica", "normal");
+    doc.setTextColor(51, 65, 85);
+    doc.text(`Solicitante: ${nombre}`, 20, 52);
+    doc.text(`Teléfono: ${telefono}`, 20, 57);
+
+    // --- TABLA DETALLES DEL REPORTE ---
+    doc.autoTable({
+        startY: 64,
+        head: [["Campo", "Detalle del Reporte"]],
+        body: [
+            ["Colonia", colonia.value],
+            ["Calle", calle],
+            ["Sección de reporte", reporte],
+            ["Reporte", especificacion || "N/A"],
+            ["Descripción", descripcion],
+        ],
+        theme: 'striped',
+        headStyles: { 
+            fillColor: [242, 92, 63], 
+            textColor: [255, 255, 255], 
+            fontStyle: 'bold',
+            halign: 'left'
+        },
+        columnStyles: {
+            0: { fontStyle: 'bold', cellWidth: 45, textColor: [71, 85, 105] },
+            1: { cellWidth: 'auto', textColor: [15, 23, 42] }
+        },
+        margin: { left: 14, right: 14 },
+        styles: { fontSize: 9.5, cellPadding: 3.5 }
+    });
+
+    let finalY = doc.lastAutoTable.finalY + 10;
+
+    // 2. INSERTAR EL MAPA EN EL PDF
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(11);
+    doc.setTextColor(30, 41, 59);
+    doc.text("Ubicación en el Mapa:", 14, finalY);
+
+    // Ajustar dimensiones del mapa (Ancho: 182mm, Alto proporcional ~70mm)
+    doc.addImage(mapaBase64, 'JPEG', 14, finalY + 4, 182, 70);
+
+    finalY += 80; // Desplazar coordenada Y para el siguiente contenido
+
+
+
+    // --- ADJUNTAR IMAGEN DE REFERENCIA ---
+    const file = imagenInput.files[0];
     const reader = new FileReader();
-    reader.readAsDataURL(imagenInput.files[0]);
-    reader.onloadend = function() {
-        const base64Image = reader.result.split(',')[1];
-        doc.addImage(base64Image, 'JPEG', 15, yPosition, 180, 120);
 
-        doc.save('reporte_ciudadano.pdf');
-        
-        // Ocultar al hacer clic
+    reader.readAsDataURL(file);
+    reader.onloadend = function() {
+        const base64Data = reader.result;
+        const format = file.type.includes("png") ? "PNG" : "JPEG";
+
+        // Si la tabla ocupó mucho espacio, agregamos nueva página para la foto
+        if (finalY + 85 > 280) {
+            doc.addPage();
+            finalY = 20;
+        }
+
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(11);
+        doc.setTextColor(30, 41, 59);
+        doc.text("Evidencia Fotográfica:", 14, finalY);
+
+        // Renderizado proporcional de la imagen
+        doc.addImage(base64Data, format, 14, finalY + 4, 182, 80);
+
+        // Guardar archivo
+        doc.save(`Reporte_${Folio}_Ciudadano.pdf`);
+
+        // Alerta de confirmación
         Swal.fire({
-        title: "Reporte subido correctamente",
-        text: `Tu reporte esta en espera para su temprana atencion, pronto nos comunicaremos con tigo, tu clave de reporte es ${Clave} recuerda que tambien lo puedes encontrar en el PDF y consultar el seguimiento de tu reporte, dando clic en la lupa y despues ingresas la clave`,
-        icon: "success",
-        draggable: true
+            title: "Reporte enviado con éxito",
+            text: `Tu reporte quedó registrado con el Folio: ${Folio}. Puedes consultar el seguimiento dando clic en la lupa.`,
+            icon: "success"
         }).then(() => {
             document.getElementById("FormularioReporte").submit();
         });

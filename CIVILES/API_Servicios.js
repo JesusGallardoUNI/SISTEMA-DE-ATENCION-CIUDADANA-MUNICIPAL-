@@ -53,7 +53,7 @@ function MostrarServicios(servicios) {
 Servicios_Generales.addEventListener("change", function() {
     // 1️⃣ fetch hace una petición HTTP al endpoint (API en PHP)
     //    NO devuelve datos inmediatamente, devuelve una PROMESA
-    alert(Servicios_Generales.value);
+    
     
     fetch(`/GUADALUPE/Recursos/API/ApiServicios.php?Secretaria=${Servicios_Generales.value}`)
 

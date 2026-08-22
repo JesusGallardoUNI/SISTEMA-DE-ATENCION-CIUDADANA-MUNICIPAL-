@@ -233,6 +233,7 @@
 
 
     //Esto es para ReporteCivil y genera una clave aleatoria mas simple
+    //Esta funcion ya no se va a usar porque la clave es obsoleta ahora es folio
     function generarClave($longitud = 8) {
         $caracteres = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789';
         $max = strlen($caracteres) - 1;

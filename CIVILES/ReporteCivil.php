@@ -11,12 +11,11 @@
 
     //============================================================//
     //                      Crea clave unica                      //
+    //                         Ahora folio                        //
     //============================================================//
-    do {
-        $Clave = generarClave(8);
-        $Query = "SELECT * FROM reportes_colonias WHERE clave = '$Clave';";
-        $existe = mysqli_query($db, $Query);
-    } while(mysqli_num_rows($existe) > 0);
+    $ClaveCod = "SELECT COUNT(*) AS Folio FROM reportes_colonias;";
+    $ResClaveCod = mysqli_query($db, $ClaveCod);
+    $Clave = mysqli_fetch_assoc($ResClaveCod);
 
 
     if($_SERVER["REQUEST_METHOD"] === "POST"){
@@ -25,7 +24,7 @@
         //==========================================================//
         $Identificacion1 = mysqli_real_escape_string($db, $_POST["nombre_persona"] ?? "");
         $Identificacion2 = mysqli_real_escape_string($db, $_POST["telefono_persona"] ?? 0);
-        $Identificacion3 = mysqli_real_escape_string($db, $_POST["correo_persona"] ?? "");
+        
         $Campo1 = mysqli_real_escape_string($db, $_POST["estado"] ?? 0);
         $Campo2 = mysqli_real_escape_string($db, $_POST["municipio"] ?? 0);   
         
@@ -66,7 +65,7 @@
         $Campo12 = "no";
 
 
-        $SubirReporte = "INSERT INTO reportes_colonias (nombre_persona, telefono_persona, correo_persona, estado, municipio, codigo_postal, nombre_colonia, tipo_reporte, especificacion, descripcion, nombre_calle, ubicacion, imagen, fecha, clave, resuelto) VALUES ('$Identificacion1', '$Identificacion2', '$Identificacion3','$Campo1','$Campo2','$Campo3','$Campo4','$Campo5','$Especificacion','$Campo6','$Campo7','$Campo8','$NombreImagen','$Campo10','$Campo11','$Campo12');";
+        $SubirReporte = "INSERT INTO reportes_colonias (nombre_persona, telefono_persona, estado, municipio, codigo_postal, nombre_colonia, tipo_reporte, especificacion, descripcion, nombre_calle, ubicacion, imagen, fecha, clave, resuelto) VALUES ('$Identificacion1', '$Identificacion2','$Campo1','$Campo2','$Campo3','$Campo4','$Campo5','$Especificacion','$Campo6','$Campo7','$Campo8','$NombreImagen','$Campo10','$Campo11','$Campo12');";
         $Agregar = mysqli_query($db, $SubirReporte);
         if ($Agregar) {
             echo "<div id='ReporteCivil'></div>";
@@ -112,20 +111,12 @@
                 <input type="text" class="opcionuno" id="nombre_persona" name="nombre_persona" required>
             </div>
 
-            
-            <p>Ingresa al menos un método de contacto (Teléfono o Correo)</p>
-            <hr>
             <!-- Telefono del ciudadano que lo reporta -->
             <div>
                 <label for="telefono_persona">Ingresa tu numero telefono:</label>
                 <input type="number" class="opcionuno" id="telefono_persona" name="telefono_persona">
             </div>
 
-            <!-- Correo del ciudadano que lo reporta -->
-            <div>
-                <label for="correo_persona">Ingresa tu correo:</label>
-                <input type="email" class="opcionuno" id="correo_persona" name="correo_persona">
-            </div>
         </fieldset> <br>
 
         <!-- Nombre del Estado -->
@@ -160,7 +151,7 @@
         <!-- Tipo de reporte General-->  
         <!-- Eliminar: 1 5 6; SOLO PONERLOS COMENTADOS -->
         <div>
-            <label for="reporte">Reporte que se quiere hacer:</label>
+            <label for="reporte">Sección de reporte que se quiere hacer:</label>
             <select id="reporte" name="reporte" required>
                 <option value="" selected disabled>Seleccione un tipo de reporte</option>
                 <option value="1">Agua potable, drenaje, alcantarillado, tratamiento y disposición de sus aguas residuales</option>
@@ -211,7 +202,7 @@
         </div>
 
         <div class="Ciego">
-            <input type="text" id="Clave" name="Clave" value="<?php echo $Clave; ?>" readonly required>
+            <input type="text" id="Clave" name="Clave" value="<?php echo $Clave['Folio']; ?>" readonly required>
         </div>
 
         <input type="submit" value="Enviar reporte">
@@ -244,6 +235,7 @@
     </footer>
 
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>                                                     <!--ESTE ES PARA COPIAR ELEMENTOS HTML Y PASARLOS A PDF-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>                                                                                     <!--Este sirve para mostrar alertas-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>                                                             <!--ESTE ES PARA EL PDF-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>                                      <!--ESTE ES PARA EL PDF-->

@@ -3,4 +3,18 @@ SELECT colonias_guadalupe.nombre, reportes_resueltos.tipo_reporte, COALESCE(SUM(
 
 
 
+generaliza la funcion matematica de la tesis
+SELECT 
+    nombre_colonia,
 
+	COUNT(CASE WHEN tipo_reporte = 1 THEN 1 END) AS "Agua potable, drenaje, alcantarillado, tratamiento y disposición de sus aguas residuales",
+    COUNT(CASE WHEN tipo_reporte = 2 THEN 1 END) AS "Alumbrado público",
+    COUNT(CASE WHEN tipo_reporte = 3 THEN 1 END) AS "Limpia, recolección, traslado, tratamiento y disposición final de residuos",
+    COUNT(CASE WHEN tipo_reporte = 4 THEN 1 END) AS "Mercados y centrales de abasto",
+    COUNT(CASE WHEN tipo_reporte = 5 THEN 1 END) AS "Panteones",
+    COUNT(CASE WHEN tipo_reporte = 7 THEN 1 END) AS "Calles, parques y jardines y su equipamiento",
+    COUNT(CASE WHEN tipo_reporte = 8 THEN 1 END) AS "Seguridad pública, policía preventiva municipal y tránsito"
+
+FROM reportes_colonias
+GROUP BY nombre_colonia
+ORDER BY nombre_colonia ASC;

@@ -9,6 +9,7 @@
             ]);
             exit;
         }
+        $db->set_charset("utf8mb4");
         return $db;
     }
 ?>
