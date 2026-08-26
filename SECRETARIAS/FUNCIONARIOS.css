@@ -2,6 +2,12 @@
     height: 100% !important;
 }
 
+.Contenido {
+    display: flex;
+    align-items: start;
+    justify-content: center;
+}
+
 @media(max-width: 768px){
     form {
         width: 90% !important;

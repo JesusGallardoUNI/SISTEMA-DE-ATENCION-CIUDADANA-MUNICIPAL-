@@ -12,7 +12,7 @@
         $Muestra = mysqli_fetch_assoc($Busca);
         if($Muestra){
             //
-            $Col1 = "El reporte fue realizado el dia " . $Muestra["fecha"] . " y se encuentra ubicado en el estado de " . $Muestra["estado"] . " en el municipio de " . $Muestra["municipio"] . " en la colonia " . $Muestra["nombre"] . " en la calle " . $Muestra["nombre_calle"] . " el reporte es " . Traductor($Muestra["tipo_reporte"]) . " y la descripcion dice " . $Muestra["descripcion"];
+            $Col1 = "El reporte fue realizado el dia " . $Muestra["fecha"] . " y se encuentra ubicado en el estado de " . $Muestra["estado"] . " en el municipio de " . $Muestra["municipio"] . " en la colonia " . $Muestra["nombre_colonia"] . " en la calle " . $Muestra["nombre_calle"] . " el reporte es " . Traductor($Muestra["tipo_reporte"]) . " y la descripcion dice " . $Muestra["descripcion"];
             $Responsable = $Muestra["id_encargado"];
             if(!$Responsable) {
                 $Col2 = "Tu reporte todavia no a sido asignado a un encargado";

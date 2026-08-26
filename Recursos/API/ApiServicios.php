@@ -11,7 +11,7 @@
     $Secretaria = $_GET["Secretaria"];
 
     //esta es la consulta (puede ser modificada para fines de IA, ciencia de datos ML, heristicas)
-    $consulta = "SELECT * FROM reportes_especificacion WHERE secretaria = '$Secretaria';";
+    $consulta = "SELECT * FROM reportes_especificacion WHERE seccion = '$Secretaria';";
     $resultado = mysqli_query($db, $consulta);
 
 

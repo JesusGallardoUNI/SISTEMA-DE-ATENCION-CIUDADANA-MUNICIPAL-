@@ -167,7 +167,7 @@
 
         <!-- Tipo de reporte Particular-->
         <div>
-            <label>Selecciona el problema en especifico: </label>
+            <label>Selecciona el servicio en especifico: </label>
             <div id="OpcionesReportes" class="OpcionesReportes">
             </div>
 
