@@ -18,40 +18,17 @@
                 
                 session_start();
                 $_SESSION['login'] = true;
-                $_SESSION['usuario_tipo'] = $Usuario['Departamento'];
+                $_SESSION['usuario_tipo'] = $Usuario['Area_Encargada'];
                 
-                $_SESSION['Municipio'] = $Usuario['municipio'];
+                
+                $_SESSION['Secretaria'] = $Usuario['Nombre_Secretaria'];
+                $_SESSION['Area'] = $Usuario['Area_Encargada'];
                 $_SESSION['NombreCompleto'] = $Usuario['Nombres'] . " " . $Usuario['Apellidos'];
                 $_SESSION['ID_Empleado'] = $Usuario['id_encargado'];
-                $Ruta = "";
-                switch($_SESSION['usuario_tipo']){
-                    case ("1"): 
-                        $Ruta = "";
-                    break;
-                    case ("2"): //TERMINADO
-                        $Ruta = "ServiciosPublicos/SecretariaServiciosPublicos.php";
-                    break;
-                    case ("3"): //TERMINADO
-                        $Ruta = "ServiciosPublicos/SecretariaServiciosPublicos.php";
-                    break;
-                    case ("4"): 
-                        $Ruta = "";
-                    break;
-                    case ("5"): 
-                        $Ruta = "";
-                    break;
-                    case ("6"): 
-                        $Ruta = "";
-                    break;
-                    case ("7"): //TERMINADO
-                        $Ruta = "ServiciosPublicos/SecretariaServiciosPublicos.php";
-                    break;
-                    case ("8"): 
-                        $Ruta = "";
-                    break;
-                }
-                $_SESSION['Nombre'] = $Usuario['Guadalupe'];
-                header("Location: {$Ruta}");
+                
+                
+                
+                header("Location: ServiciosPublicos/Operativo/Inicio.php");
             } else {
                 echo '<div id="alerta" class="alerta alerta__malo">la contraseña no es correcta</div>';
             }

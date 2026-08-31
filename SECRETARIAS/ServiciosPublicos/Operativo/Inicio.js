@@ -9,10 +9,10 @@ function cargarSeccion(Opcion) {
             Ruta = "Acciones/Pendiente.php";    //YA
             break;
         case 2:
-            Ruta = "Acciones/Completado.php";   //YA
+            Ruta = "Acciones/Completado.php";   //
             break;
         case 3:
-            Ruta = "Acciones/Descartar.php";    //YA
+            Ruta = "Acciones/Descartar.php";    //
             break;
         case 4:
             Ruta = "Acciones/Estadistica.php";  //YA (ARREGLAR EL DATO DE CUANDO ES DESCARTADO YA NO SEA PENDIENTE)
@@ -54,7 +54,7 @@ function cargarSeccion(Opcion) {
 //================================================//
 //                Para formularios                //
 //================================================//
-const BASE = "/GUADALUPE/SECRETARIAS/ServiciosPublicos";
+const BASE = "/GUADALUPE/SECRETARIAS/ServiciosPublicos/Operativo";
 // Delegación global
 document.addEventListener("submit", function (e) {
     if (e.target.classList.contains("FormularioTotal")) {

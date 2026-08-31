@@ -1,15 +1,17 @@
 <?php
-    include "../../../Recursos/Partes/Partes.php";
+    include "../../../../Recursos/Partes/Partes.php";
     $Bloqueo = Seguridad();
     if(!$Bloqueo){
-        header('Location: ../../GobiernoMunicipal.php');
+        header('Location: ../../../GobiernoMunicipal.php');
     }
     $db = ConectarDB();
     //=======================================================//
     //  Aqui empiezo a buscar todos los reportes necesarios  //
     //=======================================================//
     $Asignado_A = $_SESSION['ID_Empleado'];
-    $Buscar = "SELECT reportes_colonias.clave, reportes_colonias.tipo_reporte, reportes_colonias.nombre_colonia, reportes_colonias.nombre_calle, reportes_colonias.fecha, reportes_resueltos.fecha_resuelto, reportes_resueltos.retraso FROM reportes_colonias INNER JOIN reportes_resueltos ON reportes_colonias.clave = reportes_resueltos.clave WHERE reportes_colonias.resuelto = 'si' AND reportes_colonias.tipo_reporte = {$_SESSION['usuario_tipo']} AND reportes_colonias.id_encargado = $Asignado_A";
+    
+    $Buscar = "SELECT reportes_colonias.clave, reportes_colonias.tipo_reporte, reportes_colonias.nombre_colonia, reportes_colonias.nombre_calle, reportes_colonias.fecha, reportes_resueltos.fecha_resuelto, reportes_resueltos.retraso FROM reportes_colonias INNER JOIN reportes_resueltos ON reportes_colonias.clave = reportes_resueltos.clave WHERE reportes_colonias.resuelto = 'si' AND reportes_colonias.tipo_reporte = '{$_SESSION['usuario_tipo']}' AND reportes_colonias.id_encargado = $Asignado_A";
+    echo $Buscar;
     $Ejecutar = mysqli_query($db,$Buscar);
 ?>
 

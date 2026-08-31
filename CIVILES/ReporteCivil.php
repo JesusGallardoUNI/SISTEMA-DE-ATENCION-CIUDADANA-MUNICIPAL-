@@ -25,10 +25,10 @@
         $Identificacion1 = mysqli_real_escape_string($db, $_POST["nombre_persona"] ?? "");
         $Identificacion2 = mysqli_real_escape_string($db, $_POST["telefono_persona"] ?? 0);
         
-        $Campo1 = mysqli_real_escape_string($db, $_POST["estado"] ?? 0);
-        $Campo2 = mysqli_real_escape_string($db, $_POST["municipio"] ?? 0);   
+        $Campo1 = mysqli_real_escape_string($db, $_POST["estado"] ?? 'Nuevo León');
+        $Campo2 = mysqli_real_escape_string($db, $_POST["municipio"] ?? 'Guadalupe');   
         
-        $Campo4 = mysqli_real_escape_string($db, $_POST["colonia"] ?? 0);   //NOMBRE
+        $Campo4 = mysqli_real_escape_string($db, $_POST["colonia"] ?? '');   //NOMBRE DE COLONIA
         //BUSCAMOS EL CODIGO POSTAL POR MEDIO DEL CAMPO COLONIA
         $BuscarCodigo = "SELECT codigo_postal FROM colonias_guadalupe WHERE nombre = '$Campo4'";
         $EjecutaCP = mysqli_query($db , $BuscarCodigo);
@@ -40,8 +40,8 @@
 
         $Campo5 = mysqli_real_escape_string($db, $_POST["reporte"] ?? 0);
         $Especificacion = mysqli_real_escape_string($db, $_POST["especificacion"] ?? '');
-        $Campo6 = mysqli_real_escape_string($db, $_POST["Descripcion"] ?? 0);
-        $Campo7 = mysqli_real_escape_string($db, $_POST["calle"] ?? 0);
+        $Campo6 = mysqli_real_escape_string($db, $_POST["Descripcion"] ?? '');
+        $Campo7 = mysqli_real_escape_string($db, $_POST["calle"] ?? '');
         $Campo8 = mysqli_real_escape_string($db, $_POST["mi_mapa"] ?? 0);
         $Campo9 = $_FILES["imagen"];
         $Campo10 = mysqli_real_escape_string($db, $_POST["fechaHora"] ?? 0);
@@ -64,11 +64,23 @@
 
         $Campo12 = "no";
 
+        //===============================================================================//
+        //     BUSCAR EL AREA ENCARGADA DE ACUERDO CON LA ESPECIFICACION DEL REPORTE     //
+        //===============================================================================//
+        //$Especificacion
+        $Buscar_Encargado = "SELECT * FROM reportes_especificacion WHERE problema = '$Especificacion';";
+        $Ejecuta_Encargado = mysqli_query($db,$Buscar_Encargado);
+        $Encargado_Resultado = mysqli_fetch_assoc($Ejecuta_Encargado);
+        $Encargado = $Encargado_Resultado["encargado"];
 
-        $SubirReporte = "INSERT INTO reportes_colonias (nombre_persona, telefono_persona, estado, municipio, codigo_postal, nombre_colonia, tipo_reporte, especificacion, descripcion, nombre_calle, ubicacion, imagen, fecha, clave, resuelto) VALUES ('$Identificacion1', '$Identificacion2','$Campo1','$Campo2','$Campo3','$Campo4','$Campo5','$Especificacion','$Campo6','$Campo7','$Campo8','$NombreImagen','$Campo10','$Campo11','$Campo12');";
+
+
+
+        $SubirReporte = "INSERT INTO reportes_colonias (nombre_persona, telefono_persona, estado, municipio, codigo_postal, nombre_colonia, tipo_reporte, especificacion, descripcion, nombre_calle, ubicacion, imagen, fecha, clave, resuelto, encargado_area) VALUES ('$Identificacion1', '$Identificacion2','$Campo1','$Campo2','$Campo3','$Campo4','$Campo5','$Especificacion','$Campo6','$Campo7','$Campo8','$NombreImagen','$Campo10','$Campo11','$Campo12','$Encargado');";
+        
         $Agregar = mysqli_query($db, $SubirReporte);
         if ($Agregar) {
-            echo "<div id='ReporteCivil'></div>";
+            header("Location: ReporteCivil.php");
         }
     }
 ?>
@@ -81,11 +93,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../Recursos/Imagenes/icono.png" type="image/png" sizes="174x256">
     <title>Atención Ciudadana</title>  
-    <link rel="stylesheet" href="../Recursos/CSS/General.css">
-    <link rel="stylesheet" href="ReporteCivil.css">
+    
 
     <!--Importante no borrar, sirve para la api del mapa-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+    <link rel="stylesheet" href="../Recursos/CSS/General.css">
+    <link rel="stylesheet" href="ReporteCivil.css">
 </head>
 <body class="Relativo">
     <?php Banner(true,"../Recursos/Imagenes/icono.png","Atención Ciudadana Guadalupe Nuevo León","Ingrese los datos para su reporte"); ?>
@@ -167,7 +181,7 @@
 
         <!-- Tipo de reporte Particular-->
         <div>
-            <label>Selecciona el servicio en especifico: </label>
+            <label>Selecciona el servicio o reporte en especifico: </label>
             <div id="OpcionesReportes" class="OpcionesReportes">
             </div>
 

@@ -1,5 +1,5 @@
 //=======================//
-//   DATOS UNIVERDALES   //
+//   DATOS UNIVERSALES   //
 //=======================//
 const Servicios = {
     1: "Agua potable, drenaje, alcantarillado, tratamiento y disposición de sus aguas residuales",
@@ -12,10 +12,6 @@ const Servicios = {
     8: "Seguridad pública, policía preventiva municipal y tránsito"
 }
 
-//
-//
-//
-
 
 //=====================================//
 //   ESTO ES PARA BUSCAR INFORMACION   //
@@ -23,11 +19,11 @@ const Servicios = {
 const fondo = document.getElementById("fondo");
 const Anuncio = document.getElementById("Anuncio");
 const Mensaje = Anuncio.querySelector(".Ciego");
-Anuncio.addEventListener("click", ()=> {
+fondo.addEventListener("click", ()=> {
     //
     const anchoVentana = window.innerWidth;
     Mensaje.classList.toggle("Ciego");
-    if(anchoVentana <= 548) {
+    if(anchoVentana <= 768) {
         fondo.classList.toggle("Anunciofondo");
         Anuncio.classList.toggle("AnuncioCompleto");
     }else {
@@ -43,13 +39,20 @@ Anuncio.addEventListener("click", ()=> {
     }
 });
 
+//esto se borra si yo quiero
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+
+//esto se borra si yo quiero
+window.addEventListener('beforeunload', () => {
+  window.scrollTo(0, 0);
+});
 
 document.getElementById("FormularioReporte").addEventListener("submit", function(e) {
     e.preventDefault(); // 🚨 evita que se envíe el formulario
     generarPDF();
-
 });
-
 
 
 
@@ -214,8 +217,7 @@ async function generarPDF() {
         // Renderizado proporcional de la imagen
         doc.addImage(base64Data, format, 14, finalY + 4, 182, 80);
 
-        // Guardar archivo
-        doc.save(`Reporte_${Folio}_Ciudadano.pdf`);
+        
 
         // Alerta de confirmación
         Swal.fire({
@@ -225,14 +227,24 @@ async function generarPDF() {
         }).then(() => {
             document.getElementById("FormularioReporte").submit();
         });
+
+        // Guardar archivo
+        doc.save(`Reporte_${Folio}_Ciudadano.pdf`);
+
+        
     };
 }
+
 
 
 //========================================//
 //   ESTO NOS MUESTRA UN MAPA FUNCIONAL   //
 //========================================//
 var map = L.map('mi_mapa').setView([25.67688, -100.25943], 15);
+    
+    setTimeout(() => {
+        map.invalidateSize();
+    }, 100);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { 
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);

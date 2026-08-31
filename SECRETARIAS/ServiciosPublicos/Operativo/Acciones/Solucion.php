@@ -1,8 +1,8 @@
 <?php
-    include "../../Recursos/Partes/Partes.php";
+    include "../../../../Recursos/Partes/Partes.php";
     $Bloqueo = Seguridad();
     if(!$Bloqueo){
-        header('Location: ../GobiernoMunicipal.php');
+        header('Location: ../../GobiernoMunicipal.php');
     }
     $db = ConectarDB();
     $Clave = $_GET["clave"];
@@ -68,14 +68,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Datos del Reporte</title>
-    <link rel="stylesheet" href="../../Recursos/CSS/General.css">
-    <link rel="stylesheet" href="../FUNCIONARIOS.css">
+    <link rel="stylesheet" href="../../../../Recursos/CSS/General.css">
+    <link rel="stylesheet" href="../../../FUNCIONARIOS.css">
 
     <!--Importante no borrar, sirve para la api del mapa-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 </head>
 <body>
-    <?php Banner(true,"../../Recursos/Imagenes/icono.png","Atención Ciudadana","Detalles del reporte"); ?>
+    <?php Banner(true,"../../../../Recursos/Imagenes/icono.png","Atención Ciudadana","Detalles del reporte"); ?>
     <form method="POST"  enctype="multipart/form-data">
         <!--Datos de identificacion-->
         <fieldset>
@@ -124,7 +124,7 @@
             </div>
             <div>
                 <label>Imagen del reporte:</label>
-                <img loading="lazy" src="../../ImagenesReportes/<?php echo $Resultado['imagen']; ?>" alt="Foto">
+                <img loading="lazy" src="../../../../ImagenesReportes/<?php echo $Resultado['imagen']; ?>" alt="Foto">
             </div>
 
             <div>
@@ -168,14 +168,14 @@
         <br>
         <input type="submit" value="Subir reporte">
         <br><br>
-        <a href="SecretariaServiciosPublicos.php" class="BOTON BTN__Color_Rojo">Cancelar</a>
+        <a href="../Inicio.php" class="BOTON BTN__Color_Rojo">Cancelar</a>
         <!-- <button type="button" onclick="validarYGenerarPDF()">Subir reporte</button> -->
         
     </form>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><!--Este sirve para mostrar alertas-->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="../../Recursos/JS/General.js"></script>
-    <script src="../FUNCIONARIOS.js"></script>
+    <script src="../../../../Recursos/JS/General.js"></script>
+    <script src="../../../FUNCIONARIOS.js"></script>
 </body>
 </html>

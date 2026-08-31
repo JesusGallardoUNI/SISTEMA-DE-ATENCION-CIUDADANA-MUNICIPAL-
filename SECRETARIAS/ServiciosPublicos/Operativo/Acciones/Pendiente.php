@@ -1,15 +1,16 @@
 <?php
-    include "../../../Recursos/Partes/Partes.php";
+    include "../../../../Recursos/Partes/Partes.php";
     $Bloqueo = Seguridad();
     if(!$Bloqueo){
-        header('Location: ../../GobiernoMunicipal.php');
+        header('Location: ../../../GobiernoMunicipal.php');
     }
     $db = ConectarDB();
+    $Area = $_SESSION['Area'];
     //=======================================================//
     //  Aqui empiezo a buscar todos los reportes necesarios  //
     //=======================================================//
     $Asignado_A = $_SESSION['ID_Empleado'];
-    $Buscar = "SELECT * FROM reportes_colonias WHERE resuelto = 'no' AND tipo_reporte = {$_SESSION['usuario_tipo']} AND id_encargado = $Asignado_A AND descartado IS NULL;";
+    $Buscar = "SELECT * FROM reportes_colonias WHERE resuelto = 'no' AND encargado_area = '{$Area}' AND id_encargado = $Asignado_A AND descartado IS NULL;";
     $Ejecutar = mysqli_query($db,$Buscar);
 ?>
 
@@ -18,7 +19,8 @@
     <thead>
         <tr>
             <th>Folio</th>
-            <th>Reporte</th>
+            <th>Sección de reporte</th>
+            <th>Reporte o servicio</th>
             <th>Colonia</th>
             <th>Calle</th>
             <th>Fecha de reporte</th>
@@ -28,8 +30,9 @@
         <?php while ($Registro = mysqli_fetch_assoc($Ejecutar)): ?>
             <?php if (!empty($Registro['clave'])): ?>
                 <tr>
-                    <td><a href="Solucion.php?clave=<?php echo $Registro['clave']; ?>"><?php echo $Registro['clave']; ?></a></td>
+                    <td title="Da clic para ver el reporte completo"><a href="Acciones/Solucion.php?clave=<?php echo $Registro['clave']; ?>"><?php echo $Registro['clave']; ?></a></td>
                     <td><?php echo Traductor($Registro['tipo_reporte']); ?></td>
+                    <td><?php echo $Registro['especificacion']; ?></td>
                     <td><?php echo $Registro['nombre_colonia']; ?></td>
                     <td><?php echo $Registro['nombre_calle']; ?></td>
                     <td class="<?php echo ColorSemaforo($Registro['fecha']); ?>"><?php echo $Registro['fecha']; ?></td>

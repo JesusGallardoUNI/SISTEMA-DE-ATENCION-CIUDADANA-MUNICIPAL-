@@ -1,9 +1,12 @@
 <?php
-    include "../../Recursos/Partes/Partes.php";
+    include "../../../Recursos/Partes/Partes.php";
     $Bloqueo = Seguridad();
     if(!$Bloqueo){
-        header('Location: ../GobiernoMunicipal.php');
+        header('Location: ../../GobiernoMunicipal.php');
     }
+
+    $Secretaria = $_SESSION['Secretaria'];
+    $Area = $_SESSION['Area'];
 ?>
 
 <!DOCTYPE html>
@@ -12,44 +15,44 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Atención Ciudadana - Inicio de Sesión</title>
-        <link rel="stylesheet" href="../../Recursos/CSS/General.css">
-        <link rel="stylesheet" href="../FUNCIONARIOS.css">
+        <link rel="stylesheet" href="../../../Recursos/CSS/General.css">
+        <link rel="stylesheet" href="../../FUNCIONARIOS.css">
     </head>
     <body>
-        <?php Banner(true,"../../Recursos/Imagenes/icono.png","Municipio de Guadalupe","Secretaria de servicios publicos", true, "../../Recursos/SVG/Cerrar.svg", "../../Recursos/Partes/Salir.php"); ?>
+        <?php Banner(true,"../../../Recursos/Imagenes/icono.png","Municipio de Guadalupe",$Secretaria . " " . $Area, true, "../../../Recursos/SVG/Cerrar.svg", "../../Recursos/Partes/Salir.php"); ?>
         
         <div class="Cuerpo">
             <nav>
                 <div class="opcion Titulo_opcion" id="ScrollNavBar">
                     <h2>Menú</h2>
-                    <img src="../../Recursos/SVG/menu.svg" loading="lazy">
+                    <img src="../../../Recursos/SVG/menu.svg" loading="lazy">
                 </div>
                 <div class="opcion">
-                    <img src="../../Recursos/SVG/reporte-propio.svg" alt="">
+                    <img src="../../../Recursos/SVG/reporte-propio.svg" alt="">
                     <a href="#" onclick="cargarSeccion(0)">Selecciona reportes</a>
                 </div>
                 <div class="opcion">
-                    <img src="../../Recursos/SVG/reporte-pendiente.svg" alt="">
+                    <img src="../../../Recursos/SVG/reporte-pendiente.svg" alt="">
                     <a href="#" onclick="cargarSeccion(1)">Tus reportes pendientes</a>
                 </div>
                 <div class="opcion">
-                    <img src="../../Recursos/SVG/TareaTerminada.svg" alt="">
+                    <img src="../../../Recursos/SVG/TareaTerminada.svg" alt="">
                     <a href="#" onclick="cargarSeccion(2)">Tus reportes terminados</a>
                 </div>
                 <div class="opcion">
-                    <img src="../../Recursos/SVG/Eliminar.svg" alt="">
+                    <img src="../../../Recursos/SVG/Eliminar.svg" alt="">
                     <a href="#" onclick="cargarSeccion(3)">descartar un reporte</a>
                 </div>
                 <div class="opcion">
-                    <img src="../../Recursos/SVG/estadistica.svg" alt="">
+                    <img src="../../../Recursos/SVG/estadistica.svg" alt="">
                     <a href="#" onclick="cargarSeccion(4)">Estado de atencion</a>
                 </div>
                 <div class="opcion">
-                    <img src="../../Recursos/SVG/CambioSecretaria.svg" alt="">
+                    <img src="../../../Recursos/SVG/CambioSecretaria.svg" alt="">
                     <a href="#" onclick="cargarSeccion(5)">Solicitud de cambio</a>
                 </div>
                 <div class="opcion">
-                    <img src="../../Recursos/SVG/informe.svg" alt="">
+                    <img src="../../../Recursos/SVG/informe.svg" alt="">
                     <a href="#" onclick="cargarSeccion(6)">informes</a>
                 </div>
             </nav>
@@ -64,7 +67,7 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script><!--ESTE ES PARA GRAFICOS-->
 
         <script src="../../Recursos/JS/General.js"></script>
-        <script src="ServiciosPublicos.js"></script>
+        <script src="Inicio.js"></script>
 
     </body>
 </html>

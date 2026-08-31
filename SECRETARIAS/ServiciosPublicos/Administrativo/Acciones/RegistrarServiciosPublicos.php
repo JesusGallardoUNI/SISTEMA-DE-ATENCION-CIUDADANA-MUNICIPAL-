@@ -37,7 +37,10 @@
             <option value="1">Agua potable, drenaje, alcantarillado, tratamiento y disposición de sus aguas residuales</option>
             <option value="2">Alumbrado público</option>
             <option value="3">Limpia, recolección, traslado, tratamiento y disposición final de residuos</option>
+            <option value="4">Mercados y centrales de abasto</option>
+            <option value="5">Panteones</option>
             <option value="7">Calles, parques y jardines y su equipamiento</option>
+            <option value="8">Seguridad pública, policía preventiva municipal y tránsito</option>
         </select>
     </div>
     <div>
@@ -45,7 +48,7 @@
         <input type="text" class="No_Contestar" name="Secretaria" id="Secretaria" value="Servicios Públicos" readonly>
     </div>
     <div>
-        <label for="servicio">Ingresa el problema por atender:</label>
+        <label for="servicio">Ingresa el servicio o reporte por atender:</label>
         <input type="text" name="servicio" id="servicio">
     </div>
     <div>
