@@ -6,10 +6,12 @@
     }
     $db = ConectarDB();
     $Area = $_SESSION['Area'];
+    
     //=======================================================//
     //  Aqui empiezo a buscar todos los reportes necesarios  //
     //=======================================================//
     $Buscar = "SELECT * FROM reportes_colonias WHERE resuelto = 'no' AND encargado_area = '{$Area}' AND id_encargado IS NULL;";
+    //$Buscar si esta bien
     
     $Ejecutar = mysqli_query($db,$Buscar);
 
@@ -38,7 +40,7 @@
     </thead>
     <tbody>
         <?php while ($Registro = mysqli_fetch_assoc($Ejecutar)): ?>
-            <?php if (!empty($Registro['clave'])): ?>
+            <?php if ($Registro['clave'] !== null): ?>
                 <tr>
                     <td>
                         <center>

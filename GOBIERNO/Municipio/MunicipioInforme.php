@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="../Ayuntamiento.css">
 </head>
 <body>
-    <?php Banner(false,"","Municipio de Guadalupe","Estado de Nuevo León", true,"../../Recursos/SVG/Cerrar.svg","../../Recursos/Partes/Salir.php"); ?>
+    <?php Banner(true,"../../Recursos/Imagenes/icono.png","Municipio de Guadalupe","Estado de Nuevo León", true,"../../Recursos/SVG/Cerrar.svg","../../Recursos/Partes/Salir.php"); ?>
     <main class="principal">
         <strong><?php echo $_SESSION['Nombre'] . " " . $_SESSION['usuario_tipo'] . " del municipio de " . $_SESSION['Municipio'];?>
         <h2>Menu de operaciones</strong></h2>
@@ -80,7 +80,8 @@
                 <p>Estadistica municipal</p>
             </div>
             
-            <div class="opcion">
+            <!--Para este caso no se usara-->
+            <div class="opcion Ciego">
                  <a href="Estadistica/Gastos.php">
                     <img src="../../Recursos/SVG/gasto.svg" alt="Escudo Nacional de México">
                 </a>

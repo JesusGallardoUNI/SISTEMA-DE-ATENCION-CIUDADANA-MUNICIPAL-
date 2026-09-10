@@ -61,20 +61,27 @@
                 <td><?php echo $Muestra['codigo_postal']; ?></td>
             </tr>
             <tr>
-                <td>Grupo:</td>
+                <td>Sección de reporte:</td>
                 <td><?php echo Traductor($Muestra['tipo_reporte']); ?></td>
+            </tr>
+            <tr>
+                <td>Servicio o reporte en especifico</td>
+                <td><?php echo $Muestra['especificacion']; ?></td>
             </tr>
             <tr>
                 <td>Fecha:</td>
                 <td><?php echo $Muestra['fecha']; ?></td>
             </tr>
             <tr>
-                <td colspan="2"><textarea name="" id="" class="Descripcion" rows="8" readonly><?php echo $Muestra['descripcion']; ?></textarea></td>
+                <td colspan="2">
+                    <label>Descripción del reporte</label>
+                    <textarea name="" id="" class="Descripcion" rows="8" readonly><?php echo $Muestra['descripcion']; ?></textarea>
+                </td>
             </tr>
             <tr>
                 <td colspan="2">
                     <label for="mi_mapa">Lugar del reporte:</label>
-                    <div class="W100">
+                    <div class="W100 No_Mover_Mapa">
                         <div id="mi_mapa" ></div>
                     </div>
                     <input type="hidden" id="coordenadas" name="mi_mapa" value="<?php echo $Muestra['ubicacion']; ?>" readonly required>

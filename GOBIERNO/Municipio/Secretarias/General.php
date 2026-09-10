@@ -8,7 +8,7 @@
     //$Personal = Tabla("secretarias");
 
     //Me trae todo el personal de las secretarias 
-    $Personal = "SELECT s.id_encargado, s.Departamento, CONCAT(s.Nombres, ' ', s.Apellidos) AS 'NombreCompleto', COUNT(r.id_encargado) AS Resueltos FROM secretarias_cuentas s LEFT JOIN reportes_colonias r ON s.id_encargado = r.id_encargado WHERE r.resuelto = 'si' GROUP BY s.id_encargado;";
+    $Personal = "SELECT s.id_encargado, s.Nombre_Secretaria, s.Area_Encargada, CONCAT(s.Nombres, ' ', s.Apellidos) AS 'NombreCompleto', COUNT(r.id_encargado) AS Resueltos FROM secretarias_cuentas s LEFT JOIN reportes_colonias r ON s.id_encargado = r.id_encargado WHERE r.resuelto = 'si' GROUP BY s.id_encargado;";
     $Buscar = mysqli_query($db,$Personal);
 
 ?>
@@ -31,10 +31,11 @@
         <table class="Configurar">
             <thead>
                 <tr>
-                    <th>id</th>
-                    <th>puesto</th>
-                    <th>nombre completo</th>
-                    <th>reportes atentidos</th>
+                    <th>Id</th>
+                    <th>Secretaria</th>
+                    <th>Puesto</th>
+                    <th>Nombre completo</th>
+                    <th>Reportes atentidos</th>
                     <th>Accion</th>
                 </tr>
             </thead>
@@ -42,7 +43,8 @@
                 <?php while($Miembro = mysqli_fetch_assoc($Buscar)): ?>
                     <tr>
                         <td><?php echo $Miembro['id_encargado'];?></td>
-                        <td><?php echo Traductor($Miembro['Departamento']);?></td>
+                        <td><?php echo $Miembro['Nombre_Secretaria'];?></td>
+                        <td><?php echo $Miembro['Area_Encargada'];?></td>
                         <td><?php echo $Miembro['NombreCompleto'];?></td>
                         <td><?php echo $Miembro['Resueltos'];?></td>
                         <td><a href="Particular.php?id=<?php echo $Miembro['id_encargado'];?>" class="BOTON BTN__Color_Verde">Ver historial</a></td>

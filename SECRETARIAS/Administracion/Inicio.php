@@ -13,6 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atención Ciudadana - Inicio de Sesión</title>
     <link rel="stylesheet" href="../../Recursos/CSS/General.css">
+    <link rel="stylesheet" href="../FUNCIONARIOS.css">
 </head>
 <body>
     <?php Banner(true, "../../Recursos/Imagenes/icono.png","Municipio de Guadalupe","Panel de administracion de control de usuarios", true,"../../Recursos/SVG/Cerrar.svg","../../Recursos/Partes/Salir.php"); ?>
@@ -25,25 +26,26 @@
             </div>
             <div class="opcion">
                 <img src="../../Recursos/SVG/Altas.svg" alt="">
-                <a href="Altas.php">Generar altas</a>
+                <a href="#" onclick="cargarSeccion(1)">Generar altas</a>
             </div>
             <div class="opcion">
                 <img src="../../Recursos/SVG/Cambios.svg" alt="">
-                <a href="ListaCambios.php">Solicitud de cambios</a>
+                <a href="#" onclick="cargarSeccion(2)">Solicitud de cambios</a>
             </div>
             <div class="opcion">
                 <img src="../../Recursos/SVG/Activo.svg" alt="">
-                <a href="Activos.php">Activos</a>
+                <a href="#" onclick="cargarSeccion(3)">Activos</a>
             </div>
             <div class="opcion">
                 <img src="../../Recursos/SVG/Eliminar.svg" alt="">
-                <a href="Bajas.php">Generar bajas</a>
+                <a href="#" onclick="cargarSeccion(4)">Generar bajas</a>
             </div>
         </nav>
-        <main>
+        <main class="Contenido LimiteTabla MaxHeight_25" id="contenido">
         </main>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><!--Este sirve para mostrar alertas-->
     <script src="../../Recursos/JS/General.js"></script>
+    <script src="Inicio.js"></script>
 </body>
 </html>

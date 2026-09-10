@@ -10,8 +10,7 @@
     //=======================================================//
     $Asignado_A = $_SESSION['ID_Empleado'];
     
-    $Buscar = "SELECT reportes_colonias.clave, reportes_colonias.tipo_reporte, reportes_colonias.nombre_colonia, reportes_colonias.nombre_calle, reportes_colonias.fecha, reportes_resueltos.fecha_resuelto, reportes_resueltos.retraso FROM reportes_colonias INNER JOIN reportes_resueltos ON reportes_colonias.clave = reportes_resueltos.clave WHERE reportes_colonias.resuelto = 'si' AND reportes_colonias.tipo_reporte = '{$_SESSION['usuario_tipo']}' AND reportes_colonias.id_encargado = $Asignado_A";
-    echo $Buscar;
+    $Buscar = "SELECT reportes_colonias.clave, reportes_colonias.tipo_reporte, reportes_colonias.nombre_colonia, reportes_colonias.nombre_calle, reportes_colonias.fecha, reportes_resueltos.fecha_resuelto, reportes_resueltos.retraso FROM reportes_colonias INNER JOIN reportes_resueltos ON reportes_colonias.clave = reportes_resueltos.clave WHERE reportes_colonias.resuelto = 'si' AND reportes_colonias.encargado_area = '{$_SESSION['Area']}' AND reportes_colonias.id_encargado = $Asignado_A";
     $Ejecutar = mysqli_query($db,$Buscar);
 ?>
 
@@ -30,7 +29,7 @@
     </thead>
     <tbody>
         <?php while ($Registro = mysqli_fetch_assoc($Ejecutar)): ?>
-            <?php if (!empty($Registro['clave'])): ?>
+            <?php if ($Registro['clave'] !== null): ?>
                 <tr>
                     <td><?php echo $Registro['clave']; ?></td>
                     <td><?php echo Traductor($Registro['tipo_reporte']); ?></td>
@@ -38,7 +37,7 @@
                     <td><?php echo $Registro['nombre_calle']; ?></td>
                     <td><?php echo $Registro['fecha']; ?></td>
                     <td><?php echo $Registro['fecha_resuelto']; ?></td>
-                    <td><?php echo $Registro['retraso']; ?></td>
+                    <td class="<?php echo ColorSemaforo($Registro['fecha_resuelto']); ?>"><?php echo $Registro['retraso']; ?></td>
                 </tr>
             <?php endif; ?>
         <?php endwhile; ?>

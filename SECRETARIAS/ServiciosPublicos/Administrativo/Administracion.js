@@ -1,18 +1,14 @@
-
 function cargarSeccion(Opcion) {
     let Ruta = "";
     switch (Opcion) {
         case 0:
-            Ruta = "Acciones/RegistrarServiciosPublicos.php";        
+            Ruta = "Acciones/RegistrarServiciosPublicos.php";   //YA     
             break;
         case 1:
-            Ruta = "Acciones/ListadoEmpleados.php";    
-            break;
-        case 2:
-            Ruta = "Acciones/RendimientoEmpleados.php";   
+            Ruta = "Acciones/ListadoEmpleados.php";             //YA
             break;
         case 3:
-            Ruta = "Acciones/RegistrarAreasEncargadas.php";
+            Ruta = "Acciones/RegistrarAreasEncargadas.php";     //YA
             break;
     }
     fetch(Ruta)
@@ -63,20 +59,33 @@ document.addEventListener("submit", function (e) {
 
 
 
-
-
-
+//================================================//
+//                Mostrar alertas                 //
+//================================================//
 document.addEventListener("submit", function (e) {
 
-    if (e.target.id === "Cambio") {
+    if (e.target.id === "RegistrarAreasEncargadas") {
         e.preventDefault();
-        Muestra_Alerta("Reporte completo", "El reporte a sido enviado a la autoridad correspondiente", "success");
+        Muestra_Alerta("Registro completo", "El area a sido registrada", "success");
 
 
         setTimeout(() => {
             e.target.submit();
         }, 1400);
     }
+
+
+    if (e.target.id === "RegistrarServiciosPublicos") {
+        e.preventDefault();
+        Muestra_Alerta("Registro completo", "El servicio publico a sido registrado", "success");
+
+
+        setTimeout(() => {
+            e.target.submit();
+        }, 1400);
+    }
+
+
 
 });
 

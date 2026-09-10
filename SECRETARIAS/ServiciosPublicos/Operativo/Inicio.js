@@ -9,16 +9,16 @@ function cargarSeccion(Opcion) {
             Ruta = "Acciones/Pendiente.php";    //YA
             break;
         case 2:
-            Ruta = "Acciones/Completado.php";   //
+            Ruta = "Acciones/Completado.php";   //YA
             break;
         case 3:
-            Ruta = "Acciones/Descartar.php";    //
+            Ruta = "Acciones/Descartar.php";    //YA
             break;
         case 4:
-            Ruta = "Acciones/Estadistica.php";  //YA (ARREGLAR EL DATO DE CUANDO ES DESCARTADO YA NO SEA PENDIENTE)
+            Ruta = "Acciones/Estadistica.php";  //YA
             break;
         case 5:
-            Ruta = "Acciones/Cambio.php";
+            Ruta = "Acciones/Cambio.php";       //YA
             break;
         case 6:
             Ruta = "Acciones/Informe.php";      //YA
@@ -102,7 +102,7 @@ function GenerarPDF_Cambio() {
 
     //===---TIPO HEADER---===//
     //Agregar una imagen
-    const imagen = "../../Recursos/Imagenes/icono.png";
+    const imagen = "../../../Recursos/Imagenes/icono.png";
     doc.addImage(imagen, "PNG", 10, 12, 20, 20);
 
 

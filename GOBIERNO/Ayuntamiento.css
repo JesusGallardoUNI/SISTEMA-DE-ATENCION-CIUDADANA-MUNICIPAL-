@@ -136,10 +136,13 @@ p {
     column-gap: 8px;
     background-color: #f4f4f4;
     width: auto;
+
+    /*
+    Estas 3 se pueden regresar
     flex: 1;
-    
     overflow-y: auto;
     overflow-x: hidden;
+    */
 }
 
 .Contenido .Contenido_Reportes .Reporte {

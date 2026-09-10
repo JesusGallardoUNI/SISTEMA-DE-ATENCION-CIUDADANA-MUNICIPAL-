@@ -100,11 +100,14 @@
         
     </form>
     <br>
-    <button type="button" onclick="clearSignature()">Borrar Firma</button>
-    <br>
-    <button type="button" onclick="generatePDF()">Generar informe</button>
-    <br>
-    <button onclick="location.href='../MunicipioInforme.php'">Volver a la página principal</button>
+    <div class="Horizontal Espacio_Gap_20">
+        <button type="button" onclick="clearSignature()">Borrar Firma</button>
+    
+        <button type="button" onclick="generatePDF()">Generar informe</button>
+    </div>
+    <div>
+        <button onclick="location.href='../MunicipioInforme.php'">Volver a la página principal</button>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script><!--ESTE ES PARA EL PDF-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script><!--ESTE ES PARA EL PDF-->

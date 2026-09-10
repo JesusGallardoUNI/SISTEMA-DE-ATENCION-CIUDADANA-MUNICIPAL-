@@ -18,7 +18,7 @@
     $Muestra = mysqli_fetch_assoc($TotalMuestra);
 
     //Dame todos los reportes del empleado
-    $Listado = "SELECT rep.clave, rep.tipo_reporte, rep.nombre_colonia, rep.nombre_calle, res.costo, res.retraso FROM reportes_colonias rep LEFT JOIN reportes_resueltos res ON rep.clave = res.clave WHERE rep.id_encargado = $ID AND rep.resuelto = 'si';";
+    $Listado = "SELECT rep.clave, rep.especificacion, rep.nombre_colonia, rep.nombre_calle, res.costo, res.retraso FROM reportes_colonias rep LEFT JOIN reportes_resueltos res ON rep.clave = res.clave WHERE rep.id_encargado = $ID AND rep.resuelto = 'si';";
     $TablaListado = mysqli_query($db,$Listado);
 ?>
 
@@ -37,14 +37,14 @@
     <?php Banner(true,"../../../Recursos/Imagenes/icono.png","Secretarias","Reportes resueltos"); ?>
     <main>
         <p>Nombre: <?php echo $Busca['Nombres'] . " " . $Busca['Apellidos'];?></p>
-        <p>Cargo actual: <?php echo Traductor($Busca['Departamento']);?></p>
+        <p>Cargo actual: Secretaria de <?php echo $Busca['Nombre_Secretaria'] . " de la " . $Busca['Area_Encargada'];?></p>
         <p>Total de reportes atendidos: <?php echo $Muestra["TOTAL"];?></p>
         <br>
         <table class="Configurar">
             <thead>
                 <tr>
-                    <th>Clave</th>
-                    <th>Tipo</th>
+                    <th>Folio</th>
+                    <th>Reporte o servicio</th>
                     <th>Colonia</th>
                     <th>Calle</th>
                     <th>Costo</th>
@@ -55,7 +55,7 @@
                 <?php while($Miembro = mysqli_fetch_assoc($TablaListado)): ?>
                     <tr>
                         <td><?php echo $Miembro['clave'];?></td>
-                        <td><?php echo Traductor($Miembro['tipo_reporte']);?></td>
+                        <td><?php echo $Miembro['especificacion'];?></td>
                         <td><?php echo $Miembro['nombre_colonia'];?></td>
                         <td><?php echo $Miembro['nombre_calle'];?></td>
                         <td><?php echo $Miembro['costo'];?></td>

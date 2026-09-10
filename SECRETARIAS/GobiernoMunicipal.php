@@ -18,17 +18,28 @@
                 
                 session_start();
                 $_SESSION['login'] = true;
-                $_SESSION['usuario_tipo'] = $Usuario['Area_Encargada'];
+                
                 
                 
                 $_SESSION['Secretaria'] = $Usuario['Nombre_Secretaria'];
                 $_SESSION['Area'] = $Usuario['Area_Encargada'];
                 $_SESSION['NombreCompleto'] = $Usuario['Nombres'] . " " . $Usuario['Apellidos'];
                 $_SESSION['ID_Empleado'] = $Usuario['id_encargado'];
+
+                //Aqui determino si se va a RH
+                if($Usuario['RH'] === "si"){
+                    header("Location: Administracion/Inicio.php");
+                } else {
+                    //Aqui determino si se va a Administrativo u operativo
+                    if($Usuario['Administrativo'] === "si") {
+                        header("Location: ServiciosPublicos/Administrativo/Administracion.php");
+                    } else {
+                        header("Location: ServiciosPublicos/Operativo/Inicio.php");
+                    }
+                }
+
                 
                 
-                
-                header("Location: ServiciosPublicos/Operativo/Inicio.php");
             } else {
                 echo '<div id="alerta" class="alerta alerta__malo">la contraseña no es correcta</div>';
             }

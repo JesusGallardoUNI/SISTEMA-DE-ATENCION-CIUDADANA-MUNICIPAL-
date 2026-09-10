@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
       text: "Asegúrate de comunicárselo a quien hizo el reporte",
       icon: "success"
     }).then(() => {
-      window.location.href = 'SecretariaServiciosPublicos.php';
+      window.location.href = '../Inicio.php';
     });
   }
 
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
       text: "Las autoridades investigaran mas a detalle",
       icon: "success"
     }).then(() => {
-      window.location.href = 'SecretariaServiciosPublicos.php';
+      window.location.href = '../Inicio.php';
     });
   }
 
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
       icon: "success",
       draggable: true
     }).then(() => {
-      window.location.href = 'ListaCambios.php';
+      window.location.href = '../Inicio.php';
     });
   }
 

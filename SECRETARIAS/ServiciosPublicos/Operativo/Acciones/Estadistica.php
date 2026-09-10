@@ -1,12 +1,13 @@
 <?php
-    include "../../../Recursos/Partes/Partes.php";
+    include "../../../../Recursos/Partes/Partes.php";
     $Bloqueo = Seguridad();
     if(!$Bloqueo){
-        header('Location: ../../GobiernoMunicipal.php');
+        header('Location: ../../../GobiernoMunicipal.php');
     }
     $db = ConectarDB();
     $ID = $_SESSION['ID_Empleado'];
-    $Pendientes = "SELECT COUNT(*) AS 'Pendientes' FROM reportes_colonias WHERE id_encargado = $ID AND resuelto = 'no';";
+    
+    $Pendientes = "SELECT COUNT(*) AS 'Pendientes' FROM reportes_colonias WHERE resuelto = 'no' AND id_encargado = $ID AND descartado IS NULL;";
     $PendientesEjecuta = mysqli_query($db,$Pendientes);
     $PendientesMuestra = mysqli_fetch_assoc($PendientesEjecuta);
 
@@ -14,7 +15,7 @@
     $ResueltosEjecuta = mysqli_query($db, $Resueltos);
     $ResueltosMuestra = mysqli_fetch_assoc($ResueltosEjecuta);
 
-    $Descartados = "SELECT COUNT(*) AS 'Descartados' FROM reportes_colonias WHERE id_encargado = $ID AND descartado IS NULL;";
+    $Descartados = "SELECT COUNT(*) AS 'Descartados' FROM reportes_colonias WHERE id_encargado = $ID AND descartado = 'si';";
     $DescartadosEjecuta = mysqli_query($db, $Descartados);
     $DescartadosMuestra = mysqli_fetch_assoc($DescartadosEjecuta);
 ?>

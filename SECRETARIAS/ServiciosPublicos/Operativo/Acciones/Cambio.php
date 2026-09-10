@@ -1,18 +1,22 @@
 <?php
-    include "../../../Recursos/Partes/Partes.php";
+    include "../../../../Recursos/Partes/Partes.php";
     $Bloqueo = Seguridad();
     if(!$Bloqueo){
-        header('Location: ../../GobiernoMunicipal.php');
+        header('Location: ../../../GobiernoMunicipal.php');
     }
     $db = ConectarDB();
     $ID_EMPLEADO = $_SESSION['ID_Empleado'];
     $Empleado = "SELECT * FROM secretarias_cuentas WHERE id_encargado = {$ID_EMPLEADO};";
     $Busca = mysqli_query($db,$Empleado);
+
+
+    $ListaOpciones = Tabla("secretarias");
+
     if($Busca->num_rows){
         $Datos = mysqli_fetch_assoc($Busca);
         $Telefono = $Datos['Telefono'];
         $Correo = $Datos['Correo'];
-        $Departamento = $Datos['Departamento'];
+        $Departamento = $Datos['Area_Encargada'];
     }
     //Ahora agregar la funcion para subir la informacion a la base de datos
     if($_SERVER["REQUEST_METHOD"] === "POST"){
@@ -28,7 +32,7 @@
         $Solicitud = "INSERT INTO solicitud_cambios (fecha, id_empleado, nombre, cargo_actual, cargo_nuevo,	cambio_permanente, motivos) VALUES ('$VAL1','$ID_EMPLEADO','$VAL2','$VAL3','$VAL4','$VAL5','$VAL6');";
         $Accion = mysqli_query($db, $Solicitud);
         if($Accion){
-            header("Location: ../SecretariaServiciosPublicos.php");
+            header("Location: ../Inicio.php");
         }
     }
 ?>
@@ -55,7 +59,7 @@
     <div>
         <label for="CargoActual">Cargo actual</label>
         <input type="hidden" name="CargoActual" value="<?php echo $Departamento;?>">
-        <input type="text" value="<?php echo Traductor($Departamento);?>" id="CargoActual" readonly required>
+        <input type="text" value="<?php echo $Departamento;?>" id="CargoActual" readonly required>
     </div>
     <div>
         <label for="Motivo">Motivos:</label>
@@ -73,14 +77,9 @@
         <label for="CargoCambio">Selecciona dependencia que quieres cambiar</label>
         <select id="CargoCambio" name="CargoCambio" required>
             <option value="" selected disabled>Seleccione dependencia</option>
-            <!-- <option value="1">Agua potable, drenaje, alcantarillado, tratamiento y disposición de sus aguas residuales</option> -->
-            <option value="2">Alumbrado público</option>
-            <option value="3">Limpia, recolección, traslado, tratamiento y disposición final de residuos</option>
-            <option value="4">Mercados y centrales de abasto</option>
-            <!-- <option value="5">Panteones</option> -->
-            <!-- <option value="6">Rastro</option> -->
-            <option value="7">Calles, parques y jardines y su equipamiento</option>
-            <option value="8">Seguridad pública, policía preventiva municipal y tránsito</option>
+            <?php while($Opcion = mysqli_fetch_assoc($ListaOpciones)):  ?>
+                <option value="<?php echo $Opcion['area_encargada'] ?>"><?php echo $Opcion['area_encargada'] . " de la " . $Opcion['nombre_secretaria']; ?></option>
+            <?php endwhile; ?>
         </select>
     </div>
     <input type="submit" value="Enviar peticion">

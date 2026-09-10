@@ -1,8 +1,8 @@
 <?php
-    include "../../../Recursos/Partes/Partes.php";
+    include "../../../../Recursos/Partes/Partes.php";
     $Bloqueo = Seguridad();
     if(!$Bloqueo){
-        header('Location: ../../GobiernoMunicipal.php');
+        header('Location: ../../../GobiernoMunicipal.php');
     }
     $db = ConectarDB();
     $ID = $_SESSION['ID_Empleado'];
@@ -18,8 +18,8 @@
     <ul>
         <?php while ($Registro = mysqli_fetch_assoc($Traer)): ?>
             <li>
-                <td>Fecha de solicitud:<?php echo $Registro['fecha']; ?>.</td>
-                <td>Cambio: <?php echo Traductor($Registro['cargo_nuevo']); ?>.</td>
+                <td>Fecha de solicitud: <?php echo $Registro['fecha']; ?>.</td>
+                <td>Cambio: <?php echo $Registro['cargo_nuevo']; ?>.</td>
                 <td>Aprobado: <?php echo $Registro['Aprobado'] ?? "Pendiente"; ?>.</td>
                 <td>Indicaciones: <?php echo $Registro['indicaciones'] ?? "Pendiente"; ?>.</td>
             </li>

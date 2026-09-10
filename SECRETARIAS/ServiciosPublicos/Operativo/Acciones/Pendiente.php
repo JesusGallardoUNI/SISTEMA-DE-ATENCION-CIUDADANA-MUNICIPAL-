@@ -28,7 +28,7 @@
     </thead>
     <tbody>
         <?php while ($Registro = mysqli_fetch_assoc($Ejecutar)): ?>
-            <?php if (!empty($Registro['clave'])): ?>
+            <?php if ($Registro['clave'] !== null): ?>
                 <tr>
                     <td title="Da clic para ver el reporte completo"><a href="Acciones/Solucion.php?clave=<?php echo $Registro['clave']; ?>"><?php echo $Registro['clave']; ?></a></td>
                     <td><?php echo Traductor($Registro['tipo_reporte']); ?></td>

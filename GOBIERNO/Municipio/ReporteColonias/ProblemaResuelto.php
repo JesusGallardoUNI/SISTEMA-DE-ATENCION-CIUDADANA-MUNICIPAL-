@@ -49,6 +49,11 @@
             <tr>
                 <td colspan="2">
                     <p>Folio: <?php echo $Muestra['clave']; ?></p>
+                    <p>Colonia: <?php echo $Muestra['nombre_colonia']; ?></p>
+                    <p>Calle: <?php echo $Muestra['nombre_calle']; ?></p>
+                    <p>Codigo postal: <?php echo $Muestra['codigo_postal']; ?></p>
+                    <p>Sección de reporte: <?php echo Traductor($Muestra['tipo_reporte']); ?> </p>
+                    <p>Servicio o reporte en especifico: <?php echo $Muestra['especificacion']; ?></p>
                 </td>
             </tr>
             <tr>
@@ -58,14 +63,9 @@
             <tr>
                 <td>
                     <p>Fecha de reporte: <?php echo $Muestra['fecha']; ?></p>
-                    <p>Colonia: <?php echo $Muestra['nombre_colonia']; ?></p>
-                    <p>Calle: <?php echo $Muestra['nombre_calle']; ?></p>
-                    <p>Codigo postal: <?php echo $Muestra['codigo_postal']; ?></p>
-                    <p>Reporte: <?php echo Traductor($Muestra['tipo_reporte']); ?> </p>
                 </td>
                 <td>
                     <p>Fecha de resuelto: <?php echo $OtraMuestra['fecha_resuelto']; ?></p>
-                    <p>Costo: $<?php echo $OtraMuestra['costo']; ?></p>
                 </td>
             </tr>
             <tr>
@@ -81,7 +81,7 @@
             <tr>
                 <td colspan="2">
                     <label for="mi_mapa">Lugar del reporte:</label>
-                    <div id="mi_mapa"></div>
+                    <div id="mi_mapa" class="No_Mover_Mapa"></div>
                 </td>
             </tr>
         </table>

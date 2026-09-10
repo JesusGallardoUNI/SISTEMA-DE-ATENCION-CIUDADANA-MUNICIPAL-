@@ -1,12 +1,12 @@
 <?php
     include "../../../../Recursos/Partes/Partes.php";
-   /*
     $Bloqueo = Seguridad();
     if(!$Bloqueo){
-        header('Location: ../../GobiernoMunicipal.php');
+        header('Location: ../../../GobiernoMunicipal.php');
     }
-   */
     $db = ConectarDB();
+    $ListaAreas = Tabla("secretarias");
+    $Secretaria = $_SESSION['Secretaria'];
     if($_SERVER["REQUEST_METHOD"] === 'POST'){
         //
         $Secretaria = mysqli_real_escape_string($db, $_POST["Secretaria"] ?? ''); 
@@ -23,10 +23,10 @@
 
 ?>
 
-<form action="Acciones/RegistrarAreasEncargadas.php" method="POST">
+<form action="Acciones/RegistrarAreasEncargadas.php" method="POST" id="RegistrarAreasEncargadas">
     <div>
         <label for="Secretaria">Secretaria:</label>
-        <input type="text" class="No_Contestar" name="Secretaria" id="Secretaria" value="Servicios Públicos" readonly>
+        <input type="text" class="No_Contestar" name="Secretaria" id="Secretaria" value="<?php echo $Secretaria; ?>" readonly>
     </div>
     <div>
         <label for="Area">Registrar area encargada:</label>

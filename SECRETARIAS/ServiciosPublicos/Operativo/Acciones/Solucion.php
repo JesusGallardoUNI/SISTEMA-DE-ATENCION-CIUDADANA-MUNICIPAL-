@@ -28,7 +28,7 @@
         //    AREA PARA LA FOTO    //
         $Val3 = $_FILES["ImagenResuelto"];  //Este es para la foto
         /*Creamos carpeta para guardar las imagenes de los reportes*/
-        $CarpetaImagenes="../../ReportesResueltos/";
+        $CarpetaImagenes="../../../../ReportesResueltos/";
         if(!is_dir($CarpetaImagenes)){
             mkdir($CarpetaImagenes);
         }
@@ -79,7 +79,7 @@
     <form method="POST"  enctype="multipart/form-data">
         <!--Datos de identificacion-->
         <fieldset>
-            <legend>Datos de identificación:</legend>
+            <legend>Datos de identificación de la persona que reporta:</legend>
             <div>
                 <label>Nombre:</label>
                 <input type="text" value="<?php echo $Resultado['nombre_persona']; ?>" readonly>
@@ -109,9 +109,13 @@
                 <input type="text" id="Calle_Colonia" value="<?php echo $Resultado['nombre_calle']; ?>" readonly>
             </div>
             <div>
-                <label> Tipo de reporte realizado:</label>
+                <label>Sección de reporte:</label>
                 <input type="text" id="reporte" value="<?php echo $Reporte ?>" readonly>
                 <input type="hidden" id="reporte_subir" name="tipo_reporte" value="<?php echo $Resultado['tipo_reporte'] ?>" readonly>
+            </div>
+            <div>
+                <label>Servicio o reporte en especifico</label>
+                <input type="text" value="<?php echo $Resultado['especificacion']; ?>" readonly>
             </div>
             <div>
                 <label for="Descripcion">Descripción del reporte:</label>
@@ -119,7 +123,7 @@
             </div>
             <div>
                 <label>Lugar del reporte:</label>
-                <div id="mi_mapa"></div>
+                <div id="mi_mapa" class="No_Mover_Mapa"></div>
                 <input type="hidden" id="coordenadas" name="mi_mapa" value="<?php echo $Resultado['ubicacion']; ?>" readonly required>
             </div>
             <div>

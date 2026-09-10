@@ -1,15 +1,14 @@
 <?php
     include "../../../../Recursos/Partes/Partes.php";
-   /*
     $Bloqueo = Seguridad();
     if(!$Bloqueo){
-        header('Location: ../../GobiernoMunicipal.php');
+        header('Location: ../../../GobiernoMunicipal.php');
     }
-   */
     $db = ConectarDB();
 
 
     $ListaAreas = Tabla("secretarias");
+    $Secretaria = $_SESSION['Secretaria'];
 
     if($_SERVER["REQUEST_METHOD"] === 'POST'){
         //
@@ -29,7 +28,7 @@
 
 ?>
 
-<form action="Acciones/RegistrarServiciosPublicos.php" method="POST">
+<form action="Acciones/RegistrarServiciosPublicos.php" method="POST" id="RegistrarServiciosPublicos">
     <div>
         <label for="Seccion">Sección de reporte que se quiere registrar:</label>
         <select id="Seccion" name="Seccion" required>
@@ -45,7 +44,7 @@
     </div>
     <div>
         <label for="Secretaria">Secretaria:</label>
-        <input type="text" class="No_Contestar" name="Secretaria" id="Secretaria" value="Servicios Públicos" readonly>
+        <input type="text" class="No_Contestar" name="Secretaria" id="Secretaria" value="<?php echo $Secretaria; ?>" readonly>
     </div>
     <div>
         <label for="servicio">Ingresa el servicio o reporte por atender:</label>

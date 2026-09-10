@@ -1,11 +1,12 @@
 <?php
     include "../../../Recursos/Partes/Partes.php";
-    /*
     $Bloqueo = Seguridad();
     if(!$Bloqueo){
         header('Location: ../GobiernoMunicipal.php');
     }
-    */
+    $Secretaria = $_SESSION['Secretaria'];
+    $Area = $_SESSION['Area'];
+
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +19,7 @@
         <link rel="stylesheet" href="../../FUNCIONARIOS.css">
     </head>
     <body>
-        <?php Banner(true,"../../../Recursos/Imagenes/icono.png","Municipio de Guadalupe","Secretaria de servicios publicos", true, "../../../Recursos/SVG/Cerrar.svg", "../../../Recursos/Partes/Salir.php"); ?>
+        <?php Banner(true,"../../../Recursos/Imagenes/icono.png","Municipio de Guadalupe",$Secretaria . " " . $Area, true, "../../../Recursos/SVG/Cerrar.svg", "../../../Recursos/Partes/Salir.php"); ?>
         
         <div class="Cuerpo">
             <nav>
@@ -33,10 +34,6 @@
                 <div class="opcion">
                     <img src="../../../Recursos/SVG/reporte-pendiente.svg" alt="">
                     <a href="#" onclick="cargarSeccion(1)">Listado de empleados</a>
-                </div>
-                <div class="opcion">
-                    <img src="../../../Recursos/SVG/TareaTerminada.svg" alt="">
-                    <a href="#" onclick="cargarSeccion(2)">Rendimiento de los empleados</a>
                 </div>
                 <div class="opcion">
                     <img src="../../../Recursos/SVG/reporte-propio.svg" alt="">
@@ -55,7 +52,7 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><!--ESTE ES PARA ALERTAS-->
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script><!--ESTE ES PARA GRAFICOS-->
 
-        <script src="../../Recursos/JS/General.js"></script>
+        <script src="../../../Recursos/JS/General.js"></script>
         <script src="Administracion.js"></script>
 
     </body>

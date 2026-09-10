@@ -1,8 +1,8 @@
 <?php
-    include "../../Recursos/Partes/Partes.php";
+    include "../../../../Recursos/Partes/Partes.php";
     $Bloqueo = Seguridad();
     if(!$Bloqueo){
-        header('Location: ../GobiernoMunicipal.php');
+        header('Location: ../../../GobiernoMunicipal.php');
     }
     $db = ConectarDB();
     $Clave = $_GET["id"];
@@ -46,14 +46,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Datos del Reporte</title>
-    <link rel="stylesheet" href="../../Recursos/CSS/General.css">
-    <link rel="stylesheet" href="../FUNCIONARIOS.css">
+    <link rel="stylesheet" href="../../../../Recursos/CSS/General.css">
+    <link rel="stylesheet" href="../../../FUNCIONARIOS.css">
 
     <!--Importante no borrar, sirve para la api del mapa-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 </head>
 <body>
-    <?php Banner(true,"../../Recursos/Imagenes/icono.png","Atención Ciudadana","Detalles del reporte"); ?>
+    <?php Banner(true,"../../../../Recursos/Imagenes/icono.png","Atención Ciudadana","Detalles del reporte"); ?>
     <form method="POST"  enctype="multipart/form-data">
         <fieldset>
             <legend>Datos de identificación</legend>
@@ -85,9 +85,13 @@
                 <input type="text" id="Calle_Colonia" value="<?php echo $Resultado['nombre_calle']; ?>" readonly>
             </div>
             <div>
-                <label> Tipo de reporte realizado:</label>
+                <label>Sección de reporte:</label>
                 <input type="text" id="reporte" value="<?php echo $Reporte ?>" readonly>
                 <input type="hidden" id="reporte_subir" name="tipo_reporte" value="<?php echo $Resultado['tipo_reporte'] ?>" readonly>
+            </div>
+            <div>
+                <label>Servicio o reporte en especifico</label>
+                <input type="text" value="<?php echo $Resultado['especificacion']; ?>" readonly>
             </div>
             <div>
                 <label for="Descripcion">Descripción del reporte:</label>
@@ -95,12 +99,12 @@
             </div>
             <div>
                 <label>Lugar del reporte:</label>
-                <div id="mi_mapa"></div>
+                <div id="mi_mapa" class="No_Mover_Mapa"></div>
                 <input type="hidden" id="coordenadas" name="mi_mapa" value="<?php echo $Resultado['ubicacion']; ?>" readonly required>
             </div>
             <div>
                 <label>Imagen del reporte:</label>
-                <img loading="lazy" src="../../ImagenesReportes/<?php echo $Resultado['imagen']; ?>" alt="Foto">
+                <img loading="lazy" src="../../../../ImagenesReportes/<?php echo $Resultado['imagen']; ?>" alt="Foto">
             </div>
 
             <div>
@@ -134,14 +138,14 @@
         <br>
         <input type="submit" value="Descartar reporte" class="BTN__Color_Rojo">
         <br><br>
-        <a href="SecretariaServiciosPublicos.php" class="BOTON BTN__Color_Verde">Regresar</a>
+        <a href="../Inicio.php" class="BOTON BTN__Color_Verde">Regresar</a>
         <!-- <button type="button" onclick="validarYGenerarPDF()">Subir reporte</button> -->
         
     </form>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><!--Este sirve para mostrar alertas-->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="../FUNCIONARIOS.js"></script>
-    <script src="../../Recursos/JS/General.js"></script>
+    <script src="../../../FUNCIONARIOS.js"></script>
+    <script src="../../../../Recursos/JS/General.js"></script>
 </body>
 </html>

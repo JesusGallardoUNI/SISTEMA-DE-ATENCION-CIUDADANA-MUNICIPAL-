@@ -79,6 +79,8 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    overflow-x: hidden !important;
 }
 
 
@@ -131,6 +133,10 @@ main {
     display: none !important;
 }
 
+.No_Mover_Mapa {
+    pointer-events: none;
+}
+
 .TextoCentrado {
     display: block;
     margin: 0 auto;
@@ -145,6 +151,10 @@ main {
 .Horizontal {
     display: flex;
     flex-direction: row;
+}
+
+.Espacio_Gap_20 {
+    gap: 20px;
 }
 
 #mi_mapa {
@@ -184,6 +194,10 @@ main {
     margin-bottom: 20px;
 }
 
+.MaxHeight_25 {
+    max-height: 25rem !important;
+}
+
 .LimiteTabla {
     height: 98vh !important;
     overflow-y: auto;
@@ -192,6 +206,14 @@ main {
 
 .Espacio {
     margin: 5px;
+}
+
+.Espacio_10 {
+    margin: 10px;
+}
+
+.Espacio_Interno_10 {
+    padding: 10px !important;
 }
 
 .AnchoAuto {
@@ -622,8 +644,8 @@ ul li::before {
 }
 
 .Configurar__Mediano__Centro{
-    display: block;
-    margin: 0 auto;
+    display: block !important;
+    margin: 0 auto !important;
 }
 
 
@@ -639,7 +661,14 @@ ul li::before {
 .Configurar thead {
     background-color: var(--Gobierno);
     color: white;  
+
+    
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
+
+
 
 .Configurar td p{
     text-align: center;
@@ -658,6 +687,7 @@ ul li::before {
     border-radius: 5px;
     padding: 10px;
 }
+
 
 .Configurar input {
     text-align: center;

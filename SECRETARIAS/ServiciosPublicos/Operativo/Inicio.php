@@ -66,7 +66,7 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><!--ESTE ES PARA ALERTAS-->
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script><!--ESTE ES PARA GRAFICOS-->
 
-        <script src="../../Recursos/JS/General.js"></script>
+        <script src="../../../Recursos/JS/General.js"></script>
         <script src="Inicio.js"></script>
 
     </body>
