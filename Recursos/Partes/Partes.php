@@ -89,6 +89,18 @@
 
     }
 
+    function No_Resueltos(string $TABLA, string $COLUMNA, $VALOR){
+        $db = ConectarDB();
+        $Contador = "SELECT COUNT(*) AS 'TOTAL' FROM {$TABLA} WHERE {$COLUMNA} = '{$VALOR}' AND descartado IS NULL;";
+        $Ejecutar = mysqli_query($db, $Contador);
+        if($Ejecutar){
+            $Numero = mysqli_fetch_assoc($Ejecutar);
+            echo $Numero['TOTAL'];
+        } else{
+            echo "0";
+        }
+    }
+
     function ColorSemaforo($Fecha){
         $Original = new DateTime($Fecha);
         $Actual = new DateTime(); // La actual
@@ -117,10 +129,38 @@
         }
     }
 
+    function Retraso($Dias){
+        switch($Dias){
+            case($Dias <= 3 ):
+                return "FondoVerde";
+            break;
+
+            case($Dias >= 4 && $Dias <= 7 ):
+                return "FondoAmarillo";
+            break;
+
+            case($Dias >= 8 && $Dias <= 12 ):
+                return "FondoNaranja";
+            break;
+
+            case($Dias > 12):
+                return "FondoRojo";
+            break;
+
+            default: 
+                return "FondoNegro";
+                break;
+        }
+    }
+
     //Retorna el total de cierto tipo de reporte con base en si estan resueltos o no;
     function Estadistica(int $tipo , string $resuelto) {
         $db = ConectarDB();
-        $Reporte1 = "SELECT COUNT(*) AS 'Total' FROM reportes_colonias WHERE tipo_reporte = $tipo AND resuelto = '{$resuelto}';";
+        if($resuelto === "si") {
+            $Reporte1 = "SELECT COUNT(*) AS 'Total' FROM reportes_colonias WHERE tipo_reporte = $tipo AND resuelto = '{$resuelto}';";
+        } else {
+            $Reporte1 = "SELECT COUNT(*) AS 'Total' FROM reportes_colonias WHERE tipo_reporte = $tipo AND resuelto = '{$resuelto}' AND descartado IS NULL;";
+        }
         $R = mysqli_query($db,$Reporte1);
         if ($R && $Total = mysqli_fetch_assoc($R)) {
             return $Total['Total'];

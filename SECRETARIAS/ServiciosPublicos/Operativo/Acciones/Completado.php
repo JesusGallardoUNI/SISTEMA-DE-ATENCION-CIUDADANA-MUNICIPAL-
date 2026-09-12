@@ -37,7 +37,7 @@
                     <td><?php echo $Registro['nombre_calle']; ?></td>
                     <td><?php echo $Registro['fecha']; ?></td>
                     <td><?php echo $Registro['fecha_resuelto']; ?></td>
-                    <td class="<?php echo ColorSemaforo($Registro['fecha_resuelto']); ?>"><?php echo $Registro['retraso']; ?></td>
+                    <td class="<?php echo Retraso($Registro['fecha_resuelto']); ?>"><?php echo $Registro['retraso']; ?></td>
                 </tr>
             <?php endif; ?>
         <?php endwhile; ?>

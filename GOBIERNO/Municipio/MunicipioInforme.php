@@ -48,9 +48,9 @@
                     <img id="municipio-image" src="../../Recursos/SVG/reportes.svg" alt="Escudo Municipipal de Guadalupe" class="FondoAmarillo">
                 </a>
                 <div>
-                    <?php Total("reportes_colonias","resuelto","no"); ?>
+                    <?php No_Resueltos("reportes_colonias","resuelto","no"); ?>
                 </div>
-                <p>Reportes al Municipio</p>
+                <p>Reportes pendientes</p>
             </div>
 
             <div class="opcion">

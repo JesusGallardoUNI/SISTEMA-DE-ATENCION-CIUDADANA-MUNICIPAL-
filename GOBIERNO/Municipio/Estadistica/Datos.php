@@ -37,7 +37,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><p class="FondoAmarillo">No resuelto</p></td>
+                        <td><p class="FondoAmarillo">Reportes pendientes</p></td>
                         <td><input id="Rep1" type="number" readonly value="<?php echo Estadistica(1, "no")?>"></td>
                         <td><input id="Rep2" type="number" readonly value="<?php echo Estadistica(2, "no")?>"></td>
                         <td><input id="Rep3" type="number" readonly value="<?php echo Estadistica(3, "no")?>"></td>
@@ -45,10 +45,10 @@
                         <td><input id="Rep5" type="number" readonly value="<?php echo Estadistica(5, "no")?>"></td>
                         <td><input id="Rep7" type="number" readonly value="<?php echo Estadistica(7, "no")?>"></td>
                         <td><input id="Rep8" type="number" readonly value="<?php echo Estadistica(8, "no")?>"></td>
-                        <td><input type="number" readonly value="<?php echo Total("reportes_colonias","resuelto","no"); ?>"></td>
+                        <td><input type="number" readonly value="<?php echo No_Resueltos("reportes_colonias","resuelto","no"); ?>"></td>
                     </tr>
                     <tr>
-                        <td><p class="FondoVerde">Si resuelto</p></td>
+                        <td><p class="FondoVerde">Reportes atendidos</p></td>
                         <td><input id="Sol1" type="number" readonly value="<?php echo Estadistica(1, "si")?>"></td>
                         <td><input id="Sol2" type="number" readonly value="<?php echo Estadistica(2, "si")?>"></td>
                         <td><input id="Sol3" type="number" readonly value="<?php echo Estadistica(3, "si")?>"></td>
@@ -59,7 +59,7 @@
                         <td><input type="number" readonly value="<?php echo Total("reportes_colonias","resuelto","si"); ?>"></td>
                     </tr>
                     <tr>
-                        <td><p class="FondoRojo">Descartado</p></td>
+                        <td><p class="FondoRojo">Reportes descartados</p></td>
                         <td><input type="number" value="<?php echo Descartados(1, "si")?>" name="Descartado1" id="Descartado1"></td>
                         <td><input type="number" value="<?php echo Descartados(2, "si")?>" name="Descartado2" id="Descartado2"></td>
                         <td><input type="number" value="<?php echo Descartados(3, "si")?>" name="Descartado3" id="Descartado3"></td>

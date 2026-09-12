@@ -18,7 +18,7 @@
     $Muestra = mysqli_fetch_assoc($TotalMuestra);
 
     //Dame todos los reportes del empleado
-    $Listado = "SELECT rep.clave, rep.especificacion, rep.nombre_colonia, rep.nombre_calle, res.costo, res.retraso FROM reportes_colonias rep LEFT JOIN reportes_resueltos res ON rep.clave = res.clave WHERE rep.id_encargado = $ID AND rep.resuelto = 'si';";
+    $Listado = "SELECT rep.clave, rep.especificacion, rep.nombre_colonia, rep.nombre_calle, res.retraso FROM reportes_colonias rep LEFT JOIN reportes_resueltos res ON rep.clave = res.clave WHERE rep.id_encargado = $ID AND rep.resuelto = 'si';";
     $TablaListado = mysqli_query($db,$Listado);
 ?>
 
@@ -37,7 +37,7 @@
     <?php Banner(true,"../../../Recursos/Imagenes/icono.png","Secretarias","Reportes resueltos"); ?>
     <main>
         <p>Nombre: <?php echo $Busca['Nombres'] . " " . $Busca['Apellidos'];?></p>
-        <p>Cargo actual: Secretaria de <?php echo $Busca['Nombre_Secretaria'] . " de la " . $Busca['Area_Encargada'];?></p>
+        <p>Cargo actual: <?php echo $Busca['Nombre_Secretaria'] . " de la " . $Busca['Area_Encargada'];?></p>
         <p>Total de reportes atendidos: <?php echo $Muestra["TOTAL"];?></p>
         <br>
         <table class="Configurar">
@@ -47,7 +47,6 @@
                     <th>Reporte o servicio</th>
                     <th>Colonia</th>
                     <th>Calle</th>
-                    <th>Costo</th>
                     <th>Tiempo (Dias)</th>
                 </tr>
             </thead>
@@ -58,7 +57,6 @@
                         <td><?php echo $Miembro['especificacion'];?></td>
                         <td><?php echo $Miembro['nombre_colonia'];?></td>
                         <td><?php echo $Miembro['nombre_calle'];?></td>
-                        <td><?php echo $Miembro['costo'];?></td>
                         <td><?php echo $Miembro['retraso'];?></td>
                     </tr>
                 <?php endwhile; ?>

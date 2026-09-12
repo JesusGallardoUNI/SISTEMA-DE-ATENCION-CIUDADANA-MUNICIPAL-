@@ -10,9 +10,9 @@
     // Revisión del parámetro GET solo muestra
     if (isset($_GET['tipo'])) {
         $tipo = intval($_GET['tipo']);
-        $Muestra = "SELECT * FROM reportes_colonias WHERE tipo_reporte = {$tipo} AND resuelto = 'no'";
+        $Muestra = "SELECT * FROM reportes_colonias WHERE tipo_reporte = {$tipo} AND resuelto = 'no' AND descartado IS NULL;";
     } else {
-        $Muestra = "SELECT * FROM reportes_colonias WHERE resuelto = 'no'";
+        $Muestra = "SELECT * FROM reportes_colonias WHERE resuelto = 'no' AND descartado IS NULL;";
         $Dato = "Estas viendo el total de reportes, seleccione una opción del menú para ver casos especificos.";
     }
     $Ejecucion = mysqli_query($db, $Muestra);
@@ -30,7 +30,7 @@
     </head>
 
     <body>
-        <?php Banner(true,"../../../Recursos/Imagenes/icono.png","Colonias de Guadalupe","Reporte de colonias"); ?>
+        <?php Banner(true,"../../../Recursos/Imagenes/icono.png","Colonias de Guadalupe","Reportes pendientes de colonias"); ?>
 
         <div class="Cuerpo">
             <nav>

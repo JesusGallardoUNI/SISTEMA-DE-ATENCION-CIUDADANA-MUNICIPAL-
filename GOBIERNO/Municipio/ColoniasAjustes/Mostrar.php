@@ -9,16 +9,23 @@
     //  Este es para ingresar nueva colonia al municipio de Guadalupe  //
     //=================================================================//
     if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['Nombre'])) {
+        
+
+        $Asentamiento = mysqli_real_escape_string($db, $_POST['asentamiento']);
         $Nombre = mysqli_real_escape_string($db, $_POST['Nombre']);
+        $Codigo = mysqli_real_escape_string($db, $_POST['postal']);
+        
+        //Agregar los otros campos
+
         if (!empty($Nombre)) {
-            // Verificar si ya existe esa colonia
+            // Verificar si ya existe ese nombre
             $ConsultaExistente = "SELECT * FROM colonias_guadalupe WHERE nombre = '$Nombre'";
             $Resultado = mysqli_query($db, $ConsultaExistente);
 
             if (mysqli_num_rows($Resultado) > 0) {
                 echo "<script>alert('Esta colonia ya existe.');</script>";
             } else {
-                $AgregarColonia = "INSERT INTO colonias_guadalupe (nombre) VALUES ('$Nombre')";
+                $AgregarColonia = "INSERT INTO colonias_guadalupe (tipo_asentamiento, nombre, codigo_postal) VALUES ('$Asentamiento','$Nombre','$Codigo')";
                 $Insertar = mysqli_query($db, $AgregarColonia);
 
                 if ($Insertar) {
@@ -40,7 +47,8 @@
         $ColoniaNombre = mysqli_real_escape_string($db, $_POST['NombreEliminar']);
 
         if (!empty($ColoniaNombre)) {
-            $EliminarColonia = "DELETE FROM colonias_guadalupe WHERE nombre = '$ColoniaNombre'";
+            $EliminarColonia = "DELETE FROM colonias_guadalupe WHERE nombre = '$ColoniaNombre';";
+            echo $EliminarColonia;
             $Eliminar = mysqli_query($db, $EliminarColonia);
 
             if ($Eliminar) {
@@ -81,8 +89,25 @@
     <form method="POST" action="Mostrar.php" enctype="multipart/form-data">
         <h2>Agregar nueva colonia</h2>
         <div>
+            <label for="asentamiento">Tipo de asentamiento:</label>
+            <select name="asentamiento" id="asentamiento">
+                <option selected disabled>Selecciona una opcion</option>
+                <option value="Colonia">Colonia</option>
+                <option value="Condominio">Condominio</option>
+                <option value="Fraccionamiento">Fraccionamiento</option>
+                <option value="Rancho">Rancho</option>
+                <option value="Unidad habitacional">Unidad habitacional</option>
+                <option value="Zona comercial">Zona comercial</option>
+                <option value="Zona industrial">Zona industrial</option>
+            </select>
+        </div>
+        <div>
             <label for="Nombre">Nombre de la colonia:</label>
             <input type="text" name="Nombre" id="Nombre" required>
+        </div>
+        <div>
+            <label for="postal">Codigo postal:</label>
+            <input type="number" name="postal" id="postal" required>
         </div>
         <input type="submit" value="Agregar colonia" class="BOTON BTN__Color_Verde">
     </form>
@@ -93,6 +118,8 @@
             <thead>
                 <tr>
                     <th>Nombre de la colonia</th>
+                    <th>Asentamiento</th>
+                    <th>Codigo postal</th>
                     <th>Renombrar</th>
                     <th>Eliminar</th>
                 </tr>
@@ -102,10 +129,12 @@
                     <?php if (!empty($Registro['nombre'])): ?>
                         <tr>
                             <td><?php echo $Registro['nombre']; ?></td>
+                            <td><?php echo $Registro['tipo_asentamiento']; ?></td>
+                            <td><?php echo $Registro['codigo_postal']; ?></td>
                             <td><a href="Actualizar.php?nombre=<?php echo urlencode($Registro['nombre']); ?>" class="BOTON BOTON_CERO BTN__Color_Verde">Cambiar nombre</a></td>
                             <td>
                                 <center>
-                                    <form method="POST" class="elemento">
+                                    <form method="POST" class="elemento W100">
                                         <input type="hidden" name="NombreEliminar" value="<?php echo $Registro['nombre']; ?>">
                                         <input type="submit" value="Eliminar colonia" class="BOTON BOTON_CERO BTN__Color_Rojo">
                                     </form>

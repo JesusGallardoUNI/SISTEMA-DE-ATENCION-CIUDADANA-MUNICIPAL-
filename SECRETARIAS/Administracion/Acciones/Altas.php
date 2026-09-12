@@ -44,6 +44,7 @@
     }
 ?>
 
+
 <form method="POST" action="Acciones/Altas.php" id="Altas_Formulario" >
     <fieldset>
         <!--Nombres-->

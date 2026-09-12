@@ -36,7 +36,7 @@
         move_uploaded_file($Val3['tmp_name'], $CarpetaImagenes . $NombreImagen);
 
 
-        $Val4 = mysqli_real_escape_string($db,$_POST["CostoResuelto"]);
+        //$Val4 = mysqli_real_escape_string($db,$_POST["CostoResuelto"]);
         $Val5 = mysqli_real_escape_string($db,$_POST["DescripcionSolucion"]);
         $Val6 = mysqli_real_escape_string($db,$_POST["FechaHoraResuelto"]);
         $Val7 = mysqli_real_escape_string($db, $_POST["DiasRetraso"]);
@@ -46,7 +46,7 @@
         $Identificacion2 = mysqli_real_escape_string($db,$_POST["tipo_reporte"]);
 
         
-        $SubirSolucion = "INSERT INTO reportes_resueltos (clave, nombre_colonia, tipo_reporte, resuelto, foto, costo, descripcion , fecha_resuelto, retraso, id_encargado) VALUES ('$Val1','$Identificacion1','$Identificacion2','$Val2','$NombreImagen','$Val4','$Val5','$Val6','$Val7','$Val8');";        
+        $SubirSolucion = "INSERT INTO reportes_resueltos (clave, nombre_colonia, tipo_reporte, resuelto, foto, descripcion , fecha_resuelto, retraso, id_encargado) VALUES ('$Val1','$Identificacion1','$Identificacion2','$Val2','$NombreImagen','$Val5','$Val6','$Val7','$Val8');";        
         $Informar = mysqli_query($db,$SubirSolucion);
 
         
@@ -146,10 +146,6 @@
             <div>
                 <label for="ImagenResuelto">Imagen de reporte resuelto:</label>
                 <input type="file" name="ImagenResuelto" id="ImagenResuelto" accept="image/*" required>
-            </div>
-            <div>
-                <label for="CostoResuelto">Costo de atención:</label>
-                <input type="number" name="CostoResuelto" id="CostoResuelto" step="any" required>
             </div>
             <div>
                 <label for="DescripcionSolucion">Descripción de atención al reporte: </label>

@@ -30,7 +30,7 @@
 </head>
 
 <body>
-    <?php Banner(true,"../../../Recursos/Imagenes/icono.png","Colonias de Guadalupe","Reportes descartados"); ?>
+    <?php Banner(true,"../../../Recursos/Imagenes/icono.png","Colonias de Guadalupe","Reportes descartados de colonias"); ?>
     <div class="Cuerpo">
         <nav>
             <div class="opcion Titulo_opcion" id="ScrollNavBar">

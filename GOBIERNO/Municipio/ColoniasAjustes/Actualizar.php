@@ -22,10 +22,12 @@
         $Valor1 = mysqli_real_escape_string($db,$_POST['Nombre']);
 
         //Verificar que ese nombre no exista en la base de datos, si existe no hacer nada, caso contrario si actualiza
-        $Existe = "SELECT * FROM colonias_guadalupe WHERE nombre = '$Valor1'";
+        $Existe = "SELECT * FROM colonias_guadalupe WHERE nombre = '$Valor1';";
+        
         $Resultado = mysqli_query($db, $Existe);
         if(mysqli_num_rows($Resultado) === 0){
-            $ActualizarColonia = "UPDATE colonias_guadalupe SET nombre = '$Valor1' WHERE nombre = '{$nombre}'";
+            $ActualizarColonia = "UPDATE colonias_guadalupe SET nombre = '$Valor1' WHERE nombre = '{$nombre}';";
+           
             $Actualizar = mysqli_query($db, $ActualizarColonia);
             if($Actualizar){
                 header("Location: Mostrar.php");
